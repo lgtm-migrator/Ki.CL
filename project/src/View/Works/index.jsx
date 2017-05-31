@@ -5,14 +5,14 @@ import React from 'react';
 import { Sitemap } from '~/Component';
 
 Sitemap.set({
-    name : 'Home',
-    route : '/'
-}, 'home');
+    name : 'Works',
+    route : '/works'
+}, 'works');
 
-const Home = () => (
+const Work = () => (
     <main role='main'>
-        <h2>Home!!!!</h2>
+        <h2>Works!!!</h2>
     </main>
 );
 
-export default Home;
+export default Work;
