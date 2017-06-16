@@ -10,7 +10,7 @@ import resource from './resource.json';
 
 Sitemap.set(resource.sitemap.name, resource.sitemap);
 
-class Home extends DOM.Component {
+class About extends DOM.Component {
     constructor (props) {
         super(props);
     }
@@ -22,10 +22,10 @@ class Home extends DOM.Component {
                 data-route={resource.route}
                 ref={element => this.element = element}
             >
-                <h2>Home!!!!</h2>
+                <h2>About!!!!</h2>
             </section>
         );
     }
 }
 
-export default Home;
+export default About;
