@@ -1,0 +1,8 @@
+body {
+  display: none;
+  -webkit-box-flex: 1;
+  -ms-flex: auto;
+  flex: auto;
+  color: red; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImJhc2UuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsY0FBYztFQUNkLG9CQUFXO0VBQVgsZUFBVztFQUFYLFdBQVc7RUFDWCxXQUFXLEVBQUUiLCJmaWxlIjoiY29yZS9zY3NzL2Jhc2UuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGZsZXg6IGF1dG87XG4gIGNvbG9yOiByZWQ7IH1cbiJdfQ== */
