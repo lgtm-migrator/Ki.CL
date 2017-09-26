@@ -1,0 +1,24 @@
+{
+    "presets": [
+        "env"
+    ],
+    "plugins": [
+        "transform-strict-mode",
+        "transform-class-properties",
+        "transform-export-extensions",
+        [
+            "babel-plugin-root-import", {
+                "rootPathSuffix": "./project/src"
+            }
+        ],
+        [
+            "module-resolver", {
+                "alias": {
+                    "^": ".",
+                    "@": "./Gulptasks",
+                    "#": "./node_modules"
+                }
+            }
+        ]
+    ]
+}

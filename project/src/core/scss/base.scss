@@ -1,5 +1,7 @@
+@import '_lib';
+
 body {
-  display: none;
+  display: block;
   flex: auto;
   color: red;
 }
