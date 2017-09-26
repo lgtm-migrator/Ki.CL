@@ -166,11 +166,12 @@ class WebpackConfig extends Utilities {
                         name : 'Ki.CL',
                         host: 'localhost',
                         port : 3021,
-                        proxy: 'http://localhost:3031/'
+                        server: { baseDir: ['project/dev'] }
+                        // proxy: 'http://localhost:3031/project/dev'
                     },
-                    {
-                        reload: false
-                    }
+                    // {
+                    //     reload: false
+                    // }
                 )
             ],
 
