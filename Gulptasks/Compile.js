@@ -1,9 +1,10 @@
 import named from 'vinyl-named';
 
+import BrowserSync from 'browser-sync';
 import Webpack from 'webpack';
 import DevServer from 'webpack-dev-server';
 import WebpackStream from 'webpack-stream';
-import WebpackConfig from '^/webpack.config';
+import WebpackConfig from '^/webpack.config.babel';
 
 import plumber from 'gulp-plumber';
 
@@ -30,8 +31,6 @@ export default class Compile extends Utilities {
         super();
         this.gulp = gulp;
 
-        this.firstRun = true;
-
         this.init();
     }
 
@@ -39,39 +38,32 @@ export default class Compile extends Utilities {
         this.compile();
     }
 
+    webpackChangeHandler (err, stats) {
+        this.util.log(stats.toString({
+            colors: this.util.colors.supportsColor,
+            chunks: false,
+            hash: false,
+            version: false
+        }));
+
+        BrowserSync.reload();
+
+        this.firstBuildReady = true;
+    }
+
     compile () {
         this.gulp.task(
             Compile.tasks.compile,
-            () => {
-                new DevServer(
-                    Webpack(
-                        Object.assign({}, WebpackConfig, {
-                            entry : Compile.entry,
-                            output : Compile.output
-                        })
-                    ),
-                    {
-                        publicPath : '/project/dev/',
-                        stats: {
-                            colors: true
-                        }
+            // () => Webpack(WebpackConfig),
+            callback => this.gulp.src('')
+                .pipe(plumber())
+                .pipe(WebpackStream(WebpackConfig, null, this.webpackChangeHandler.bind(this)))
+                .pipe(this.gulp.dest(Compile.output.path))
+                .on('data', () => {
+                    if (this.firstBuildReady && callback) {
+                        callback();
                     }
-                ).listen(3031, 'localhost', error => {
-                    if(error) throw new gutil.PluginError("webpack-dev-server", error);
-                    // Server listening
-                    console.log("[webpack-dev-server]", "http://localhost:3031/webpack-dev-server/index.html");
-
-                    // keep the server alive or continue?
-                    // callback();
                 })
-            }
-            // () => this.gulp.src(Compile.entry, { cwd : this.path.root.src })
-            //     .pipe(named())
-            //     .pipe(WebpackStream(Object.assign({}, WebpackConfig, {
-            //         entry : Compile.entry,
-            //         output : Compile.output
-            //     }), Webpack))
-            //     .pipe(this.gulp.dest(this.path.root.dev))
         );
     }
 }

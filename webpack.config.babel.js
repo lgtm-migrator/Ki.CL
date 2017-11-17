@@ -37,6 +37,16 @@ class WebpackConfig extends Utilities {
             watch : true,
             
             target : 'web',
+
+            entry : {
+                js : './project/src/App.ts',
+                scss : './project/src/App.scss'
+            },
+
+            output : {
+                filename : 'javascripts/application.js',
+                path : `${this.appRoot}/project/dev/`
+            },
             
             resolve : {
                 extensions : ['.ts', '.json', 'scss'],
@@ -72,7 +82,7 @@ class WebpackConfig extends Utilities {
                     {
                         test : /\.(css|sass|scss)$/,
                         exclude : /node_modules/,
-                        use : ['css-hot-loader'].concat(ExtractText.extract({
+                        use : ['webpack-extract-css-hot-reload'].concat(ExtractText.extract({
                             fallback : 'style-loader',
                             use : [
                                 {
@@ -167,17 +177,16 @@ class WebpackConfig extends Utilities {
                         host: 'localhost',
                         port : 3021,
                         server: { baseDir: ['project/dev'] }
-                        // proxy: 'http://localhost:3031/project/dev'
                     },
-                    // {
-                    //     reload: false
-                    // }
+                    {
+                        reload : true
+                    }
                 )
             ],
 
             devServer : {
                 contentBase: `${this.appRoot}/project/dev`,
-                colors : true,
+                // colors : true,
                 quiet : false,
                 noInfo : false,
                 publicPath : '/project/dev/',

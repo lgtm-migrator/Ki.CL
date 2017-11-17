@@ -60,7 +60,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7bc896e89ed045c36845"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e421297674412a765ae9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -786,7 +786,7 @@ exports.default = Core;
 
 // removed by extract-text-webpack-plugin
     if(true) {
-      // 1506408179368
+      // 1507610004458
       var cssReload = __webpack_require__(4)(module.i, {"selector":"data-hot"});
       module.hot.dispose(cssReload);
       module.hot.accept(undefined, cssReload);
