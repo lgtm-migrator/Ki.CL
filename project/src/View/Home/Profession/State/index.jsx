@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 
 import { routes } from 'content/resources';
 
-const resources = routes.about;
+const { profession } = routes.home.content;
 
 const mapStateToProps = () => ({
-    ...resources
+    profession
 });
 
 const Connector = connect(mapStateToProps);
 
-export { Connector, resources };
+export { Connector };

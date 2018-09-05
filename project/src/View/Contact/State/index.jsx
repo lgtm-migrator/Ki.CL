@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { routes } from 'content/resources';
 
-const resources = routes.about;
+const resources = routes.contact;
 
 const mapStateToProps = () => ({
     ...resources
