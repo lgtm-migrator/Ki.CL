@@ -10,7 +10,7 @@ type Props = {
     width: number
 };
 
-const count = 500;
+const count = 3;
 
 const ratio = count / (Math.PI * 2);
 

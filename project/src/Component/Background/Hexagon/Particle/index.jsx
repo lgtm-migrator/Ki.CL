@@ -32,8 +32,6 @@ class Particle extends React.Component<Props> {
         super(props);
 
         this.draw = this.draw.bind(this);
-        this.move = this.move.bind(this);
-        this.position = this.position.bind(this);
     }
 
     componentWillUnmount() {
@@ -54,50 +52,6 @@ class Particle extends React.Component<Props> {
         TweenLite.set(graphic.position, this.position());
 
         this.graphic = graphic;
-
-        this.move();
-    }
-
-    move(index) {
-        const speed = duration();
-
-        index = index || this.props.index;
-
-        TweenLite.to(this.graphic, speed, {
-            pixi: {
-                fillColor: fillColor(),
-                scale: scale(),
-                position: this.position(
-                    index + Math.floor(Math.random() * 18) - 18
-                )
-            },
-            ease
-        });
-
-        TweenLite.to(this.graphic.position, speed, {
-            ...this.position(index + Math.floor(Math.random() * 18) - 18),
-            ease,
-            onComplete: () => {
-                this.move(index);
-            }
-        });
-    }
-
-    position(index) {
-        const { ratio, height, width } = this.props;
-
-        const centerY = height / 2;
-        const centerX = width / 2;
-        const radius =
-            Math.min(centerX, centerY) /
-            ((Math.floor(Math.random() * 20) + 12) / 10);
-
-        index = index || this.props.index;
-
-        const x = centerX - radius * Math.cos(index / ratio);
-        const y = centerY - radius * Math.sin(index / ratio);
-
-        return { x, y };
     }
 
     render() {
