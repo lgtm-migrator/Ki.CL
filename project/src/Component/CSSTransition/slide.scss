@@ -1,4 +1,4 @@
-$style: 'slidedown';
+$style: 'slide';
 
 .#{$cssTransitionStylePrefix}#{$style} {
   &.#{$cssTransition} {
@@ -8,14 +8,6 @@ $style: 'slidedown';
 
     &-exit {
       overflow: hidden;
-    }
-
-    &-enter:not(.#{$cssTransitionEnterActive}) {
-      transform: translate3d(0, -100vh, 0);
-    }
-
-    &-exit-active {
-      transform: translate3d(0, 100vh, 0);
     }
   }
 }
