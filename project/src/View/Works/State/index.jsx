@@ -3,15 +3,19 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import multi from 'redux-multi';
 
-const reducers = combineReducers({});
+import currentItem from './currentItem';
 
-const mapStateToProps = () =>
-  // state
-  ({});
+const reducers = combineReducers({
+  ...currentItem.reducers
+});
 
-const mapDispatchToProps = () =>
-  // dispatch
-  ({});
+const mapStateToProps = state => ({
+  ...currentItem.mapStateToProps(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  ...currentItem.mapDispatchToProps(dispatch)
+});
 
 const Connector = connect(
   mapStateToProps,
