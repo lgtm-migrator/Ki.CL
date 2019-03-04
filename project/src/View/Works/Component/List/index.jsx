@@ -1,14 +1,19 @@
 // @flow
-import React from 'react';
+import React, { createRef } from 'react';
 import autobind from 'autobind-decorator';
 
-import { randomId } from 'Helper';
+import { cssUnit, randomId } from 'Helper';
 
 import { Navigation } from 'Component';
+import { withRouter } from 'Component/Router';
 
 import { Item } from 'View/Works/Component';
 
-import './style';
+import resources from 'content/resources';
+
+import State from './State';
+
+import { gap } from './style';
 
 type Props = {
   data?: Array
@@ -16,10 +21,20 @@ type Props = {
 
 const { cancelAnimationFrame, requestAnimationFrame } = window;
 
+const {
+  view: {
+    works: { path }
+  }
+} = resources;
+
 class List extends React.PureComponent<Props> {
   static defaultProps = {
     data: []
   };
+
+  ref = createRef();
+
+  scrollTop = -1;
 
   componentDidMount() {
     this.scrollMonitor();
@@ -29,9 +44,33 @@ class List extends React.PureComponent<Props> {
     cancelAnimationFrame(this.scrollWatcher);
   }
 
-  ref;
+  @autobind
+  setInView() {
+    const {
+      data,
+      location: { pathname }
+    } = this.props;
 
-  scrollTop;
+    const space = Math.round(cssUnit(gap));
+
+    const inView = data
+      .map(({ id }, index) => {
+        const { bottom, height, y } = this.ref.current.childNodes[
+          index
+        ].getBoundingClientRect();
+
+        const url = `${path}/${id}`;
+
+        return {
+          inView: y >= space / 2 && bottom <= space * 2 + height,
+          shouldRedirect: pathname !== url,
+          path: url
+        };
+      })
+      .filter(({ inView, shouldRedirect }) => inView && shouldRedirect)[0];
+
+    console.log(inView);
+  }
 
   scrollWatcher;
 
@@ -44,8 +83,8 @@ class List extends React.PureComponent<Props> {
     } = window;
 
     if (scrollTop !== this.scrollTop) {
-      console.log(scrollTop);
       this.scrollTop = scrollTop;
+      this.setInView();
     }
 
     this.scrollWatcher = requestAnimationFrame(this.scrollMonitor);
@@ -56,7 +95,7 @@ class List extends React.PureComponent<Props> {
 
     return (
       <Navigation>
-        <ul ref={node => (this.ref = node)}>
+        <ul ref={this.ref}>
           {data.map(project => (
             <Item project={project} key={randomId()} />
           ))}
@@ -66,4 +105,6 @@ class List extends React.PureComponent<Props> {
   }
 }
 
-export default List;
+const Component = State.connector(List);
+
+export default withRouter(Component);

@@ -38,10 +38,30 @@ const request = async ({ path }) => {
   }
 };
 
-const whichRequest = ({ path }) => request({ path });
+const about = () => request({ path: '/about' });
+const works = () => request({ path: '/works' });
+const work = ({ projectId }) => request({ path: `/works/${projectId}` });
 
-const about = () => whichRequest({ path: '/about' });
-const works = () => whichRequest({ path: '/works' });
-const work = ({ projectId }) => whichRequest({ path: `/works/${projectId}` });
+const image = ({ path }) => {
+  if (caches[path]) {
+    return Promise.resolve(caches[path]);
+  }
 
-export { about, works, work, caches };
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+
+    image.onload = () => {
+      caches[path] = path;
+
+      resolve(path);
+    };
+
+    image.onerror = () => {
+      reject(new Error(`${path} can not be found`));
+    };
+
+    image.src = path;
+  });
+};
+
+export { about, image, works, work, caches };

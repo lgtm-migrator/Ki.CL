@@ -4,11 +4,14 @@ import { classname } from 'Component/CSSTransition/style';
 
 const duration = node => {
   const parent = node && node.parentNode;
-  const nodes = Array.from(parent.querySelectorAll(`.${classname}`));
 
-  if (!parent || nodes.length === 0) {
+  if (!parent) {
     return 0;
   }
+
+  const nodes = []
+    .concat(...parent.querySelectorAll(`.${classname}`), ...node.childNodes)
+    .filter(node => node instanceof HTMLElement);
 
   return Math.max(...nodes.map(n => transitionDuration(n, true)));
 };

@@ -1,3 +1,48 @@
+main {
+  &[data-routes="home"] {
+    .logo {
+      &[class*="#{$cssTransition}-"][class*="-active"] {
+        transform-origin: top left;
+        transition-property: opacity, transform;
+
+        &::before {
+          transition-property: transform;
+        }
+      }
+
+      &.#{$cssTransitionEnter}:not(.#{$cssTransitionEnterActive}) {
+        transform: scale(7) translate3d(-50%, -50%, 0);
+
+        &::before {
+          transform: scale(0.5);
+        }
+      }
+
+      &.#{$cssTransitionExit}.#{$cssTransitionExitActive} {
+        opacity: 0;
+        transform: scale(4) translate3d(-50%, -50%, 0);
+
+        &::before {
+          transform: scale(0.4);
+        }
+      }
+    }
+
+    > section {
+      &[class*="#{$cssTransition}-"][class*="-active"] {
+        transition-delay: $fast;
+        transition-duration: $speed;
+        transition-property: opacity, transform;
+      }
+
+      &.#{$cssTransitionEnter}:not(.#{$cssTransitionEnterActive}) {
+        opacity: 0;
+        transform: scale(1.5);
+      }
+    }
+  }
+}
+
 body {
   &[data-entered-routes="home"],
   &[data-exited-routes="home"] {
@@ -6,8 +51,7 @@ body {
         &[data-routes="home"] {
           z-index: 3;
 
-          h1,
-          h2,
+          section h1,
           p,
           nav {
             transition-duration: $speed;
@@ -43,8 +87,7 @@ body {
         &.#{$cssTransitionEnter}:not(.#{$cssTransitionEnterActive}) {
           transform: translate3d(0, -110vh, 0) scale(1.2);
 
-          h1,
-          h2,
+          section h1,
           p,
           nav {
             opacity: 0;
@@ -81,8 +124,7 @@ body {
           transform: translate3d(0, -110vh, 0) scale(1.2);
           transition-delay: $fastest;
 
-          h1,
-          h2,
+          section h1,
           p,
           nav {
             opacity: 0;

@@ -5,8 +5,6 @@ import Async from 'react-async';
 import { CSSTransition, Errors, Spinner } from 'Component';
 import { debounce, isEmpty } from 'Helper';
 
-import './style';
-
 type Node = React.Node;
 
 type AwaitForExpected = any;
@@ -54,6 +52,7 @@ const Asynchronizer = ({
       {({ data, error, isLoading }) => (
         <React.Fragment>
           <Spinner
+            className="asynchronizer"
             iconOnly={iconOnly}
             message={awaitMessage}
             show={Boolean(isLoading)}

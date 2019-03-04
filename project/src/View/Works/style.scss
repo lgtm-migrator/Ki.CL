@@ -1,7 +1,7 @@
 [data-routes="works"] {
   position: relative;
 
-  .spinner {
+  > .spinner {
     height: 100vh;
     min-height: 100vh;
   }

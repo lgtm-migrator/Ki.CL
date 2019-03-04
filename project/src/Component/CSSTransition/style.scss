@@ -1,12 +1,9 @@
 .#{$cssTransition} {
   &[class*="#{$cssTransition}-"] {
     overflow: hidden;
-
-    &[class*="-active"] {
-      transition-duration: $speed;
-      transition-property: none;
-      transition-timing-function: $easeIn;
-    }
+    transition-duration: $speed;
+    transition-property: none;
+    transition-timing-function: $easeIn;
   }
 }
 

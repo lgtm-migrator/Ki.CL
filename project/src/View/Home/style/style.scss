@@ -1,11 +1,13 @@
 [data-routes="home"] {
   display: grid;
+  width: 100vw;
+  height: 100vh;
   align-content: center;
-  background-image: url("/image/london.whitechapel.jpg");
+  // background-image: url("/image/london.whitechapel.jpg");
+  background-color: $dark_white;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: $white;
   font-family: $heading_font_family;
   font-size: 2rem;
   grid-gap: $gutter;
@@ -20,20 +22,51 @@
     z-index: 1;
   }
 
-  &::before {
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    display: block;
+  > section {
+    display: grid;
     width: 100vw;
     height: 100vh;
-    background-color: rgba($black, 0.6);
-    content: "\0020";
+    align-content: center;
+    justify-content: center;
+    background-image: url("/asset/image/london.whitechapel.jpg");
+    background-size: cover;
+    color: $white;
+
+    &::before {
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($pitch_black, 0.7);
+      content: "\0020";
+
+      ~ * {
+        position: relative;
+        z-index: 1;
+      }
+    }
   }
 
   .logo {
-    color: $white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 60vw;
+    height: 60vw;
+    align-content: center;
+    background-color: $white;
+    border-radius: 50%;
+    color: $light_black;
+    transform: translate3d(-50%, -50%, 0);
+
+    @include landscape () {
+      width: 60vh;
+      height: 60vh;
+    }
   }
 
   p {
@@ -55,7 +88,7 @@
       color: $white;
 
       &:hover {
-        color: $orange;
+        color: $red;
       }
     }
   }

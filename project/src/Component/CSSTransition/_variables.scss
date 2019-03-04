@@ -1,5 +1,9 @@
 $cssTransition: "css-transition";
 
+$cssTransitionAppear: "#{$cssTransition}-appear";
+$cssTransitionAppearActive: "#{$cssTransitionAppear}-active";
+$cssTransitionAppearDone: "#{$cssTransitionAppear}-done";
+
 $cssTransitionEnter: "#{$cssTransition}-enter";
 $cssTransitionEnterActive: "#{$cssTransitionEnter}-active";
 $cssTransitionEnterDone: "#{$cssTransitionEnter}-done";

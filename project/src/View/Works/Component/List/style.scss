@@ -1,7 +1,8 @@
+$gap: 20vh;
+
 [data-routes="works"] {
   nav {
     display: grid;
-    justify-content: stretch;
     padding: 20vh 0;
 
     ul {
@@ -10,4 +11,8 @@
       justify-items: center;
     }
   }
+}
+
+:export {
+  gap: $gap;
 }

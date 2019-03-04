@@ -1,7 +1,9 @@
 // @flow
 import React from 'react';
 
-import { Link } from 'Component';
+import { Asynchronizer, Link } from 'Component';
+
+import { image, caches } from 'API';
 
 import { classname } from './style';
 
@@ -33,7 +35,14 @@ const Item = ({ project }: Props) => {
   return (
     <li className={classname}>
       <figure>
-        <img src={src} alt={name} />
+        <Asynchronizer
+          awaitCache={caches[src]}
+          awaitFor={() => image({ path: src })}
+          awaitDelay={1000}
+          iconOnly
+        >
+          {() => <img src={src} alt={name} />}
+        </Asynchronizer>
         <figcaption>
           <Link title={name} to={path}>
             {name}

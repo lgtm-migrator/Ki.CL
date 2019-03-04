@@ -3,10 +3,12 @@ import React from 'react';
 
 import { about, caches } from 'API';
 
-import { Asynchronizer, Logo, Navigation } from 'Component';
+import { Asynchronizer, CSSTransition, Logo, Navigation } from 'Component';
 import { Route } from 'Component/Router';
 
 import resources from 'content/resources';
+
+import State from './State';
 
 import './style';
 
@@ -19,7 +21,30 @@ const {
   }
 } = resources;
 
-const Home = () => (
+const Home = ({ atLanding, data, updateAtLanding }) => (
+  <React.Fragment>
+    <CSSTransition transitionIn={atLanding}>
+      <Logo
+        component="h1"
+        nonInteractive
+        onClick={() => {
+          updateAtLanding(false);
+        }}
+      />
+    </CSSTransition>
+    <CSSTransition transitionIn={!atLanding}>
+      <section>
+        <h1>{heading}</h1>
+        <p>{data.sections.About}</p>
+        <Navigation />
+      </section>
+    </CSSTransition>
+  </React.Fragment>
+);
+
+const Instance = State.connecter(Home);
+
+const Component = () => (
   <main data-routes="home">
     <Asynchronizer
       awaitCache={caches['/about']}
@@ -27,16 +52,9 @@ const Home = () => (
       awaitMessage={loader.text}
       iconOnly
     >
-      {({ data }) => (
-        <React.Fragment>
-          <Logo />
-          <h2>{heading}</h2>
-          <p>{data.sections.About}</p>
-          <Navigation />
-        </React.Fragment>
-      )}
+      {({ data }) => <Instance data={data} />}
     </Asynchronizer>
   </main>
 );
 
-export default <Route exact path={path} render={Home} />;
+export default <Route exact path={path} render={Component} />;
