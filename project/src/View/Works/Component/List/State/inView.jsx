@@ -3,12 +3,12 @@ const actions = {
 };
 
 const defaultState = {
-  inView: []
+  inView: ''
 };
 
 const mapDispatchToProps = dispatch => ({
-  updateInView(inView, path) {
-    dispatch({ type: actions.updateInView, inView, path });
+  updateInView(inView) {
+    dispatch({ type: actions.updateInView, inView });
   }
 });
 
@@ -17,19 +17,13 @@ const mapStateToProps = state => ({
 });
 
 const reducers = {
-  inView(list = defaultState.inView, { type, inView, path }) {
+  inView(defaultInView = defaultState.inView, { type, inView }) {
     switch (type) {
       case actions.updateInView:
-        list = list.filter(string => string !== path);
-
-        if (inView && !list.indexOf(path) > -1) {
-          return [...list, path];
-        }
-
-        return list;
+        return inView;
 
       default:
-        return list;
+        return defaultInView;
     }
   }
 };

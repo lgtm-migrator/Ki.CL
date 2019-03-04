@@ -5,7 +5,7 @@ import autobind from 'autobind-decorator';
 import { cssUnit, randomId } from 'Helper';
 
 import { Navigation } from 'Component';
-import { withRouter } from 'Component/Router';
+import { withRouter, Redirect } from 'Component/Router';
 
 import { Item } from 'View/Works/Component';
 
@@ -48,7 +48,8 @@ class List extends React.PureComponent<Props> {
   setInView() {
     const {
       data,
-      location: { pathname }
+      location: { pathname },
+      updateInView
     } = this.props;
 
     const space = Math.round(cssUnit(gap));
@@ -61,15 +62,18 @@ class List extends React.PureComponent<Props> {
 
         const url = `${path}/${id}`;
 
-        return {
-          inView: y >= space / 2 && bottom <= space * 2 + height,
-          shouldRedirect: pathname !== url,
-          path: url
-        };
+        const inView = y >= space / 2 && bottom <= space * 2 + height;
+        const shouldRedirect = pathname !== url;
+
+        return { inView, shouldRedirect, url };
       })
       .filter(({ inView, shouldRedirect }) => inView && shouldRedirect)[0];
 
-    console.log(inView);
+    if (!inView) {
+      return;
+    }
+
+    updateInView(inView);
   }
 
   scrollWatcher;
@@ -91,20 +95,26 @@ class List extends React.PureComponent<Props> {
   }
 
   render() {
-    const { data } = this.props;
+    const {
+      data,
+      inView: { shouldRedirect, url }
+    } = this.props;
 
     return (
-      <Navigation>
-        <ul ref={this.ref}>
-          {data.map(project => (
-            <Item project={project} key={randomId()} />
-          ))}
-        </ul>
-      </Navigation>
+      <React.Fragment>
+        <Navigation>
+          <ul ref={this.ref}>
+            {data.map(project => (
+              <Item project={project} key={randomId()} />
+            ))}
+          </ul>
+        </Navigation>
+        {shouldRedirect && <Redirect to={url} />}
+      </React.Fragment>
     );
   }
 }
 
-const Component = State.connector(List);
+const Component = State.connecter(List);
 
 export default withRouter(Component);

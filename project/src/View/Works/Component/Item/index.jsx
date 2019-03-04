@@ -38,7 +38,6 @@ const Item = ({ project }: Props) => {
         <Asynchronizer
           awaitCache={caches[src]}
           awaitFor={() => image({ path: src })}
-          awaitDelay={1000}
           iconOnly
         >
           {() => <img src={src} alt={name} />}

@@ -38,13 +38,9 @@ const request = async ({ path }) => {
   }
 };
 
-const about = () => request({ path: '/about' });
-const works = () => request({ path: '/works' });
-const work = ({ projectId }) => request({ path: `/works/${projectId}` });
-
 const image = ({ path }) => {
   if (caches[path]) {
-    return Promise.resolve(caches[path]);
+    return caches[path];
   }
 
   return new Promise((resolve, reject) => {
@@ -63,5 +59,9 @@ const image = ({ path }) => {
     image.src = path;
   });
 };
+
+const about = () => request({ path: '/about' });
+const works = () => request({ path: '/works' });
+const work = ({ projectId }) => request({ path: `/works/${projectId}` });
 
 export { about, image, works, work, caches };
