@@ -1,9 +1,15 @@
+const url = window.location.hash.substr(1);
+const projectId = url.split('/')[2];
+
 const actions = {
   updateInView: 'UPDATE_IN_VIEW'
 };
 
 const defaultState = {
-  inView: ''
+  inView: {
+    shouldRedirect: Boolean(projectId),
+    url: projectId && url
+  }
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -17,13 +23,20 @@ const mapStateToProps = state => ({
 });
 
 const reducers = {
-  inView(defaultInView = defaultState.inView, { type, inView }) {
+  inView(previousInView = defaultState.inView, { type, inView }) {
     switch (type) {
       case actions.updateInView:
-        return inView;
+        if (
+          previousInView.shouldRedirect !== inView.shouldRedirect ||
+          previousInView.url !== inView.url
+        ) {
+          return inView;
+        }
+
+        return previousInView;
 
       default:
-        return defaultInView;
+        return previousInView;
     }
   }
 };

@@ -32,11 +32,16 @@ class List extends React.PureComponent<Props> {
     data: []
   };
 
+  static get space() {
+    return Math.round(cssUnit(gap));
+  }
+
   ref = createRef();
 
   scrollTop = -1;
 
   componentDidMount() {
+    this.scrollInView();
     this.scrollMonitor();
   }
 
@@ -52,17 +57,24 @@ class List extends React.PureComponent<Props> {
       updateInView
     } = this.props;
 
-    const space = Math.round(cssUnit(gap));
+    const { current } = this.ref;
+
+    if (!current) {
+      return;
+    }
 
     const inView = data
       .map(({ id }, index) => {
-        const { bottom, height, y } = this.ref.current.childNodes[
+        const { bottom, height, y } = current.childNodes[
           index
         ].getBoundingClientRect();
 
+        const belowTop = y >= List.space / 2;
+        const aboveBottom = bottom <= List.space * 2 + height;
+
         const url = `${path}/${id}`;
 
-        const inView = y >= space / 2 && bottom <= space * 2 + height;
+        const inView = belowTop && aboveBottom;
         const shouldRedirect = pathname !== url;
 
         return { inView, shouldRedirect, url };
@@ -94,11 +106,44 @@ class List extends React.PureComponent<Props> {
     this.scrollWatcher = requestAnimationFrame(this.scrollMonitor);
   }
 
-  render() {
+  @autobind
+  scrollInView() {
     const {
       data,
-      inView: { shouldRedirect, url }
+      inView: { url }
     } = this.props;
+
+    const { current } = this.ref;
+
+    if (!current) {
+      return;
+    }
+
+    const { index } = data
+      .map(({ id }, index) => ({ id, index }))
+      .filter(({ id }) => url.endsWith(id))[0];
+
+    const { top } = current.childNodes[index].getBoundingClientRect();
+
+    document.scrollingElement.scrollTo({
+      top: top - List.space,
+      behavior: 'auto'
+    });
+  }
+
+  redirect() {
+    const {
+      inView: { shouldRedirect, url },
+      location: { pathname }
+    } = this.props;
+
+    const direct = pathname !== url && shouldRedirect;
+
+    return direct && <Redirect to={url} />;
+  }
+
+  render() {
+    const { data } = this.props;
 
     return (
       <React.Fragment>
@@ -109,7 +154,7 @@ class List extends React.PureComponent<Props> {
             ))}
           </ul>
         </Navigation>
-        {shouldRedirect && <Redirect to={url} />}
+        {this.redirect()}
       </React.Fragment>
     );
   }
