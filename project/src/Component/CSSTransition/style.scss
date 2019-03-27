@@ -1,0 +1,14 @@
+.#{$cssTransition} {
+  &[class*="#{$cssTransition}-"] {
+    transition-duration: $speed;
+    transition-property: none;
+    transition-timing-function: $easeIn;
+  }
+}
+
+:export {
+  classname: #{$cssTransition};
+  enterdoneclassname: #{$cssTransitionEnterDone};
+  exitdoneclassname: #{$cssTransitionExitDone};
+  styleprefix: #{$cssTransitionStylePrefix};
+}

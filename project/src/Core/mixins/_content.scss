@@ -1,0 +1,4 @@
+@mixin content ($content: "\0020") {
+  content: "\0020";
+  display: block;
+}

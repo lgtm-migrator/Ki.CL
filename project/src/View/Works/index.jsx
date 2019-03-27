@@ -1,42 +1,52 @@
+// @flow
 import React from 'react';
-import { Route } from 'react-router-dom';
 
-import API from 'API';
-import { randomId } from 'Helper';
+import { Asynchronizer } from 'Component';
+import { Route } from 'Component/Router';
 
-import { Preloader } from 'Component';
+import { works, caches } from 'API';
 
-import { Connector, resources } from './State';
+import resources from 'content/resources';
 
-import { Work } from './Component';
+import Anchor from './Anchor';
+import View from './View';
 
-import './style.scss';
+import './style';
 
-let projects;
-
-const fetchProjects = async () => {
-  projects = await projects || fetch(API.works).then(data => data.json());
-
-  return projects;
+type Props = {
+  data?: Array
 };
 
-const Works = ({ data }) => {
-  return (
-    <nav rule='navigation'>
-      <ul>
-        { data.map( project => <Work { ...{ ...project, key: randomId } } /> ) }
-      </ul>
-    </nav>
-  );
-};
+const {
+  view: {
+    works: {
+      content: { loader },
+      path,
+    },
+  },
+} = resources;
 
-const Instance = Connector(Preloader({ Component: Works, awaitFor: fetchProjects }));
-
-const Component = props => (
-  <Route
-    path={resources.path}
-    component={match => <Instance { ...{ match, ...props } } />}
-  />
+const Works = ({ data }: Props) => (
+  <React.Fragment>
+    <Anchor data={data} />
+  </React.Fragment>
 );
 
-export default Component;
+const Component = ({ match }) => (
+  <main data-routes="works">
+    <View />
+    <Asynchronizer
+      awaitCache={caches.get(path)}
+      awaitFor={works}
+      awaitMessage={loader.text}
+    >
+      {({ data }) => <Works data={data} match={match} />}
+    </Asynchronizer>
+  </main>
+);
+
+Works.defaultProps = {
+  data: [],
+};
+
+export default <Route path={path} render={Component} />;

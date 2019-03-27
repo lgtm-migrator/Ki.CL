@@ -1,32 +1,27 @@
 import React from 'react';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import {
+ applyMiddleware, combineReducers, compose, createStore,
+} from 'redux';
 import { Provider, connect } from 'react-redux';
 import multi from 'redux-multi';
 
-import Resources from './Resources';
-import Style from './Style';
+let reducers = {};
 
-let reducers = combineReducers({
-  ...Resources.reducers,
-  ...Style.reducers
-});
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/* eslint-enable */
 
-const mapStateToProps = state => ({
-  ...Resources.mapStateToProps(state),
-  ...Style.mapStateToProps(state)
-});
+const enhancer = composeEnhancers(applyMiddleware(multi));
 
-const mapDispatchToProps = dispatch => ({
-  ...Style.mapDispatchToProps(dispatch)
-});
+const store = createStore(state => state, enhancer);
 
-const Connector = connect(mapStateToProps, mapDispatchToProps);
+const asyncReducers = (newReducers) => {
+  reducers = Object.assign(reducers, newReducers);
 
-const enhancer = compose(applyMiddleware(multi));
-
-const store = createStore(reducers, enhancer);
+  store.replaceReducer(combineReducers({ ...reducers }));
+};
 
 const State = ({ children }) => <Provider {...{ store }}>{children}</Provider>;
 
-export { Connector, Resources };
+export { asyncReducers, connect };
 export default State;

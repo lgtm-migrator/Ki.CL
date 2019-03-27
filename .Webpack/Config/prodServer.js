@@ -23,12 +23,12 @@ const browserConfig = {
   server: {
     baseDir,
 
-    directory: true
+    directory: true,
   },
 
   hooks: {
-    'client:js': `___browserSync___.socket.on('disconnect', function () { window.close(); location.reload(); });`
-  }
+    'client:js': `___browserSync___.socket.on('disconnect', function () { window.close(); location.reload(); });`,
+  },
 };
 
 const browserInstance = browserSync.create();

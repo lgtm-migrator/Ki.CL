@@ -3,30 +3,18 @@ import React from 'react';
 
 import { Router } from 'Component';
 
-import About from './About';
-import Contact from './Contact';
 import Home from './Home';
+import PageNotFound from './PageNotFound';
 import Works from './Works';
 
-import './style.scss';
+const routeIndex = 1;
 
-type Props = {
-  className?: String,
-  style: Array | String | {},
-  transitionStyle: String
-};
-
-const View = ({ className, style, transitionStyle, ...rest }: Props) => (
-  <Router { ...{ className, transitionStyle, style } }>
-    {About(rest)}
-    {Contact(rest)}
-    {Home(rest)}
-    {Works(rest)}
+const View = () => (
+  <Router routeIndex={routeIndex} transitionStyle="slide">
+    {Home}
+    {Works}
+    {PageNotFound}
   </Router>
 );
-
-View.defaultProps = {
-  className: 'view'
-}
 
 export default View;

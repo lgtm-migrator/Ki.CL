@@ -1,4 +1,4 @@
-export default element => {
+export default (element) => {
   if (typeof element === 'string' || element.length === 0) {
     return element;
   }

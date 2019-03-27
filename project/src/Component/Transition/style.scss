@@ -1,9 +1,19 @@
-.transition {
+.#{$transition} {
+  pointer-events: none;
   position: relative;
 
-  > [class*='css-transition-'] {
+  > .#{$cssTransitionEnter} {
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
+    z-index: 2;
   }
+
+  > .#{$cssTransitionExit} {
+    z-index: 1;
+  }
+}
+
+:export {
+  classname: #{$transition};
 }

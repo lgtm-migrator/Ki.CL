@@ -4,45 +4,51 @@ import { HashRouter as Router, NavLink } from 'react-router-dom';
 
 import classnames from 'classnames';
 
-import './style.scss';
+import './style';
+
+type Node = React.Node;
+
+type ClassName = {} | Array | String;
 
 type Props = {
-  children: React.Node,
-  className: {} | Array | String,
+  children: Node,
+  className: ClassName,
   component: string,
   onClick: Function,
-  to: string,
-  text: string
+  to: string
 };
 
 const activeClassName = 'isActive';
 
-const Link = ({ children, className, component: Wrapper, onClick, to, text, ...rest }: Props) => {
+const Link = ({
+  children,
+  className,
+  component: Wrapper,
+  onClick,
+  to,
+}: Props) => {
   className = classnames(className);
 
-  const Element = () => (
+  const Element = ({ className }) => (
     <NavLink
       exact
-      {...{
-        activeClassName,
-        onClick,
-        to,
-        className: !Wrapper ? className: null,
-        ...rest
-      }}
+      activeClassName={activeClassName}
+      className={className}
+      onClick={onClick}
+      to={to}
     >
-      {text ? <span>{text}</span>: children}
+      {children}
     </NavLink>
   );
 
   return (
     <Router>
       {Wrapper ? (
-        <Wrapper {...{ className }}>
+        <Wrapper className={className}>
           <Element />
         </Wrapper>
-      ): (
-        <Element />
+      ) : (
+        <Element className={className} />
       )}
     </Router>
   );

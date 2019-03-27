@@ -3,16 +3,16 @@ import webpackMerge from 'webpack-merge';
 
 import { Args } from './Utilities';
 
-import { basicConfig as dev } from './development.babel';
+import { devConfig } from './development.babel';
 
 import { browser } from './Config/prodServer';
 
 const mode = process.env.NODE_ENV || 'production';
 const watch = !Args.noWatch;
 
-const config = webpackMerge(dev, { mode, watch });
+const config = webpackMerge(devConfig, { mode, watch });
 
-const errorHandler = error => {
+const errorHandler = (error) => {
   if (!error) {
     return;
   }
@@ -26,23 +26,20 @@ const errorHandler = error => {
   return true;
 };
 
-const statsHandler = async (error, stats) =>
-  new Promise((resolve, reject) => {
-    if (errorHandler(error)) {
-      reject(error);
-      
-      return;
-    }
+const statsHandler = async (error, stats) => new Promise((resolve, reject) => {
+  if (errorHandler(error)) {
+    reject(error);
 
-    resolve(stats);
-  });
+    return;
+  }
 
-const production = new Promise((resolve, reject) =>
-  webpack(config, (error, stats) =>
-    statsHandler(error, stats)
-      .then(resolve)
-      .catch(reject)
-  )
+  resolve(stats);
+});
+
+const production = new Promise(
+  (resolve, reject) => webpack(config, (error, stats) => statsHandler(error, stats)
+        .then(resolve)
+        .catch(reject)),
 );
 
 process.env.NODE_ENV = mode;

@@ -1,133 +1,152 @@
 // @flow
 import React from 'react';
+import {
+  HashRouter,
+  Redirect,
+  Route,
+  Switch,
+  withRouter,
+} from 'react-router-dom';
 
-import classnames from 'classnames';
+import { Transition } from 'Component';
 
-import { HashRouter as Router, Switch, withRouter } from 'react-router-dom';
+import { view } from 'content/resources';
 
-import { DOM, Transition } from 'Component';
-import { pathnameToRoutes } from 'Helper';
-import { Connector } from 'State';
+import path from './Utilities/path';
 
-type Location = {
-  pathname: String
-};
-
-type Resources = {
-  routes: Array
-};
-
-type Node = React.node;
+type Node = React.Node;
 
 type Props = {
-  children: React.Node,
-  className: String,
-  location: Location,
+  children: Node,
+  componentOnly?: Boolean,
+  routeIndex: Number,
+
+  transitionStyle: String,
+
   onEnter?: (node: Node) => void,
+  onEntered?: (node: Node) => void,
+  onEntering?: (node: Node) => void,
   onExit?: (node: Node) => void,
-  resources: Resources,
-  transitionStyle?: String,
-  style: {}
+  onExited?: (node: Node) => void,
+  onExiting?: (node: Node) => void
 };
 
-const routeIndex = { current: -1, previous: -1 };
+const body = document.querySelector('body');
 
-const enterHandler = pathname => {
-  DOM.Title.set(pathname);
-  DOM.Body.routesAttr.set('current', pathname);
-};
-
-const exitHandler = pathname => {
-  DOM.Body.routesAttr.set('previous', pathname);
-};
-
-const directionByRoute = ({ routes, currentRoute }) => {
-  let direction = '';
-
-  routeIndex.current = Object.keys(routes)
-    .map(route => `/${route.split('/')[0]}`)
-    .indexOf(`/${currentRoute.split('/')[1]}`);
-
-  if (routeIndex.previous >= 0) {
-    if (routeIndex.current > routeIndex.previous) {
-      direction = 'transition-forward';
-    }
-
-    if (routeIndex.current < routeIndex.previous) {
-      direction = 'transition-backward';
-    }
-  }
-
-  routeIndex.previous = routeIndex.current;
-
-  return direction;
-};
-
-const Component = ({
+const Router = ({
   children,
-  className,
-  location,
-  onEnter,
-  onExit,
-  resources,
+  componentOnly,
+  routeIndex,
+
   transitionStyle,
-  style,
-  ...rest
+
+  onEnter,
+  onEntered,
+  onEntering,
+  onExit,
+  onExited,
+  onExiting,
 }: Props) => {
-  const { pathname: currentRoute } = location;
-  const { routes } = resources;
+  const Transitions = ({ history, location, match }) => {
+    const pathChains = location.pathname.split('/');
+    const transitionKey = pathChains[routeIndex] || view.home.path;
 
-  return (
-    <Transition
-      { ...{
-        className: classnames(
-          'router',
-          className,
-          transitionStyle,
-          directionByRoute({ routes, currentRoute })
-        ),
-        components: {
-          wrapper: 'main',
-          element: 'section',
-          elementProps: {
-            'data-routes': pathnameToRoutes(currentRoute),
-            style
+    const deterCallback = (callback, whenCallbackDone) => {
+      if (callback && callback.then) {
+        callback.then(((shouldMoveOn) => {
+          if (shouldMoveOn === false) {
+            return;
           }
-        },
-        keyValue: currentRoute,
-        onEnter: node => {
-          enterHandler(currentRoute);
 
-          onEnter(node);
-        },
-        onExit: node => {
-          exitHandler(currentRoute);
+          whenCallbackDone();
+        }));
 
-          onExit(node);
-        }
-      } }
-    >
-      <Switch location={location}>
-        { React.Children.map(children, child => React.cloneElement(child, { ...rest }) ) }
-      </Switch>
-    </Transition>
+        return;
+      }
+
+      whenCallbackDone();
+    };
+
+    location.query = path.query(location);
+
+    return (
+      <Transition
+        location={location}
+        match={match}
+        transitionKey={transitionKey}
+        transitionStyle={transitionStyle}
+        onEnter={node => deterCallback(
+          onEnter({ history, location, node }),
+          () => {
+            // To Prevent the same route attrs
+            // when CSSTransition appear set to true
+            let enteredRoutes = path.notationise(
+              window.location.hash,
+              routeIndex,
+            );
+
+            const { exitedRoutes } = body.dataset;
+
+            if (body.dataset.enteredRoutes === enteredRoutes) {
+              return;
+            }
+
+            if (enteredRoutes === exitedRoutes) {
+              enteredRoutes = path.notationise(location.pathname, routeIndex);
+            }
+
+            body.dataset.enteredRoutes = enteredRoutes;
+          },
+        )}
+        onEntered={(node) => {
+          onEntered({ history, location, node });
+        }}
+        onEntering={(node) => {
+          onEntering({ history, location, node });
+        }}
+        onExit={node => deterCallback(
+          onExit({ history, location, node }),
+          () => {
+            body.dataset.exitedRoutes = path.notationise(
+              location.pathname,
+              routeIndex,
+            );
+          },
+        )}
+        onExited={(node) => {
+          onExited({ history, location, node });
+        }}
+        onExiting={(node) => {
+          onExiting({ history, location, node });
+        }}
+      >
+        <Switch location={location}>{children}</Switch>
+      </Transition>
+    );
+  };
+
+  const Instance = withRouter(Transitions);
+
+  return componentOnly ? (
+    <Instance />
+  ) : (
+    <HashRouter>
+      <Instance />
+    </HashRouter>
   );
 };
 
-const Instance = Connector(Component);
+body.dataset.enteredRoutes = path.notationise(window.location.hash);
 
-const InstanceWithRouter = withRouter(Instance);
+Router.defaultProps = {
+  componentOnly: false,
+  onEnter() {},
+  onEntered() {},
+  onEntering() {},
+  onExit() {},
+  onExited() {},
+  onExiting() {},
+};
 
-const View = props => (
-  <Router>
-    <InstanceWithRouter {...props} />
-  </Router>
-);
-
-Component.defaultProps = {
-  transitionStyle: 'slide',
-  onEnter: () => {},
-  onExit: () => {}
-}
-
-export default View;
+export { Redirect, Route, withRouter };
+export default Router;

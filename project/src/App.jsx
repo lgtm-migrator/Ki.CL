@@ -1,49 +1,56 @@
 // @flow
 import React from 'react';
 
-import State, { Connector } from 'State';
-import View from 'View';
+import { Errors } from 'Component';
 
-import { GlobalHeader } from 'Component';
+import State from './State';
+import View from './View';
 
-import './style.scss';
-
-type Style = { paddingTop: Number };
-
-type UpdateStyle = { height: Number };
-
-type Props = {
-  style?: Style,
-  updateStyle?: (props: UpdateStyle) => void
-};
-
-const Component = ({ style, updateStyle }: Props) => {
-  const resizeHandler = ({ height } = {}) => {
-    updateStyle({ paddingTop: height });
-  }
-
-  return (
-    <React.Fragment>
-      <GlobalHeader { ...{ resizeHandler } } />
-      <View { ...{ style } } />
-    </React.Fragment>
-  )
-};
-
-Component.defaultProps = {
-  style: { paddingTop : 0 },
-  updateStyle: () => {}
-}
-
-const Instance = Connector(Component);
-
-const App = () => (
-  <State>
-    <Instance />
-  </State>
-);
+import './style';
 
 const appRoot = document.querySelector('[app-root]');
+
+class App extends React.PureComponent {
+  constructor() {
+    super();
+
+    this.state = {
+      errors: null,
+    };
+  }
+
+  static getDerivedStateFromError(errors) {
+    return { errors };
+  }
+
+  componentDidCatch(errors, info) {
+    console.error(errors, info);
+  }
+
+  render() {
+    const { errors } = this.state;
+
+    if (errors) {
+      return <Errors errors={errors} show={Boolean(errors)} />;
+    }
+
+    return (
+      <State>
+        <View />
+      </State>
+    );
+  }
+}
+
+window.kicl = {
+  ref: {
+    scrollTop: document.scrollingElement.scrollTop,
+  },
+};
+
+window.onscroll = (event) => {
+  window.kicl.ref.scrollTop = event.target.scrollingElement.scrollTop;
+};
 
 export { appRoot };
 export default App;

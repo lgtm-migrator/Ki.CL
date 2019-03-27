@@ -1,22 +1,23 @@
-const recursive = nodes => {
+const recursive = (nodes) => {
   if (nodes.length === 1) {
     return nodes[0];
   }
 
   const result = [];
 
-  recursive(nodes.splice(1, nodes.length - 1)).forEach(node =>
-    nodes[0].forEach(firstNode =>
-      result.push(
-        [].concat(firstNode, node).sort((a, b) => a.index - b.index)
-      )
-    )
-  );
+  recursive(nodes.splice(1, nodes.length - 1))
+    .forEach(
+      node => nodes[0].forEach(
+        firstNode => result.push(
+          [].concat(firstNode, node).sort((a, b) => a.index - b.index),
+        ),
+      ),
+    );
 
   return result;
 };
 
-const loop = (...args) => {
+export default (...args) => {
   let callback = args[args.length - 1];
 
   if (typeof callback !== 'function') {
@@ -26,19 +27,14 @@ const loop = (...args) => {
   return []
     .concat(
       recursive(
-        (callback ? args.splice(0, args.length - 1) : args).map(
-          (node, index) =>
-            [].concat(...[node]).map(value => ({ value, index }))
-        )
-      )
+        (callback ? args.splice(0, args.length - 1) : args)
+          .map(
+            (node, index) => [].concat(...[node]).map(value => ({ value, index })),
+          ),
+      ),
     )
-    .map(
-      node =>
-        Array.isArray(node)
-          ? node.map(props => props.value)
-          : [node.value]
-    )
-    .map(result => (callback ? callback(...result) : result));
+    .map(node => (Array.isArray(node) ? node.map(props => props.value) : [node.value]))
+    .map(result =>
+      // eslint-disable-next-line
+      (callback ? callback(...result) : result));
 };
-
-export default loop;

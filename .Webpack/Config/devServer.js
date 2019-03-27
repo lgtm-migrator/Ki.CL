@@ -1,4 +1,4 @@
-import open from 'open';
+import open from 'opn';
 import webpack from 'webpack';
 import remotedev from 'remotedev-server';
 
@@ -10,10 +10,7 @@ import { srcRoot as assetPath } from './asset';
 import { srcRoot as contentPath } from './content';
 import { publicPath } from './output';
 
-const host = config.localhost.host;
-const port = config.localhost.port;
-
-const devtool = 'source-map';
+const { host, port } = config.localhost;
 
 const stats = {
   all: false,
@@ -33,13 +30,13 @@ const stats = {
   reasons: true,
   timings: true,
   version: true,
-  warnings: true
+  warnings: true,
 };
 
 const optimization = {
   namedModules: true,
   noEmitOnErrors: true,
-  occurrenceOrder: true
+  occurrenceOrder: true,
 };
 
 const contentBase = [assetPath, contentPath].map(path => `${path}/`);
@@ -51,19 +48,19 @@ const devServer = {
   openPage: '',
   overlay: {
     warnings: true,
-    errors: true
+    errors: true,
   },
   progress: true,
   publicPath: `${host}:${port}${publicPath}`,
   watchContentBase: true,
   watchOptions: {
     aggregateTimeout: 500,
-    poll: 1000
+    poll: 1000,
   },
 
   contentBase,
   port,
-  stats
+  stats,
 };
 
 remotedev({ name: 'channel', realtime: true, port: 5000 });
@@ -72,7 +69,8 @@ const browser = () => open(`${host}:${port}`);
 
 const plugins = [
   new webpack.NamedModulesPlugin(),
-  new webpack.HotModuleReplacementPlugin()
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.EvalSourceMapDevToolPlugin(),
 ];
 
 export { browser, devServer };
@@ -80,8 +78,8 @@ export { browser, devServer };
 export default {
   cache: true,
   devServer,
-  devtool,
+  devtool: false,
   optimization,
   // output,
-  plugins
+  plugins,
 };

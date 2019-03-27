@@ -1,19 +1,26 @@
 {
   "siteName": "Ki.CL",
   "description": "",
-  "routes": {
+  "view": {
+    "pageNotFound": {
+      "name": "Page Not Found",
+      "content": {
+        "message": "{{pathname}} is not a valid route"
+      },
+      "excluded": true
+    },
     "home": {
       "path": "/",
       "name": "Home",
       "content": {
+        "heading": "Welcome to Ki.CL",
         "profession": [
           "Interactive Design",
           "Graphic Design"
         ],
-        "description": [
-          "A California Based Creative / Digital Specialist.",
-          "With over 10 years experience Keni has had the privilege of working for projects in many countries with the likes of Animative, Fantasy Interactive, User interface, Art and Photography, and more."
-        ]
+        "loader": {
+          "text": "fetching contents..."
+        }
       }
     },
     "about": {
@@ -25,10 +32,22 @@
       "path": "/works",
       "name": "Works",
       "message": "Ki.CL",
-      "project": {
-        "path": "/works/:projectId",
-        "name": "Works | Project",
-        "message": "Ki.CL"
+      "content": {
+        "loader": {
+          "text": "fetching projects..."
+        }
+      },
+      "view": {
+        "work": {
+          "path": "/works/:projectId",
+          "name": "Work",
+          "message": "Ki.CL",
+          "content": {
+            "loader": {
+              "text": "fetching project..."
+            }
+          }
+        }
       }
     },
     "contact": {
@@ -38,24 +57,28 @@
     }
   },
   "component": {
-    "loader": {
+    "spinner": {
       "content": {
-        "description": "loading..."
+        "default" : {
+          "message": "loading..."
+        }
       }
     }
   },
-  "months": [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ]
+  "miscellaneous": {
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ]
+  }
 }

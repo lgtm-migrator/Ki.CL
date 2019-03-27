@@ -7,11 +7,11 @@ const plugins = Args.analyzer
       new BundleAnalyzerPlugin({
         openAnalyzer: !Args.noBrowser,
         logLevel: 'warn',
-        analyzerPort: 30001
-      })
+        analyzerPort: 30001,
+      }),
     ]
   : [];
 
 export default {
-  plugins
+  plugins,
 };

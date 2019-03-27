@@ -1,16 +1,11 @@
-@import 'Core/Lib';
-@import 'Core/Reset';
-@import 'Core/Core';
-
 [app-root] {
   position: relative;
 }
 
-header[rule='banner'] {
+header[rule="banner"] {
   min-width: 100vw;
-  position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 10;
 }
 
 main {

@@ -1,54 +1,72 @@
 // @flow
 import React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import classnames from 'classnames';
 
-import CSSTransition from './CSSTransition';
+import { CSSTransition } from 'Component';
 
-import './style.scss';
-
-type className = string;
-
-type elementProps = {};
-
-type components = {
-  className: Array<className> | className,
-  element: string,
-  wrapper: string,
-  elementProps: elementProps
-};
-
-type Props = {
-  className: Array<className> | className,
-  childComponent: React.Node,
-  components: components
-};
-
-const defaultClassName = 'transition';
+import { classname } from './style';
 
 const Transition = ({
-  className,
-  childComponent,
-  components,
-  ...rest
-}: Props) => {
-  const { element, elementProps, wrapper, wrapperProps } = components;
+  children,
+  transitionKey,
+  transitionStyle,
+  onEnter = () => {},
+  onEntered = () => {},
+  onEntering = () => {},
+  onExit = () => {},
+  onExited = () => {},
+  onExiting = () => {},
+}) => (
+  <TransitionGroup component={React.Fragment}>
+    {CSSTransition({
+      children,
+      transitionKey,
+      transitionStyle,
+      onEnter({ node }) {
+        onEnter({ node });
 
-  return (
-    <TransitionGroup { ...{
-      ...wrapperProps,
-      className: classnames(defaultClassName, className),
-      component: wrapper
-    } }>
-      {CSSTransition({
-        ...rest,
-        ...elementProps,
-        component: element,
-        className: components.className
-      })}
-    </TransitionGroup>
-  );
-};
+        if (!node || !node.parentNode) {
+          return;
+        }
 
-export { CSSTransition };
+        node.parentNode.classList.add(classname);
+      },
+      onEntered({ node }) {
+        onEntered({ node });
+
+        if (!node || !node.parentNode) {
+          return;
+        }
+
+        node.parentNode.classList.remove(classname);
+      },
+      onEntering({ node }) {
+        onEntering({ node });
+      },
+      onExit({ node }) {
+        onExit({ node });
+
+        if (!node || !node.parentNode) {
+          return;
+        }
+
+        node.parentNode.classList.add(classname);
+        node.style.top = -window.kicl.ref.scrollTop;
+      },
+      onExited({ node }) {
+        onExited({ node });
+
+        if (!node || !node.parentNode) {
+          return;
+        }
+
+        node.parentNode.classList.remove(classname);
+      },
+      onExiting({ node }) {
+        onExiting({ node });
+      },
+    })}
+  </TransitionGroup>
+);
+
 export default Transition;

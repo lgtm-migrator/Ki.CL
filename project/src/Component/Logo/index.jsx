@@ -1,22 +1,51 @@
 // @flow
 import React from 'react';
 
-import classnames from 'classnames';
-
 import { Link } from 'Component';
 
-import { Connector } from './State';
+import { siteName, view } from 'content/resources';
 
-import './style.scss';
+import './style';
+
+type Node = React.Node;
 
 type Props = {
-  className: {} | Array | String,
-  path: string,
-  siteName: string
+  component?: Node,
+  onClick: (event?: Event) => void
 };
 
-const Logo = ({ className, path, siteName }: Props) => (
-  <Link to={path} text={siteName} component='h1' className={ classnames(className, 'logo') } />
-);
+const { home } = view;
+const { path } = home;
 
-export default Connector(Logo);
+const className = 'logo';
+
+const Logo = ({ component, nonInteractive, onClick }: Props) => {
+  const Content = () => <span>{siteName}</span>;
+  const Element = component;
+
+  if (nonInteractive) {
+    return (
+      <Element className={className} onClick={onClick}>
+        <Content />
+      </Element>
+    );
+  }
+
+  if (onClick) {
+    throw new Error(
+      'onClick should not be defined when nonInteractive is defined',
+    );
+  }
+
+  return (
+    <Link to={path} className={className} component={Element}>
+      <Content />
+    </Link>
+  );
+};
+
+Logo.defaultProps = {
+  component: 'h1',
+};
+
+export default Logo;
