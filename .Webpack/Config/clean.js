@@ -11,9 +11,9 @@ const cleaner = new CleanWebpackPlugin([tmpRoot, outputSrcRoot], {
   beforeEmit: false,
   verbose: Args.verbose,
 
-  root
+  root,
 });
 
 export default {
-  plugins: [cleaner]
+  plugins: [cleaner],
 };

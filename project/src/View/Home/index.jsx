@@ -3,7 +3,9 @@ import React from 'react';
 
 import { about, caches } from 'API';
 
-import { Asynchronizer, CSSTransition, Logo, Navigation } from 'Component';
+import {
+ Asynchronizer, CSSTransition, Logo, Navigation,
+} from 'Component';
 import { Route } from 'Component/Router';
 
 import resources from 'content/resources';
@@ -16,9 +18,9 @@ const {
   view: {
     home: {
       content: { loader, heading },
-      path
-    }
-  }
+      path,
+    },
+  },
 } = resources;
 
 const Home = ({ atLanding, data, updateAtLanding }) => (
@@ -47,7 +49,7 @@ const Instance = State.connecter(Home);
 const Component = () => (
   <main data-routes="home">
     <Asynchronizer
-      awaitCache={caches['/about']}
+      awaitCache={caches.get('/about')}
       awaitFor={about}
       awaitMessage={loader.text}
       iconOnly

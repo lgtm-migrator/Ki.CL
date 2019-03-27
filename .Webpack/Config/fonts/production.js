@@ -8,6 +8,6 @@ fonts.use = use;
 
 export default {
   module: {
-    rules: [fonts]
-  }
+    rules: [fonts],
+  },
 };

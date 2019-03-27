@@ -2,15 +2,13 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import IcoMoon from 'react-icomoon';
-import Fittext from 'react-fittext';
+import { TiMediaRecord, TiMediaRecordOutline } from 'react-icons/ti';
 
 import { CSSTransition } from 'Component';
-import { cssUnit } from 'Helper';
 
 import { component } from 'content/resources';
 
-import { maxsize } from './style';
+import { icononlyclassname } from './style';
 
 type Props = {
   className?: string,
@@ -22,29 +20,29 @@ type Props = {
 const {
   spinner: {
     content: {
-      default: { message }
-    }
-  }
+      default: { message },
+    },
+  },
 } = component;
 
-const Spinner = ({ className, iconOnly, show, message }: Props) => {
+const Spinner = ({
+ className, iconOnly, show, message,
+}: Props) => {
   const classNames = classnames(
     'spinner',
-    { 'is-icon-only': iconOnly },
-    className
+    { [`${icononlyclassname}`]: iconOnly },
+    className,
   );
 
   return (
     <CSSTransition transitionIn={show} transitionStyle="fade">
-      <Fittext maxFontSize={cssUnit(maxsize)}>
-        <div className={classNames} aria-label={message}>
-          <div>
-            <IcoMoon icon="spinner8" />
-            <IcoMoon icon="spinner8" />
-          </div>
-          {message && <p className="text">{message}</p>}
+      <div className={classNames} aria-label={message}>
+        <div>
+          <TiMediaRecord />
+          <TiMediaRecordOutline />
         </div>
-      </Fittext>
+        {message && <p className="text">{message}</p>}
+      </div>
     </CSSTransition>
   );
 };
@@ -53,7 +51,7 @@ Spinner.defaultProps = {
   className: '',
   iconOnly: false,
   show: true,
-  message
+  message,
 };
 
 export default Spinner;

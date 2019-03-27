@@ -1,6 +1,5 @@
 .#{$cssTransition} {
   &[class*="#{$cssTransition}-"] {
-    overflow: hidden;
     transition-duration: $speed;
     transition-property: none;
     transition-timing-function: $easeIn;

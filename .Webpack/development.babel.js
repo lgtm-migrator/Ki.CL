@@ -14,7 +14,7 @@ import {
   javascript,
   output,
   resolve,
-  stylesheet
+  stylesheet,
 } from './Config';
 
 const mode = process.env.NODE_ENV || 'development';
@@ -32,7 +32,7 @@ const devConfig = webpackMerge(
   javascript,
   output,
   resolve,
-  stylesheet
+  stylesheet,
 );
 
 const config = webpackMerge(devConfig, devServer, { mode });

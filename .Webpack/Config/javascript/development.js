@@ -1,4 +1,4 @@
-import { BabelLoader, EsLintLoader } from './production';
+import { BabelLoader, EsLintLoader, plugins } from './production';
 
 BabelLoader.use[0].options.plugins = ['react-hot-loader/babel'];
 
@@ -7,5 +7,6 @@ BabelLoader.use[0].options.plugins = ['react-hot-loader/babel'];
 const rules = [BabelLoader, EsLintLoader];
 
 export default {
-  module: { rules }
+  module: { rules },
+  plugins,
 };

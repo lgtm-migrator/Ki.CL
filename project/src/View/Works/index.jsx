@@ -8,38 +8,45 @@ import { works, caches } from 'API';
 
 import resources from 'content/resources';
 
-import { List } from './Component';
-
+import Anchor from './Anchor';
 import View from './View';
 
 import './style';
+
+type Props = {
+  data?: Array
+};
 
 const {
   view: {
     works: {
       content: { loader },
-      path
-    }
-  }
+      path,
+    },
+  },
 } = resources;
 
-const Works = ({ data }) => (
+const Works = ({ data }: Props) => (
   <React.Fragment>
-    <List data={data} />
-    <View />
+    <Anchor data={data} />
   </React.Fragment>
 );
 
-const Component = () => (
+const Component = ({ match }) => (
   <main data-routes="works">
+    <View />
     <Asynchronizer
-      awaitCache={caches[path]}
+      awaitCache={caches.get(path)}
       awaitFor={works}
       awaitMessage={loader.text}
     >
-      {({ data }) => <Works data={data} />}
+      {({ data }) => <Works data={data} match={match} />}
     </Asynchronizer>
   </main>
 );
+
+Works.defaultProps = {
+  data: [],
+};
 
 export default <Route path={path} render={Component} />;

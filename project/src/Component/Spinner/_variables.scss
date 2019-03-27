@@ -5,10 +5,10 @@ $spinner: (
   ),
   color: (
     default: $dark_grey,
-    light: $white,
+    light: $grey,
     active: $green
   ),
-  size: 3rem,
+  size: 4rem,
   fontSize: 1rem,
   z-index: 1000
 );

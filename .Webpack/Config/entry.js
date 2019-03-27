@@ -7,5 +7,5 @@ const context = `${contextRoot}/src`;
 export { context, contextRoot };
 export default {
   entry,
-  context
+  context,
 };

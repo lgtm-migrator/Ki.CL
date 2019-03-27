@@ -1,5 +1,7 @@
 import React from 'react';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import {
+ applyMiddleware, combineReducers, compose, createStore,
+} from 'redux';
 import { Provider, connect } from 'react-redux';
 import multi from 'redux-multi';
 
@@ -13,7 +15,7 @@ const enhancer = composeEnhancers(applyMiddleware(multi));
 
 const store = createStore(state => state, enhancer);
 
-const asyncReducers = newReducers => {
+const asyncReducers = (newReducers) => {
   reducers = Object.assign(reducers, newReducers);
 
   store.replaceReducer(combineReducers({ ...reducers }));

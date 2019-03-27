@@ -1,5 +1,5 @@
 const actions = {
-  updateData: 'UPDATE_DATA'
+  updateData: 'UPDATE_DATA',
 };
 
 const defaultState = [];
@@ -13,7 +13,7 @@ const reducers = {
       default:
         return state;
     }
-  }
+  },
 };
 
 const mapStateToProps = ({ data }) => ({ data });
@@ -21,7 +21,7 @@ const mapStateToProps = ({ data }) => ({ data });
 const mapDispatchToProps = dispatch => ({
   updateData(data) {
     dispatch({ type: actions.updateData, data });
-  }
+  },
 });
 
 export default { mapStateToProps, mapDispatchToProps, reducers };

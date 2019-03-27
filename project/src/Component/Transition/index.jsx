@@ -15,7 +15,7 @@ const Transition = ({
   onEntering = () => {},
   onExit = () => {},
   onExited = () => {},
-  onExiting = () => {}
+  onExiting = () => {},
 }) => (
   <TransitionGroup component={React.Fragment}>
     {CSSTransition({
@@ -64,7 +64,7 @@ const Transition = ({
       },
       onExiting({ node }) {
         onExiting({ node });
-      }
+      },
     })}
   </TransitionGroup>
 );

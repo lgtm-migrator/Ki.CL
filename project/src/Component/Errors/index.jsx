@@ -36,7 +36,7 @@ const Errors = ({ errors, onError, show }: Props) => {
 
 Errors.defaultProps = {
   errors: {},
-  show: true
+  show: true,
 };
 
 export default Errors;

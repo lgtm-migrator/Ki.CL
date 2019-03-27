@@ -3,7 +3,7 @@ main {
     .logo {
       &[class*="#{$cssTransition}-"][class*="-active"] {
         transform-origin: top left;
-        transition-property: opacity, transform;
+        transition-property: background-color, opacity, transform;
 
         &::before {
           transition-property: transform;
@@ -11,6 +11,7 @@ main {
       }
 
       &.#{$cssTransitionEnter}:not(.#{$cssTransitionEnterActive}) {
+        background-color: $black;
         transform: scale(7) translate3d(-50%, -50%, 0);
 
         &::before {
@@ -31,7 +32,6 @@ main {
     > section {
       &[class*="#{$cssTransition}-"][class*="-active"] {
         transition-delay: $fast;
-        transition-duration: $speed;
         transition-property: opacity, transform;
       }
 
@@ -62,18 +62,18 @@ body {
 
         &:not([data-routes="home"]) {
           &::after {
-            position: absolute;
-            z-index: 99;
-            top: 0;
-            left: 0;
-            display: block;
-            width: 100%;
-            height: 100%;
             background-color: rgba($black, 0.9);
             content: "\0020";
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
             transition-duration: $speed;
             transition-property: none;
             transition-timing-function: $easeIn;
+            width: 100%;
+            z-index: 99;
           }
         }
       }

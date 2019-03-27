@@ -30,13 +30,13 @@ const stats = {
   reasons: true,
   timings: true,
   version: true,
-  warnings: true
+  warnings: true,
 };
 
 const optimization = {
   namedModules: true,
   noEmitOnErrors: true,
-  occurrenceOrder: true
+  occurrenceOrder: true,
 };
 
 const contentBase = [assetPath, contentPath].map(path => `${path}/`);
@@ -48,19 +48,19 @@ const devServer = {
   openPage: '',
   overlay: {
     warnings: true,
-    errors: true
+    errors: true,
   },
   progress: true,
   publicPath: `${host}:${port}${publicPath}`,
   watchContentBase: true,
   watchOptions: {
     aggregateTimeout: 500,
-    poll: 1000
+    poll: 1000,
   },
 
   contentBase,
   port,
-  stats
+  stats,
 };
 
 remotedev({ name: 'channel', realtime: true, port: 5000 });
@@ -70,7 +70,7 @@ const browser = () => open(`${host}:${port}`);
 const plugins = [
   new webpack.NamedModulesPlugin(),
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.EvalSourceMapDevToolPlugin()
+  new webpack.EvalSourceMapDevToolPlugin(),
 ];
 
 export { browser, devServer };
@@ -81,5 +81,5 @@ export default {
   devtool: false,
   optimization,
   // output,
-  plugins
+  plugins,
 };

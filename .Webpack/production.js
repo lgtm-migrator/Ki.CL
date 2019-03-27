@@ -12,7 +12,7 @@ const watch = !Args.noWatch;
 
 const config = webpackMerge(devConfig, { mode, watch });
 
-const errorHandler = error => {
+const errorHandler = (error) => {
   if (!error) {
     return;
   }
@@ -26,23 +26,20 @@ const errorHandler = error => {
   return true;
 };
 
-const statsHandler = async (error, stats) =>
-  new Promise((resolve, reject) => {
-    if (errorHandler(error)) {
-      reject(error);
+const statsHandler = async (error, stats) => new Promise((resolve, reject) => {
+  if (errorHandler(error)) {
+    reject(error);
 
-      return;
-    }
+    return;
+  }
 
-    resolve(stats);
-  });
+  resolve(stats);
+});
 
-const production = new Promise((resolve, reject) =>
-  webpack(config, (error, stats) =>
-    statsHandler(error, stats)
-      .then(resolve)
-      .catch(reject)
-  )
+const production = new Promise(
+  (resolve, reject) => webpack(config, (error, stats) => statsHandler(error, stats)
+        .then(resolve)
+        .catch(reject)),
 );
 
 process.env.NODE_ENV = mode;

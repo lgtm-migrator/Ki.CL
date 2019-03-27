@@ -4,7 +4,7 @@ import windowSize from './windowSize';
 
 const absoluteUnit = ({ value, unit }) => {
   const isAbsoluteUnit = ['em', 'pt', 'px', 'rem'].some(
-    absUnit => unit === absUnit
+    absUnit => unit === absUnit,
   );
 
   if (!isAbsoluteUnit) {
@@ -28,7 +28,7 @@ const viewportUnit = ({ value, unit }) => {
   return parseFloat((value / 100) * (isVH ? height : width));
 };
 
-const cssUnit = value => {
+const cssUnit = (value) => {
   const props = units.parse(value);
 
   return absoluteUnit(props) || viewportUnit(props) || parseFloat(props);

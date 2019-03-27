@@ -9,8 +9,8 @@ class CopyPlugin {
         debug: 'debug',
         to: `${dest}/[path]/[name].[ext]`,
         from: '**/*',
-        context: `${appRoot}/${srcRoot}`
-      }
+        context: `${appRoot}/${srcRoot}`,
+      },
     ]);
   }
 }

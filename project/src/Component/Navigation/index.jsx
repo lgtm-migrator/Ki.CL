@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import classnames from 'classnames';
 
 import { randomId } from 'Helper';
 
@@ -9,15 +10,17 @@ import Item from './Item';
 
 import './style';
 
-type ItemProps = {
-  name: string,
+type Items = {
   path: string,
   title: string
 };
 
 type Props = {
+  className: string,
   children: React.Node,
-  items?: Array<ItemProps>
+  items?: Array<Items>,
+  onClick(): void,
+  vertial?: boolean
 };
 
 const { view } = resources;
@@ -27,24 +30,47 @@ const basePath = view.home.path;
 const defaultProps = {
   items: Object.keys(view)
     .filter(page => !view[page].excluded && view[page].path !== basePath)
-    .map(page => {
+    .map((page) => {
       const { name } = view[page];
 
       return { ...view[page], title: name };
-    })
+    }),
+  vertial: false,
 };
 
-const Navigation = ({ items, children }: Props) => (
-  <nav role="navigation">
-    {children || (
+const Navigation = ({
+  className,
+  children,
+  items,
+  onClick,
+  vertial,
+}: Props) => {
+  const classNames = classnames(className, {
+    isVertial: vertial,
+  });
+
+  return (
+    <nav className={classNames} role="navigation">
       <ul>
-        {items.map(({ key = randomId(), name, path, title }) => (
-          <Item name={name} path={path} title={title} key={key} />
-        ))}
+        {items.map(
+          ({
+           key = randomId(), path, title, ...rest
+          }) => (
+            <Item
+              key={key}
+              onClick={onClick}
+              path={path}
+              title={title}
+              {...rest}
+            >
+              {children || title}
+            </Item>
+          ),
+        )}
       </ul>
-    )}
-  </nav>
-);
+    </nav>
+  );
+};
 
 Navigation.defaultProps = defaultProps;
 

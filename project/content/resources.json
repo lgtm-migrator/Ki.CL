@@ -2,8 +2,7 @@
   "siteName": "Ki.CL",
   "description": "",
   "view": {
-    "PageNotFound": {
-      "path": "/404",
+    "pageNotFound": {
       "name": "Page Not Found",
       "content": {
         "message": "{{pathname}} is not a valid route"

@@ -2,12 +2,14 @@
 import React from 'react';
 
 import { Asynchronizer } from 'Component';
-import { Redirect, Route } from 'Component/Router';
-import { interpolate } from 'Helper';
+import { Route } from 'Component/Router';
 
 import { work, caches } from 'API';
 
 import resources from 'content/resources';
+
+import Header from './Header';
+import Modules from './Modules';
 
 import './style';
 
@@ -19,23 +21,42 @@ type Props = {
   data?: Data
 };
 
-const { content, path } = resources.view.works.view.work;
+const {
+  view: {
+    works: {
+      path: workPath,
+      view: {
+        work: {
+          content: { loader },
+          path,
+        },
+      },
+    },
+  },
+} = resources;
 
-const Work = ({ data, match }: Props) => (
-  <h2>{`${data.id || match.params.projectId}`}</h2>
+const Work = ({
+  data: {
+ created_on: createdOn, cover, modules, name,
+},
+}: Props) => (
+  <React.Fragment>
+    <Header createdOn={createdOn} cover={cover} modules={modules} name={name} />
+    <Modules modules={modules} name={name} />
+  </React.Fragment>
 );
 
 const Component = ({ match }) => {
-  const { params } = match;
+  const {
+    params: { projectId },
+  } = match;
 
   return (
-    <section data-routes={`works.${params.projectId}`}>
+    <section data-routes={`works.${projectId}`}>
       <Asynchronizer
-        awaitCache={caches[match.url]}
-        awaitFor={work}
-        awaitMessage={interpolate(content.loader.text, params)}
-        awaitProps={params}
-        awaitError={() => <Redirect to="/works" />}
+        awaitCache={caches.get(`${workPath}/${projectId}`)}
+        awaitFor={() => work({ projectId })}
+        awaitMessage={loader.text}
       >
         {({ data }) => <Work data={data} match={match} />}
       </Asynchronizer>
@@ -44,7 +65,7 @@ const Component = ({ match }) => {
 };
 
 Work.defaultProps = {
-  data: {}
+  data: {},
 };
 
-export default <Route exact path={path} render={Component} />;
+export default <Route path={path} render={Component} />;

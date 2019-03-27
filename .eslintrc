@@ -3,14 +3,7 @@
     "standard",
     "airbnb",
     "plugin:flowtype/recommended",
-    "plugin:prettier/recommended",
-    "plugin:react/recommended",
-    "prettier",
-    "prettier/babel",
-    "prettier/flowtype",
-    "prettier/react",
-    "prettier/standard",
-    "eslint-config-prettier"
+    "plugin:react/recommended"
   ],
   "env": {
     "browser": true,
@@ -28,7 +21,6 @@
     }
   },
   "rules": {
-    "prettier/prettier": "error",
     "autoFixOnSave": 0,
     "camelcase": [ "error", {
       "properties": "always"
@@ -64,7 +56,6 @@
     "babel",
     "flowtype",
     "jest",
-    "prettier",
     "react",
     "standard"
   ]

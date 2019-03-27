@@ -25,7 +25,7 @@ const Link = ({
   className,
   component: Wrapper,
   onClick,
-  to
+  to,
 }: Props) => {
   className = classnames(className);
 

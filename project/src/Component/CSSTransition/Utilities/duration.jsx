@@ -2,7 +2,7 @@ import transitionDuration from 'get-transition-duration';
 
 import { classname } from 'Component/CSSTransition/style';
 
-const duration = node => {
+const duration = (node) => {
   const parent = node && node.parentNode;
 
   if (!parent) {

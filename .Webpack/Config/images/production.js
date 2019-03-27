@@ -8,6 +8,6 @@ images.use = use;
 
 export default {
   module: {
-    rules: [images]
-  }
+    rules: [images],
+  },
 };

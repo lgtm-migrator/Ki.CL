@@ -2,7 +2,7 @@ import {
   classname,
   enterdoneclassname,
   exitdoneclassname,
-  styleprefix
+  styleprefix,
 } from 'Component/CSSTransition/style';
 
 function add(node) {
@@ -19,12 +19,10 @@ function remove(node) {
   }
 
   node.classList.remove(
-    ...Array.from(node.classList).filter(className =>
-      className.startsWith(styleprefix)
-    ),
+    ...Array.from(node.classList).filter(className => className.startsWith(styleprefix)),
     classname,
     enterdoneclassname,
-    exitdoneclassname
+    exitdoneclassname,
   );
 }
 

@@ -1,5 +1,5 @@
 const actions = {
-  showComponent: 'SHOW_COMPONENT'
+  showComponent: 'SHOW_COMPONENT',
 };
 
 const defaultState = false;
@@ -13,7 +13,7 @@ const reducers = {
       default:
         return state;
     }
-  }
+  },
 };
 
 const mapStateToProps = ({ show }) => ({ show });
@@ -21,7 +21,7 @@ const mapStateToProps = ({ show }) => ({ show });
 const mapDispatchToProps = dispatch => ({
   showComponent(show = true) {
     dispatch({ type: actions.showComponent, show });
-  }
+  },
 });
 
 export default { mapStateToProps, mapDispatchToProps, reducers };

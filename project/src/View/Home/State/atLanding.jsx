@@ -1,19 +1,19 @@
 const actions = {
-  updateAtLanding: 'UPDATE_AT_LANDING'
+  updateAtLanding: 'UPDATE_AT_LANDING',
 };
 
 const defaultState = {
-  atLanding: true
+  atLanding: true,
 };
 
 const mapDispatchToProps = dispatch => ({
   updateAtLanding(atLanding) {
     dispatch({ type: actions.updateAtLanding, atLanding });
-  }
+  },
 });
 
 const mapStateToProps = state => ({
-  atLanding: state.atLanding
+  atLanding: state.atLanding,
 });
 
 const reducers = {
@@ -25,7 +25,7 @@ const reducers = {
       default:
         return defaultValue;
     }
-  }
+  },
 };
 
 export default { mapDispatchToProps, mapStateToProps, reducers };

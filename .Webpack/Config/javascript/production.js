@@ -1,3 +1,5 @@
+import webpack from 'webpack';
+
 // import formatter from 'eslint-friendly-formatter';
 
 const BabelLoader = {
@@ -9,10 +11,10 @@ const BabelLoader = {
       loader: 'babel-loader',
       options: {
         cacheDirectory: true,
-        cacheIdentifier: true
-      }
-    }
-  ]
+        cacheIdentifier: true,
+      },
+    },
+  ],
 };
 
 const EsLintLoader = {
@@ -22,13 +24,19 @@ const EsLintLoader = {
   loader: 'eslint-loader',
   options: {
     cache: true,
-    quite: true
-  }
+    quite: true,
+    fix: true,
+  },
 };
+
+const plugins = [
+  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+];
 
 const rules = [BabelLoader, EsLintLoader];
 
-export { EsLintLoader, BabelLoader };
+export { EsLintLoader, BabelLoader, plugins };
 export default {
-  module: { rules }
+  module: { rules },
+  plugins,
 };

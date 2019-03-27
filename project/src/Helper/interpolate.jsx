@@ -1,11 +1,3 @@
-const interpolate = (text, props) => {
-  Object.keys(props).forEach(name => {
-    const regex = new RegExp(`{{${name}}}`, 'g');
-
-    text = text.replace(regex, props[name]);
-  });
-
-  return text;
-};
+const interpolate = (text, props) => text.replace(/\{\{([^}]+)?\}\}/g, ($1, $2) => props[$2]);
 
 export default interpolate;

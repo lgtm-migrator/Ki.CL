@@ -2,8 +2,7 @@ import glob from 'glob';
 
 import { Args, Wildcard } from '!/Utilities';
 
-const removeDuplicatedPath = (path, index, paths) =>
-  paths.indexOf(path) === index;
+const removeDuplicatedPath = (path, index, paths) => paths.indexOf(path) === index;
 
 class HtmlStaticAssetsPlugin {
   constructor({ srcRoot }) {
@@ -12,7 +11,7 @@ class HtmlStaticAssetsPlugin {
     this.addAssets = this.addAssets.bind(this);
     this.compilation = this.compilation.bind(this);
     this.replaceSharedPathWithChunk = this.replaceSharedPathWithChunk.bind(
-      this
+      this,
     );
   }
 
@@ -21,15 +20,15 @@ class HtmlStaticAssetsPlugin {
       assets,
       glob
         .sync(
-          `${this.srcRoot}/${Wildcard([Args.shared, this.chunk])}/${pattern}`
+          `${this.srcRoot}/${Wildcard([Args.shared, this.chunk])}/${pattern}`,
         )
         .map(this.replaceSharedPathWithChunk)
-        .filter(removeDuplicatedPath)
+        .filter(removeDuplicatedPath),
     );
   }
 
   compilation(compilation) {
-    compilation.plugin('html-webpack-plugin-before-html-processing', data => {
+    compilation.plugin('html-webpack-plugin-before-html-processing', (data) => {
       const { assets } = data;
       const { css, js } = assets;
 

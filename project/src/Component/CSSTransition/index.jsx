@@ -50,7 +50,7 @@ const CSSTransition = ({
   onEntering = CSSTransition.defaultProps.onEntering,
   onExit = CSSTransition.defaultProps.onExit,
   onExited = CSSTransition.defaultProps.onExited,
-  onExiting = CSSTransition.defaultProps.onExiting
+  onExiting = CSSTransition.defaultProps.onExiting,
 }: Props) => {
   const transitionStyles = transitionStyle
     .replace(/ /g, '')
@@ -69,26 +69,26 @@ const CSSTransition = ({
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
       appear={appear}
-      onEnter={node => {
+      onEnter={(node) => {
         onEnter({ node });
         classList.add(node);
       }}
-      onEntered={node => {
+      onEntered={(node) => {
         onEntered({ node });
         classList.remove(node);
       }}
-      onEntering={node => {
+      onEntering={(node) => {
         onEntering({ node });
       }}
-      onExit={node => {
+      onExit={(node) => {
         onExit({ node });
         classList.add(node);
       }}
-      onExited={node => {
+      onExited={(node) => {
         onExited({ node });
         classList.remove(node);
       }}
-      onExiting={node => {
+      onExiting={(node) => {
         onExiting({ node });
       }}
     >
@@ -109,8 +109,10 @@ CSSTransition.defaultProps = {
   onEntering() {},
   onExit() {},
   onExited() {},
-  onExiting() {}
+  onExiting() {},
 };
 
-export { fade, slide, slidedown, slideup, styleprefix };
+export {
+ fade, slide, slidedown, slideup, styleprefix,
+};
 export default CSSTransition;

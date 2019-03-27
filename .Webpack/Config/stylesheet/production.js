@@ -2,33 +2,32 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import { CSSloaders, SCSSloaders } from './development';
 
-const extractLoaders = loaders =>
-  loaders.filter(({ loader }) => loader !== 'style-loader');
+const extractLoaders = loaders => loaders.filter(({ loader }) => loader !== 'style-loader');
 
 const extractText = new ExtractTextPlugin({
   filename: 'styles.css',
-  allChunks: true
+  allChunks: true,
 });
 
 const css = {
   test: /\.css$/,
   use: ExtractTextPlugin.extract({
     use: extractLoaders(CSSloaders),
-    fallback: 'style-loader'
-  })
+    fallback: 'style-loader',
+  }),
 };
 
 const scss = {
   test: /\.scss$/,
   use: ExtractTextPlugin.extract({
     use: extractLoaders(SCSSloaders),
-    fallback: 'style-loader'
-  })
+    fallback: 'style-loader',
+  }),
 };
 
 const rules = [css, scss];
 
 export default {
   module: { rules },
-  plugins: [extractText]
+  plugins: [extractText],
 };

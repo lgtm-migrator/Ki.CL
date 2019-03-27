@@ -4,8 +4,7 @@ const { URLSearchParams } = window;
 
 const basePath = view.home.name.toLowerCase();
 
-const notationise = (path, routeIndex) =>
-  path
+const notationise = (path, routeIndex) => path
     .replace('#', '')
     .substr(1)
     .replace(/\//g, '.')
@@ -19,7 +18,7 @@ const query = (location, query) => {
   Array.from(new URLSearchParams(location.search).entries()).forEach(
     ([key, value]) => {
       query[key] = value;
-    }
+    },
   );
 
   return query;

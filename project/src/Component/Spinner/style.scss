@@ -3,131 +3,146 @@
 $iconOnlyClassName: "is-icon-only";
 
 .spinner {
-  /* Positioning */
-  position: absolute;
-  z-index: get-map($spinner, "z-index");
-  top: 50%;
-  left: 50%;
-
-  /* Display & Box Model */
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  /* Other */
-  background-color: get-map($spinner, "background.default");
-  color: get-map($spinner, "color.default");
-  font-family: $font_family;
-  font-size: get-map($spinner, "size");
-  transform: translate3d(-50%, -50%, 0);
-
-  div {
-    position: relative;
-    display: block;
-  }
-
-  svg {
-    animation-duration: $slow;
-    animation-iteration-count: infinite;
-    animation-name: spinner-animation;
-    animation-timing-function: linear;
-
-    &:first-child {
-      animation-name: spinner-background-animation;
-    }
-
-    &:last-child {
-      position: absolute;
-      top: 0;
-      left: 0;
-      color: get-map($spinner, "color.light");
-    }
-  }
-
-  p {
-    margin-top: $gutter;
-    font-size: get-map($spinner, "fontSize");
-  }
-
-  &.#{$iconOnlyClassName} {
-    p {
-      position: absolute;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-      width: 0;
-      height: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
-  }
-
-  &[class*="css-transition-"][class*="-active"] {
+  [class] > &,
+  [class] [class] > & {
+    align-items: center;
+    background-color: get-map($spinner, "background.default");
+    color: get-map($spinner, "color.default");
+    display: flex;
+    flex-direction: column;
+    font-family: $font_family;
+    font-size: get-map($spinner, "size");
+    height: 100%;
+    justify-content: center;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: 100%;
     z-index: get-map($spinner, "z-index");
-    transition-delay: $fast;
 
     div {
-      transition-duration: $fast;
-      transition-property: opacity, transform;
-    }
-
-    p {
-      transition-duration: $fast;
-      transition-property: color, opacity, transform;
+      display: block;
+      position: relative;
     }
 
     svg {
-      transition-duration: $fast;
-      transition-property: color;
-    }
-  }
+      animation-duration: $slow;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
 
-  &.#{$cssTransitionEnter}:not(.#{$cssTransitionEnterActive}),
-  &.#{$cssTransitionExitActive} {
-    div,
-    p {
-      opacity: 0;
-    }
-
-    p,
-    svg {
-      color: get-map($spinner, "color.active");
-    }
-
-    div {
-      transform: scale(3);
+      &:last-child {
+        color: get-map($spinner, "color.light");
+        left: 0;
+        position: absolute;
+        top: 0;
+      }
     }
 
     p {
-      transform: translate3d(0, 200%, 0);
+      font-size: get-map($spinner, "fontSize");
+      margin-top: $gutter;
+    }
+
+    &.#{$iconOnlyClassName} {
+      p {
+        height: 0;
+        left: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        width: 0;
+      }
+    }
+
+    &:not(.#{$cssTransition}) {
+      svg {
+        animation-name: spinner-animation;
+
+        &:first-child {
+          animation-name: spinner-background-animation;
+        }
+      }
+    }
+
+    &[class*="css-transition-"][class*="-active"] {
+      z-index: get-map($spinner, "z-index");
+
+      div {
+        transition-duration: $fast;
+        transition-property: opacity, transform;
+      }
+
+      p {
+        transition-duration: $fast;
+        transition-property: color, opacity, transform;
+      }
+
+      svg {
+        transition-duration: $fast;
+        transition-property: color;
+      }
+    }
+
+    &.#{$cssTransitionEnter}:not(.#{$cssTransitionEnterActive}),
+    &.#{$cssTransitionExitActive} {
+      div,
+      p {
+        opacity: 0;
+      }
+
+      p,
+      svg {
+        color: get-map($spinner, "color.active");
+      }
+
+      div {
+        transform: scale(3);
+      }
+
+      p {
+        transform: translate3d(0, 200%, 0);
+      }
     }
   }
 }
 
 @keyframes spinner-background-animation {
   0% {
-    transform: rotate(-180deg);
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(2);
   }
 
   100% {
-    transform: rotate(180deg);
+    opacity: 0;
+    transform: scale(2);
   }
 }
 
 @keyframes spinner-animation {
   0% {
-    transform: rotate(0);
+    color: get-map($spinner, "color.default");
+    transform: scale(1);
+  }
+
+  50% {
+    color: get-map($spinner, "color.light");
+    transform: scale(1.2);
   }
 
   100% {
-    transform: rotate(360deg);
+    color: get-map($spinner, "color.default");
+    transform: scale(1);
   }
 }
 
 :export {
-  icononlyclassname: $iconOnlyClassName;
-  maxsize: get-map($spinner, "size");
+  icononlyclassname: #{$iconOnlyClassName};
 }

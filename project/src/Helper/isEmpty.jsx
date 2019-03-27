@@ -1,22 +1,14 @@
-const { hasOwnProperty } = Object.prototype;
+const isPromise = data => Boolean(typeof data === 'object' && Boolean(data.then));
 
-function isEmpty(obj) {
-  if (
-    // null and undefined are "empty"
-    obj === null ||
-    obj === undefined ||
-    // Assume if it has a length property with a non-zero value
-    // that that property is correct.
-    obj.length === 0 ||
-    // Otherwise, does it have any properties of its own?
-    // Note that this doesn't handle
-    // toString and valueOf enumeration bugs in IE < 9
-    Object.keys(obj).map(key => hasOwnProperty.call(obj, key)).length === 0
-  ) {
-    return true;
-  }
+const isArray = data => Boolean(Array.isArray(data) && data.length > 0);
 
-  return false;
-}
+const isObject = data => Boolean(
+    typeof data === 'object'
+      && Object.keys(data).some(name => Object.prototype.hasOwnProperty.call(data, name)),
+  );
+
+const isTruthy = data => Boolean(data);
+
+const isEmpty = data => !isPromise(data) && !isArray(data) && !isObject(data) && !isTruthy(data);
 
 export default isEmpty;

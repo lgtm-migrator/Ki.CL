@@ -20,12 +20,12 @@ const html = new HtmlWebpackPlugin({
 
     minifyCSS: true,
     minifyJS: true,
-    minifyURLs: true
+    minifyURLs: true,
   },
 
-  xhtml: true
+  xhtml: true,
 });
 
 export default {
-  plugins: [html]
+  plugins: [html],
 };

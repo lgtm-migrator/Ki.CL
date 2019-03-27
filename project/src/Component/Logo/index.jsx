@@ -33,7 +33,7 @@ const Logo = ({ component, nonInteractive, onClick }: Props) => {
 
   if (onClick) {
     throw new Error(
-      'onClick should not be defined when nonInteractive is defined'
+      'onClick should not be defined when nonInteractive is defined',
     );
   }
 
@@ -45,7 +45,7 @@ const Logo = ({ component, nonInteractive, onClick }: Props) => {
 };
 
 Logo.defaultProps = {
-  component: 'h1'
+  component: 'h1',
 };
 
 export default Logo;

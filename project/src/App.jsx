@@ -1,5 +1,4 @@
 // @flow
-import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 import React from 'react';
 
 import { Errors } from 'Component';
@@ -16,7 +15,7 @@ class App extends React.PureComponent {
     super();
 
     this.state = {
-      errors: null
+      errors: null,
     };
   }
 
@@ -44,10 +43,12 @@ class App extends React.PureComponent {
 }
 
 window.kicl = {
-  ref: {}
+  ref: {
+    scrollTop: document.scrollingElement.scrollTop,
+  },
 };
 
-window.onscroll = event => {
+window.onscroll = (event) => {
   window.kicl.ref.scrollTop = event.target.scrollingElement.scrollTop;
 };
 

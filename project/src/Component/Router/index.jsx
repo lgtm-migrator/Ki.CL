@@ -5,7 +5,7 @@ import {
   Redirect,
   Route,
   Switch,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
 
 import { Transition } from 'Component';
@@ -45,11 +45,27 @@ const Router = ({
   onEntering,
   onExit,
   onExited,
-  onExiting
+  onExiting,
 }: Props) => {
-  const Transitions = ({ location, match }) => {
+  const Transitions = ({ history, location, match }) => {
     const pathChains = location.pathname.split('/');
     const transitionKey = pathChains[routeIndex] || view.home.path;
+
+    const deterCallback = (callback, whenCallbackDone) => {
+      if (callback && callback.then) {
+        callback.then(((shouldMoveOn) => {
+          if (shouldMoveOn === false) {
+            return;
+          }
+
+          whenCallbackDone();
+        }));
+
+        return;
+      }
+
+      whenCallbackDone();
+    };
 
     location.query = path.query(location);
 
@@ -59,47 +75,49 @@ const Router = ({
         match={match}
         transitionKey={transitionKey}
         transitionStyle={transitionStyle}
-        onEnter={node => {
-          onEnter({ location, node });
+        onEnter={node => deterCallback(
+          onEnter({ history, location, node }),
+          () => {
+            // To Prevent the same route attrs
+            // when CSSTransition appear set to true
+            let enteredRoutes = path.notationise(
+              window.location.hash,
+              routeIndex,
+            );
 
-          // To Prevent the same route attrs
-          // when CSSTransition appear set to true
-          let enteredRoutes = path.notationise(
-            window.location.hash,
-            routeIndex
-          );
+            const { exitedRoutes } = body.dataset;
 
-          const { exitedRoutes } = body.dataset;
+            if (body.dataset.enteredRoutes === enteredRoutes) {
+              return;
+            }
 
-          if (body.dataset.enteredRoutes === enteredRoutes) {
-            return;
-          }
+            if (enteredRoutes === exitedRoutes) {
+              enteredRoutes = path.notationise(location.pathname, routeIndex);
+            }
 
-          if (enteredRoutes === exitedRoutes) {
-            enteredRoutes = path.notationise(location.pathname, routeIndex);
-          }
-
-          body.dataset.enteredRoutes = enteredRoutes;
+            body.dataset.enteredRoutes = enteredRoutes;
+          },
+        )}
+        onEntered={(node) => {
+          onEntered({ history, location, node });
         }}
-        onEntered={node => {
-          onEntered({ location, node });
+        onEntering={(node) => {
+          onEntering({ history, location, node });
         }}
-        onEntering={node => {
-          onEntering({ location, node });
+        onExit={node => deterCallback(
+          onExit({ history, location, node }),
+          () => {
+            body.dataset.exitedRoutes = path.notationise(
+              location.pathname,
+              routeIndex,
+            );
+          },
+        )}
+        onExited={(node) => {
+          onExited({ history, location, node });
         }}
-        onExit={node => {
-          onExit({ location, node });
-
-          body.dataset.exitedRoutes = path.notationise(
-            location.pathname,
-            routeIndex
-          );
-        }}
-        onExited={node => {
-          onExited({ location, node });
-        }}
-        onExiting={node => {
-          onExiting({ location, node });
+        onExiting={(node) => {
+          onExiting({ history, location, node });
         }}
       >
         <Switch location={location}>{children}</Switch>
@@ -127,7 +145,7 @@ Router.defaultProps = {
   onEntering() {},
   onExit() {},
   onExited() {},
-  onExiting() {}
+  onExiting() {},
 };
 
 export { Redirect, Route, withRouter };

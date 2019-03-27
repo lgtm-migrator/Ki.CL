@@ -10,8 +10,10 @@ const output = {
   path: `${appRoot}/${srcRoot}`,
   publicPath,
   hotUpdateChunkFilename: `${tmpRoot}/[id].[hash].hot-update.js`,
-  hotUpdateMainFilename: `${tmpRoot}/[hash].hot-update.js`
+  hotUpdateMainFilename: `${tmpRoot}/[hash].hot-update.js`,
 };
 
-export { publicPath, srcRoot, tmpRoot, output };
+export {
+ publicPath, srcRoot, tmpRoot, output,
+};
 export default { output };

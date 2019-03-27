@@ -6,7 +6,7 @@ import { interpolate } from 'Helper';
 
 import resources from 'content/resources';
 
-const { path, content } = resources.view.PageNotFound;
+const { view: { pageNotFound: { content } } } = resources;
 
 const PageNotFound = ({ location }) => (
   <main>
@@ -14,4 +14,6 @@ const PageNotFound = ({ location }) => (
   </main>
 );
 
-export default <Route exact path={path} render={PageNotFound} />;
+export default (
+  <Route render={PageNotFound} />
+);

@@ -3,34 +3,34 @@ import { isEmpty } from 'Helper';
 
 const { API_URL } = process.env;
 
-const promises = {};
-const caches = {};
+const promises = new Map();
+const caches = new Map();
 
 const request = async ({ path }) => {
   try {
-    if (!isEmpty(caches[path])) {
-      return caches[path];
+    if (caches.has(path)) {
+      return caches.get(path);
     }
 
-    if (isEmpty(promises[path])) {
+    if (!promises.has(path)) {
       const headers = new Headers();
 
       headers.append('Content-Type', 'application/json');
       headers.append('Accept', 'application/json');
 
-      promises[path] = fetch(`${API_URL}/api${path}`, {
+      promises.set(path, fetch(`${API_URL}/api${path}`, {
         mode: 'cors',
         credentials: 'include',
         method: 'GET',
-        headers
-      }).then(data => data.json());
+        headers,
+      }).then(data => data.json()));
     }
 
-    const data = await promises[path];
+    const data = await promises.get(path);
 
-    caches[path] = data;
+    caches.set(path, data);
 
-    delete promises[path];
+    promises.delete(path);
 
     return data;
   } catch (error) {
@@ -39,7 +39,7 @@ const request = async ({ path }) => {
 };
 
 const image = ({ path }) => {
-  if (caches[path]) {
+  if (!isEmpty(caches[path])) {
     return caches[path];
   }
 
@@ -64,4 +64,6 @@ const about = () => request({ path: '/about' });
 const works = () => request({ path: '/works' });
 const work = ({ projectId }) => request({ path: `/works/${projectId}` });
 
-export { about, image, works, work, caches };
+export {
+ about, image, works, work, caches,
+};

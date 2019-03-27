@@ -13,6 +13,7 @@ type AwaitFor = Promise<AwaitForExpected>;
 
 type Props = {
   children: Node,
+  awaitCache: {},
   awaitFor: AwaitFor,
   awaitProps: {},
   awaitDelay?: Number,
@@ -20,20 +21,19 @@ type Props = {
   iconOnly?: Boolean
 };
 
-const Component = ({ children, data }) =>
-  typeof children === 'function'
+const Component = ({ children, data }) => (typeof children === 'function'
     ? children({ data })
-    : React.cloneElement(children, { data });
+    : React.cloneElement(children, { data }));
 
 const Asynchronizer = ({
   children, // Accual children to be render
-  awaitCache, // caches to await for
+  awaitCache, // caches to await for, return immediately if truthy
   awaitError,
   awaitFor, // function to await for
   awaitProps, // Props that pass to awaitFor
   awaitDelay,
   awaitMessage,
-  iconOnly
+  iconOnly,
 }: Props) => {
   if (!isEmpty(awaitCache)) {
     return <Component data={awaitCache}>{children}</Component>;
@@ -69,7 +69,7 @@ const Asynchronizer = ({
 
 Asynchronizer.defaultProps = {
   awaitDelay: 1000,
-  iconOnly: false
+  iconOnly: false,
 };
 
 export default Asynchronizer;

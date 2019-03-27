@@ -11,11 +11,11 @@ $style: "slidedown";
     }
 
     &-enter:not(.#{$cssTransitionEnterActive}) {
-      transform: translate3d(0, -100vh, 0);
+      transform: translate3d(0, -100%, 0);
     }
 
     &-exit-active {
-      transform: translate3d(0, 100vh, 0);
+      transform: translate3d(0, 100%, 0);
     }
   }
 }
