@@ -29,7 +29,7 @@ export default (...args) => {
       recursive(
         (callback ? args.splice(0, args.length - 1) : args)
           .map(
-            (node, index) => [].concat(...[node]).map(value => ({ value, index }))
+            (node, index) => [].concat(...[node]).map(value => ({ value, index })),
           ),
       ),
     )
