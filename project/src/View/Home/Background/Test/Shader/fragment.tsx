@@ -3,20 +3,29 @@ import {GLSL} from '@/Component/WebGL';
 export default GLSL`
 precision highp float;
 varying vec2 uv;
-uniform vec4 colors[3];
-uniform vec2 particles[3];
-void main () {
-  vec4 sum = vec4(0.0);
-  for (int i=0; i<3; i++) {
-    vec4 c = colors[i];
-    vec2 p = particles[i];
-    float d = c.a * smoothstep(0.6, 0.2, distance(p, uv));
-    sum += d * vec4(c.a * c.rgb, c.a);
+
+uniform float time;
+
+void main() {
+  float amnt;
+  float nd;
+  
+  const float counts = 10.0;
+  
+  vec4 cbuff = vec4(0.0);
+  
+  for(float i=0.0; i<counts;i++){
+    nd = sin(3.17*0.8*uv.x + (i*0.1+sin(+time)*0.2) + time)*0.8+0.1 + uv.x;
+    amnt = 1.0/abs(nd-uv.y)*0.01;
+    cbuff += vec4(amnt, amnt*0.3 , amnt*uv.y, 90.0);
   }
-  if (sum.a > 1.0) {
-    sum.rgb /= sum.a;
-    sum.a = 1.0;
+  
+  for(float i=0.0; i<1.0;i++){
+    nd = sin(3.14*2.0*uv.y + i*40.5 + time)*90.3*(uv.y+80.3)+0.5;
+    amnt = 1.0/abs(nd-uv.x)*0.015;
+    cbuff += vec4(amnt*0.2, amnt*0.2 , amnt*uv.x, 1.0);
   }
-  gl_FragColor = vec4(sum.a * sum.rgb, 1.0);
+  
+  gl_FragColor = cbuff;
 }
 `;

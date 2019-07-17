@@ -9,9 +9,15 @@ const WebGL = ({
   height,
   width
 }: IWebGL.Props) => (
-  <div data-component={Style.default}>
+  <div data-component={Style.default} style={{height, width}}>
     <Surface
+      debug={true}
       height={height}
+      pixelRatio={window.devicePixelRatio}
+      webglContextAttributes={{
+        alpha: false,
+        antialias: true
+      }}
       width={width}
     >
       {children}

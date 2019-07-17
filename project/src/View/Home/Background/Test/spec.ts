@@ -1,7 +1,7 @@
 declare module ITest {
   interface State {
-    time: number,
-    increment: boolean
+    increment: boolean;
+    time: number;
   }
   
   interface Props {
