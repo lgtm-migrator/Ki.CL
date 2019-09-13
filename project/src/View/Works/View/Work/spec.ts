@@ -4,9 +4,9 @@ declare module IWork {
   interface MatchParams {
     projectId: string;
   }
-  
+
   interface Props extends RouteComponentProps<MatchParams> {
-  
+
   }
 }
 

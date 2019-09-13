@@ -4,5 +4,5 @@ import ReactDOM from 'react-dom';
 import App, {appRoot} from './App';
 
 loadPolyfill().then(() => {
-  ReactDOM.render(<App />, appRoot);
+  ReactDOM.render(<App/>, appRoot);
 });

@@ -5,9 +5,9 @@ import Test from './Test';
 
 const Background = () => {
   const {
-    sizes: { height, width }
+    sizes: {height, width}
   } = WindowSizes();
-  
+
   return (
     <WebGL
       height={height}

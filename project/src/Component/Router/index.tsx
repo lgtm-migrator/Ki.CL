@@ -31,43 +31,43 @@ const Router: React.FunctionComponent<IRouter.Props> = (
   ) => {
     let enterFrame: number;
     let exitFrame: number;
-    
+
     const routes = pathname === view.home.path
       ? view.home.name.toLowerCase()
       : pathname.substr(1).replace(/\//g, '.');
-    
+
     const onEnterHandler: IRouter.OnEnter = (node, done) => {
       document.body.dataset.enteredRoutes = routes;
-      
+
       window.cancelAnimationFrame(enterFrame);
-      
+
       if (!onEnter) {
         return;
       }
-      
+
       enterFrame = window.requestAnimationFrame(
         () => {
           onEnter(node, done);
         }
       );
     };
-    
+
     const onExitHandler: IRouter.OnExit = node => {
       document.body.dataset.exitedRoutes = routes;
-      
+
       window.cancelAnimationFrame(exitFrame);
-      
+
       if (!onExit) {
         return;
       }
-      
+
       exitFrame = window.requestAnimationFrame(
         () => {
           onExit(node);
         }
       );
     };
-    
+
     return (
       <Transition
         appear={appear}
@@ -88,9 +88,9 @@ const Router: React.FunctionComponent<IRouter.Props> = (
       </Transition>
     );
   };
-  
+
   const Instance = withRouter(Component);
-  
+
   return (
     <Provider>
       <Instance>{children}</Instance>

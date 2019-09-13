@@ -5,10 +5,10 @@ declare module IHome {
     gutter: string;
     tweenTime: string;
   }
-  
+
   interface Props extends RouteComponentProps {
   }
-  
+
   interface Component {
   }
 }

@@ -9,13 +9,13 @@ function addDefault(
   if (!node) {
     return;
   }
-  
+
   node.classList.add(Style.cssTransition);
-  
+
   if (!additionalClassNames) {
     return;
   }
-  
+
   node.classList.add(classnames(additionalClassNames));
 }
 
@@ -26,13 +26,13 @@ function removeDone(
   if (!node) {
     return;
   }
-  
+
   node.classList.remove(Style.cssTransition, Style.appearDone, Style.enterDone, Style.exitDone);
-  
+
   if (!additionalClassNames) {
     return;
   }
-  
+
   node.classList.remove(classnames(additionalClassNames));
 }
 

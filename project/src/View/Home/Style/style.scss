@@ -41,10 +41,7 @@ $font-color: get($black, "default");
 
   color: $font-color;
   display: grid;
-  grid-template-areas:
-    '. . .'
-    '. div .'
-    '. . .';
+  grid-template-areas: '. . .' '. div .' '. . .';
   grid-template-columns: auto calc(#{$width} + #{$logo-size}) auto;
   grid-template-rows: auto calc(#{$height} + #{$logo-size}) auto;
   text-align: center;
@@ -79,14 +76,9 @@ $font-color: get($black, "default");
     display: grid;
     grid-area: div;
     grid-gap: $space;
-    grid-template-areas:
-      '. . .'
-      '. logo .'
-      '. heading .'
-      '. . .'
-      '. article .';
+    grid-template-areas: '. . .' '. logo .' '. heading .' '. . .' '. article .';
     grid-template-columns: $gutter auto $gutter;
-    grid-template-rows: auto minmax(min-content, max-content) minmax(min-content, max-content) auto  minmax(min-content, max-content);
+    grid-template-rows: auto minmax(min-content, max-content) minmax(min-content, max-content) auto minmax(min-content, max-content);
     position: relative;
     z-index: 1;
 

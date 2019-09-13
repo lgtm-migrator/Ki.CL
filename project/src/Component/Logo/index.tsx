@@ -8,17 +8,17 @@ import classnames from 'classnames';
 const {
   siteName,
   view: {
-    home: { path }
+    home: {path}
   }
 } = resources;
 
 const Logo: React.FunctionComponent<ILogo.Props> = ({
-  isSquare = false
-}) => {
+                                                      isSquare = false
+                                                    }) => {
   const className = classnames({
     [Style.square]: isSquare
   });
-  
+
   return (
     <h1
       data-component={Style.default}

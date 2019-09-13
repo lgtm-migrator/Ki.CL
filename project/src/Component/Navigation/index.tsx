@@ -11,7 +11,7 @@ const {view} = resources;
 const DEFAULT_ITEMS: INavigation.Links = Object.keys(view).map(
   (viewName) => {
     const {name, path} = view[viewName];
-    
+
     return {
       children: name,
       to: path

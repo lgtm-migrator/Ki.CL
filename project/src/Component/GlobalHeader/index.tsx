@@ -20,8 +20,8 @@ const Component: React.FunctionComponent<IGlobalHeader.Component> = (
     transitionStyle={TransitionStyleName.slideDown}
   >
     <header role='banner' data-component={Style.default}>
-      <Logo />
-      <Navigation inline={true} />
+      <Logo/>
+      <Navigation inline={true}/>
     </header>
   </CSSTransition>
 );
@@ -31,7 +31,7 @@ const Instance = withRouter(Component);
 const GlobalHeader: React.FunctionComponent<IGlobalHeader.Props> =
   ({transitionInPaths}) => (
     <Provider>
-      <Instance transitionInPaths={transitionInPaths} />
+      <Instance transitionInPaths={transitionInPaths}/>
     </Provider>
   );
 

@@ -3,9 +3,9 @@ declare module ITest {
     time: number,
     increment: boolean
   }
-  
+
   interface Props {
-  
+
   }
 }
 

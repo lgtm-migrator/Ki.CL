@@ -43,4 +43,4 @@ const Home: React.FunctionComponent<IHome.Props> = () => {
 
 const Component = withRouter(Home);
 
-export default <Route path={path} exact={true} component={Component} />;
+export default <Route path={path} exact={true} component={Component}/>;

@@ -23,15 +23,15 @@ const Link: React.FunctionComponent<ILink.Props> = (
       {children}
     </NavLink>
   );
-  
+
   return (
     <Provider>
       {
         Wrapper ? (
           <Wrapper className={wrapperClassName}>
-            <Element />
+            <Element/>
           </Wrapper>
-        ) : <Element />
+        ) : <Element/>
       }
     </Provider>
   );

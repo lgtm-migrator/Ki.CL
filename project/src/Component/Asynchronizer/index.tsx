@@ -9,50 +9,50 @@ import Style from './Style';
 const delay = CSSUnit(Style.delay);
 
 const Asynchronizer: React.FunctionComponent<IAsynchronizer.Props> = ({
-  awaitFor,
-  children
-}) => {
+                                                                        awaitFor,
+                                                                        children
+                                                                      }) => {
   let stillLoadingTimer: number;
-  
+
   const [
     isLoading,
     stillLoading
   ]: IAsynchronizer.LoadingState = useState<IAsynchronizer.IsLoading>(true);
-  
+
   const [
     spinnerRemoved,
     removeSpinner
   ]: IAsynchronizer.SpinnerState = useState<IAsynchronizer.SpinnerRemoved>(false);
-  
+
   const showChildren = () => {
     removeSpinner(true);
   };
-  
+
   const awaitComplete = () => {
     stillLoading(false);
   };
-  
+
   useEffect(() => {
     if (isLoading && !spinnerRemoved) {
-      const { cancel, promise } = Fetch(awaitFor);
-      
+      const {cancel, promise} = Fetch(awaitFor);
+
       promise
-      .then(
-        () => {
-          stillLoadingTimer = window.setTimeout(
-            awaitComplete,
-            delay
-          );
-        }
-      );
-  
+        .then(
+          () => {
+            stillLoadingTimer = window.setTimeout(
+              awaitComplete,
+              delay
+            );
+          }
+        );
+
       return () => {
         window.clearTimeout(stillLoadingTimer);
         cancel();
       };
     }
   });
-  
+
   return (
     <React.Fragment>
       <Spinner transitionIn={isLoading} onExited={showChildren}/>

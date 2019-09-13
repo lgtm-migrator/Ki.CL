@@ -15,7 +15,7 @@ const appRoot = document.querySelector('[app-root]');
 
 const App = () => (
   <Fragment>
-    <GlobalHeader transitionInPaths={paths} />
+    <GlobalHeader transitionInPaths={paths}/>
     {View}
   </Fragment>
 );
