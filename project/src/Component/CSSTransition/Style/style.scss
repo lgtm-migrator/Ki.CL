@@ -12,6 +12,8 @@ $transition-duration: get($duration, 'fast');
 .#{$appear-active},
 .#{$enter-active},
 .#{$exit-active} {
+  animation-duration: $transition-duration;
+  animation-name: none;
   transition-duration: $transition-duration;
   transition-property: none;
 }

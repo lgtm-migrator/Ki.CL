@@ -1,5 +1,4 @@
-@import '../../../Component/Logo/Style/mixins';
-@import './value';
+@import 'value';
 
 $cssTransition: #{get($css-transition, 'default')};
 $appear: #{get($css-transition, 'appear.default')};
@@ -10,130 +9,74 @@ $exit: #{get($css-transition, 'exit.default')};
 $exit-active: #{get($css-transition, 'exit.active')};
 $exit-done: #{get($css-transition, 'exit.active')};
 
-$coming-soon-color: #{get($white, 'default')};
+$link: #{get($component-link, 'default')};
+$logo: #{get($component-logo, 'default')};
+$navigation: #{get($component-navigation, 'default')};
+$webGL: #{get($component-webGL, 'default')};
 
-$global-header: get($component-global-header, 'default');
-
-$logo: get($component-logo, 'default');
-$logo-size: get($font, 'font-size.larger');
-
-$webGL: get($component-webGL, 'default');
-
-$gutter: #{get($grid, 'gutter')};
-$space: #{get($grid, 'narrow')};
-
-$height: 60vw;
-$width: 80vw;
-$height-landscape: 60vh;
-$width-landscape: 80vh;
-
-$heading-font-weight: get($font, "font-weight.bold");
-$heading-font-size: get($font, "font-size.medium");
-
-$highlight-background-color: get($black, "default");
-$highlight-line-height: get($font, "font-size.large");
-$highlight-space: get($grid, "space");
-
-$font-color: get($black, "default");
+$bleed: get($grid, 'default');
+$color: get($black, 'default');
+$gap: get($grid, 'gutter');
 
 [data-routes='home'] {
-  @include set-logo-size($logo-size);
-
-  color: $font-color;
+  color: $color;
   display: grid;
-  grid-template-areas: '. . .' '. div .' '. . .';
-  grid-template-columns: auto calc(#{$width} + #{$logo-size}) auto;
-  grid-template-rows: auto calc(#{$height} + #{$logo-size}) auto;
-  text-align: center;
-  position: absolute;
-  top: 0;
+  grid-gap: $gap;
+  grid-template-areas: '. . . . . .' '. logo h2 . link .' '. . . . . .';
+  grid-template-columns: $gap max-content max-content auto max-content $gap;
+  grid-template-rows: $bleed max-content auto;
 
-  @include landscape() {
-    background-size: $width-landscape $height-landscape;
-    grid-template-columns: auto calc(#{$width-landscape} + #{$gutter}) auto;
-    grid-template-rows: auto calc(#{$height-landscape} + #{$gutter}) auto;
-  }
-
-  h1,
-  h2,
-  article {
-    transition-duration: get($duration, 'normal');
-    transition-property: opacity, transform;
+  > * {
+    align-self: center;
     justify-self: center;
   }
 
-  article {
-    color: get($white, "default");
-    grid-area: article;
-    transition-delay: get($duration, 'fast');
+  > [data-component=#{$link}] {
+    color: $color;
+    grid-area: link;
+    text-transform: uppercase;
+    transition-property: font-weight;
   }
 
-  div {
-    background-image: url('../../../../asset/image/big.sur.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: $width $height;
-    display: grid;
-    grid-area: div;
-    grid-gap: $space;
-    grid-template-areas: '. . .' '. logo .' '. heading .' '. . .' '. article .';
-    grid-template-columns: $gutter auto $gutter;
-    grid-template-rows: auto minmax(min-content, max-content) minmax(min-content, max-content) auto minmax(min-content, max-content);
-    position: relative;
-    z-index: 1;
-
-    &.#{$appear-active},
-    &.#{$enter-active},
-    &.#{$exit-active} {
-      transition-duration: get($duration, 'normal');
-    }
-
-    &.#{$cssTransition} {
-      h1,
-      h2,
-      article {
-        opacity: 0;
-      }
-
-      h1 {
-        transform: scale(2);
-      }
-
-      article {
-        transform: translate3d(0, $gutter, 0);
-      }
-    }
-  }
-
-  h1 {
-    transition-delay: get($duration, 'fastest');
+  [data-component=#{$logo}] {
     grid-area: logo;
   }
 
   h2 {
-    grid-area: heading;
-    transition-delay: get($duration, 'faster');
+    grid-area: h2;
+    white-space: pre;
   }
 
-  p {
-    + p {
-      padding-top: $space;
+  &.#{$cssTransition} {
+    > * {
+      transition-duration: get($duration, 'fast');
+      transition-property: opacity, transform;
     }
 
-    &:first-child {
-      span {
-        font-weight: $heading-font-weight;
-        font-size: $heading-font-size;
+    &:not(.#{$exit}) {
+      > * {
+        transition-delay: get($duration, 'fast');
+      }
+
+      h2 {
+        transition-delay: get($duration, 'fast') * 1.4;
+      }
+
+      > [data-component=#{$link}] {
+        transition-delay: get($duration, 'fast') * 1.8;
       }
     }
 
-    &:last-child {
-      span {
-        background-color: $highlight-background-color;
-        box-shadow: -16px 0 0 $highlight-background-color;
-        line-height: $highlight-line-height;
-        padding: $highlight-space $highlight-space $highlight-space 0;
-        white-space: pre-wrap;
+    &.#{$exit} {
+      transition-delay: get($duration, 'normal');
+    }
+
+    &.#{$appear}:not(.#{$appear-active}),
+    &.#{$enter}:not(.#{$enter-active}),
+    &.#{$exit}.#{$exit-active} {
+      > * {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
       }
     }
   }

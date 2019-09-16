@@ -1,25 +1,21 @@
-import {CSSTransition, Logo, Navigation} from '@/Component';
-import {TransitionStyleName} from '@/Component/CSSTransition';
-import {Provider, withRouter} from '@/Component/Router';
-import React from 'react';
-import IGlobalHeader from './spec';
-import Style from './Style';
+import {CSSTransition, Logo, Navigation} from "@/Component";
+import {TransitionStyleName} from "@/Component/CSSTransition";
+import {Provider, withRouter} from "@/Component/Router";
+import React from "react";
+import IGlobalHeader from "./spec";
+import Style from "./Style";
 
-const Component: React.FunctionComponent<IGlobalHeader.Component> = (
-  {
-    location,
-    transitionInPaths
-  }
-) => (
+const Component: React.FunctionComponent<IGlobalHeader.Component> = ({
+                                                                       location,
+                                                                       transitionInPaths
+                                                                     }) => (
   <CSSTransition
-    transitionIn={
-      transitionInPaths.some(
-        pathname => pathname === location.pathname
-      )
-    }
+    transitionIn={transitionInPaths.some(
+      pathname => pathname === location.pathname
+    )}
     transitionStyle={TransitionStyleName.slideDown}
   >
-    <header role='banner' data-component={Style.default}>
+    <header role="banner" data-component={Style.default}>
       <Logo/>
       <Navigation inline={true}/>
     </header>
@@ -28,11 +24,12 @@ const Component: React.FunctionComponent<IGlobalHeader.Component> = (
 
 const Instance = withRouter(Component);
 
-const GlobalHeader: React.FunctionComponent<IGlobalHeader.Props> =
-  ({transitionInPaths}) => (
-    <Provider>
-      <Instance transitionInPaths={transitionInPaths}/>
-    </Provider>
-  );
+const GlobalHeader: React.FunctionComponent<IGlobalHeader.Props> = ({
+                                                                      transitionInPaths
+                                                                    }) => (
+  <Provider>
+    <Instance transitionInPaths={transitionInPaths}/>
+  </Provider>
+);
 
 export default GlobalHeader;

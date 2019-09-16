@@ -1,8 +1,8 @@
 import autobind from "autobind-decorator";
-import React from 'react';
-import {Node} from '@/Component/WebGL';
-import ITest from './spec';
-import Shader from './Shader';
+import React from "react";
+import {Node} from "@/Component/WebGL";
+import ITest from "./spec";
+import Shader from "./Shader";
 
 class Index extends React.PureComponent<ITest.Props, ITest.State> {
   public state: ITest.State = {
@@ -29,18 +29,9 @@ class Index extends React.PureComponent<ITest.Props, ITest.State> {
       [0.3, Math.sin(3 + 0.002 * time), Math.cos(1 + 0.003 * time), 1]
     ];
 
-    const particles = [
-      [0.3, 0.3],
-      [0.7, 0.5],
-      [0.4, 0.9]
-    ];
+    const particles = [[0.3, 0.3], [0.7, 0.5], [0.4, 0.9]];
 
-    return (
-      <Node
-        shader={Shader.gradients}
-        uniforms={{colors, particles}}
-      />
-    );
+    return <Node shader={Shader.gradients} uniforms={{colors, particles}}/>;
   }
 
   @autobind

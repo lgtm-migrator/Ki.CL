@@ -1,4 +1,4 @@
-import Color from 'color';
+import Color from "color";
 
 function RandomColor(hex?: string): Color {
   if (hex) {

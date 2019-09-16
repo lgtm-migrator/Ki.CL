@@ -1,15 +1,15 @@
-$default: get($component-logo, 'default');
-$square: get($component-logo, 'square');
+$default: get($component-logo, "default");
+$square: get($component-logo, "square");
 
-$content: get($kicl, 'content.default');
-$name: get($kicl, 'name');
-$size: get($grid, 'gutter');
-$transition-duration: get($duration, 'fast');
-$transition-timing-function: get($ease, 'default.in');
+$content: get($kicl, "content.default");
+$name: get($kicl, "name");
+$size: get($grid, "gutter");
+$transition-duration: get($duration, "fast");
+$transition-timing-function: get($ease, "default.in");
 
 @include set-logo-size($size);
 
-[data-component='#{$default}'] {
+[data-component="#{$default}"] {
   overflow: hidden;
   position: relative;
 
@@ -18,6 +18,7 @@ $transition-timing-function: get($ease, 'default.in');
     display: block;
     font-family: $name;
     font-size: inherit;
+    font-weight: unset;
     left: 0;
     line-height: 1;
     position: absolute;
@@ -28,9 +29,12 @@ $transition-timing-function: get($ease, 'default.in');
     transition-timing-function: $transition-timing-function;
     will-change: color;
     z-index: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   a {
+    color: transparent;
     height: 100%;
     opacity: 0;
     position: absolute;

@@ -10,6 +10,7 @@ const Link: React.FunctionComponent<ILink.Props> = (
     className: wrapperClassName,
     component: Wrapper,
     onClick,
+    onMouseOver,
     to
   }) => {
   const Element = () => (
@@ -18,6 +19,7 @@ const Link: React.FunctionComponent<ILink.Props> = (
       data-component={Style.default}
       exact={true}
       onClick={onClick}
+      onMouseOver={onMouseOver}
       to={to}
     >
       {children}

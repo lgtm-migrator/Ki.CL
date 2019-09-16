@@ -3,6 +3,8 @@ import webpack from 'webpack'
 
 process.env.API_URL = api.host[process.env.NODE_ENV]
 
+console.log(api, process.env.NODE_ENV, api.host[process.env.NODE_ENV])
+
 const env = new webpack.EnvironmentPlugin(['API_URL', 'NODE_ENV'])
 
 export default {

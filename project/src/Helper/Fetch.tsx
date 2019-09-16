@@ -26,8 +26,10 @@ function Fetch(url: string) {
   const cancel = () => {
     controller.abort();
   };
-  const promise = fetch(url, {signal}).catch(() => {
-  });
+  const promise = window.fetch(url, {signal})
+    .then(response => response.json())
+    .catch(() => {
+    });
 
   return {cancel, promise}
 }

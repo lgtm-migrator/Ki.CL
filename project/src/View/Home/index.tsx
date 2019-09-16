@@ -1,45 +1,32 @@
 import resources from '$/resources';
-import {Asynchronizer, Logo} from '@/Component';
+import {Asynchronizer, Link, Logo} from '@/Component';
+// import {Asynchronizer, Link, Logo, Navigation} from '@/Component';
 import {Route, withRouter} from '@/Component/Router';
-import {RandomId} from "@/Helper";
 import IHome from '@/View/Home/spec';
 import React from 'react';
 import './Style';
 
 const {
   view: {
+    about: {name, path: to},
     home: {
       path,
-      content: {heading, messages}
+      content: {heading}
     }
   }
 } = resources;
 
-const Home: React.FunctionComponent<IHome.Props> = () => {
-  return (
-    <main data-routes='home'>
-      <Asynchronizer awaitFor={require('../../../asset/image/big.sur.png')}>
-        <div>
-          <Logo isSquare={true}/>
-          <h2>{heading}</h2>
-          <article>
-            {
-              messages.map(
-                (text: string) => (
-                  <p key={RandomId()}>
-                <span>
-                  {text}
-                </span>
-                  </p>
-                )
-              )
-            }
-          </article>
-        </div>
-      </Asynchronizer>
-    </main>
-  );
-};
+const Home: React.FunctionComponent<IHome.Props> = () => (
+  <Asynchronizer awaitFor={require('../../../asset/image/big.sur.png')}>
+    {() => (
+      <main data-routes='home'>
+        <Logo isSquare={true}/>
+        <h2>{heading}</h2>
+        <Link to={to}>{name}</Link>
+      </main>
+    )}
+  </Asynchronizer>
+);
 
 const Component = withRouter(Home);
 

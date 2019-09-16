@@ -12,13 +12,14 @@ declare module INavigation {
     inline: string;
   }
 
-  type ClickHandler = (event: MouseEvent<HTMLAnchorElement>, to: LocationDescriptor) => void;
+  type MouseEventHandler = (event: MouseEvent<HTMLAnchorElement>, to: LocationDescriptor) => void;
 
   interface Props extends ICSSTransition.Props {
     className?: string;
     inline?: boolean;
     items?: Links;
-    onClick?: ClickHandler;
+    onClick?: MouseEventHandler;
+    onHover?: MouseEventHandler;
   }
 }
 

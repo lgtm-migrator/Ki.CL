@@ -7,7 +7,7 @@ html {
   font-size: get($font, 'font-size.normal');
   font-weight: get($font, 'font-weight.normal');
   letter-spacing: get($font, 'letter-spacing');
-  line-height: get($font, 'line-height');
+  line-height: get($font, 'line-height.default');
 }
 
 h1,
@@ -16,14 +16,13 @@ h3,
 h4,
 h5 {
   font-family: get($font, 'font-family.bold');
+  font-weight: get($font, 'font-weight.light');
+  letter-spacing: get($font, 'font-size.smallest');
+  line-height: get($font, 'line-height.wide');
 }
 
 h1 {
-  font-size: 3rem;
-}
-
-h2 {
-  font-size: 2rem;
+  font-size: get($font, 'font-size.medium');
 }
 
 a,
