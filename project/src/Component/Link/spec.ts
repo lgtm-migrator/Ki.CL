@@ -6,7 +6,7 @@ declare module ILink {
     default: string;
     active: string;
   }
-
+  
   interface Props extends NavLinkProps {
     className?: string;
     component?: ElementType;

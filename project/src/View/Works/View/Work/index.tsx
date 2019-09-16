@@ -4,7 +4,7 @@ import IWork from './spec';
 
 const Work = ({match}: IWork.Props) => {
   const {params: {projectId}} = match;
-
+  
   return (
     <section data-routes={`works.${projectId}`}>
       {projectId}
@@ -12,4 +12,4 @@ const Work = ({match}: IWork.Props) => {
   );
 };
 
-export default <Route path='/works/:projectId' exact={true} render={Work}/>
+export default <Route path='/works/:projectId' exact={true} render={Work} />

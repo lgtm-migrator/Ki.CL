@@ -14,12 +14,12 @@ declare module ICSSTransition {
     exitActive: string;
     exitDone: string;
   }
-
+  
   type OnEnter = EnterHandler;
   type OnExit = ExitHandler;
-
+  
   type TransitionIn = boolean;
-
+  
   interface Props extends Partial<CSSTransitionProps> {
     addEndListener?: EndHandler;
     onEnter?: EnterHandler;
@@ -32,7 +32,7 @@ declare module ICSSTransition {
     transitionKey?: string;
     transitionStyle?: keyof TransitionStyle;
   }
-
+  
   interface TransitionStyle {
     custom: string;
     fade: string
@@ -40,7 +40,7 @@ declare module ICSSTransition {
     slideDown: string;
     zoomIn: string;
     zoomOut: string;
-
+    
     [key: string]: string;
   }
 }

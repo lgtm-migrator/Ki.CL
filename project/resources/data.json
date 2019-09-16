@@ -49,6 +49,11 @@
     }
   },
   "component": {
+    "globalHeader": {
+      "content": {
+        "heading": "KENI LAM"
+      }
+    },
     "spinner": {
       "content": {
         "message": "loading..."

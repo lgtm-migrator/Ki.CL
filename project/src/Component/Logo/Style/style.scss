@@ -18,9 +18,11 @@ $transition-timing-function: get($ease, "default.in");
     display: block;
     font-family: $name;
     font-size: inherit;
+    -webkit-font-smoothing: antialiased;
     font-weight: unset;
     left: 0;
     line-height: 1;
+    -moz-osx-font-smoothing: grayscale;
     position: absolute;
     text-indent: 0;
     top: 0;
@@ -29,8 +31,6 @@ $transition-timing-function: get($ease, "default.in");
     transition-timing-function: $transition-timing-function;
     will-change: color;
     z-index: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   a {

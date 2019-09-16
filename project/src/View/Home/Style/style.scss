@@ -1,83 +1,8 @@
 @import 'value';
 
-$cssTransition: #{get($css-transition, 'default')};
-$appear: #{get($css-transition, 'appear.default')};
-$appear-active: #{get($css-transition, 'appear.active')};
-$enter: #{get($css-transition, 'enter.default')};
-$enter-active: #{get($css-transition, 'enter.active')};
-$exit: #{get($css-transition, 'exit.default')};
-$exit-active: #{get($css-transition, 'exit.active')};
-$exit-done: #{get($css-transition, 'exit.active')};
-
-$link: #{get($component-link, 'default')};
-$logo: #{get($component-logo, 'default')};
-$navigation: #{get($component-navigation, 'default')};
-$webGL: #{get($component-webGL, 'default')};
-
-$bleed: get($grid, 'default');
-$color: get($black, 'default');
-$gap: get($grid, 'gutter');
-
 [data-routes='home'] {
-  color: $color;
-  display: grid;
-  grid-gap: $gap;
-  grid-template-areas: '. . . . . .' '. logo h2 . link .' '. . . . . .';
-  grid-template-columns: $gap max-content max-content auto max-content $gap;
-  grid-template-rows: $bleed max-content auto;
-
-  > * {
-    align-self: center;
-    justify-self: center;
-  }
-
-  > [data-component=#{$link}] {
-    color: $color;
-    grid-area: link;
-    text-transform: uppercase;
-    transition-property: font-weight;
-  }
-
-  [data-component=#{$logo}] {
-    grid-area: logo;
-  }
-
-  h2 {
-    grid-area: h2;
-    white-space: pre;
-  }
-
-  &.#{$cssTransition} {
-    > * {
-      transition-duration: get($duration, 'fast');
-      transition-property: opacity, transform;
-    }
-
-    &:not(.#{$exit}) {
-      > * {
-        transition-delay: get($duration, 'fast');
-      }
-
-      h2 {
-        transition-delay: get($duration, 'fast') * 1.4;
-      }
-
-      > [data-component=#{$link}] {
-        transition-delay: get($duration, 'fast') * 1.8;
-      }
-    }
-
-    &.#{$exit} {
-      transition-delay: get($duration, 'normal');
-    }
-
-    &.#{$appear}:not(.#{$appear-active}),
-    &.#{$enter}:not(.#{$enter-active}),
-    &.#{$exit}.#{$exit-active} {
-      > * {
-        opacity: 0;
-        transform: translate3d(0, -100%, 0);
-      }
-    }
-  }
+  background-image: url($background-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

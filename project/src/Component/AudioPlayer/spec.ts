@@ -4,14 +4,14 @@ declare module IAudio {
   type Index = number;
   type UpdateIndex = (props: Index) => void;
   type IndexState = [Index, UpdateIndex];
-
+  
   type Tracks = any[];
   type UpdateTracks = (props: Tracks) => void;
   type TracksState = [Tracks, UpdateTracks];
-
+  
   interface Events extends SyntheticEvent<HTMLAudioElement, Event> {
   }
-
+  
   interface Props {
     onAbort?: (event: Events) => void;
     onListen?: (event: Events) => void;

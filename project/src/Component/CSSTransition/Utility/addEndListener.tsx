@@ -1,7 +1,7 @@
 import Style from '@/Component/CSSTransition/Style';
+import {CSSUnit} from '@/Helper';
 import getTransitionDuration from 'get-transition-duration';
 import {EndHandler} from 'react-transition-group/Transition';
-import {CSSUnit} from '@/Helper';
 
 const {setTimeout} = window;
 
@@ -35,12 +35,12 @@ const duration = (node: HTMLElement) => (
 
 const addEndListener: EndHandler = (node, done) => {
   const waitTime = duration(node);
-
+  
   if (waitTime === 0) {
     done();
     return;
   }
-
+  
   setTimeout(done, duration(node));
 };
 

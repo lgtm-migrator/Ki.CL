@@ -1,21 +1,22 @@
-import resources from '$/resources';
-import {GlobalHeader} from '@/Component';
+import {Asynchronizer, GlobalHeader} from '@/Component';
 import React, {Fragment} from 'react';
-import View from './View';
-
-const {view} = resources;
-
-const paths = Object.keys(view).filter(
-  name => 'home' !== name
-).map(
-  name => view[name].path
-);
+import View, {awaitFor} from './View';
 
 const appRoot = document.querySelector('[app-root]');
+const pathname = window.location.hash.substr(2) || 'home';
+const shouldWaitFor = awaitFor[pathname];
 
 const App = () => (
   <Fragment>
-    <GlobalHeader transitionInPaths={paths}/>
+    {
+      shouldWaitFor ? (
+        <Asynchronizer awaitFor={shouldWaitFor}>
+          {() => (
+            <GlobalHeader transitionIn={true} />
+          )}
+        </Asynchronizer>
+      ) : <GlobalHeader transitionIn={true} />
+    }
     {View}
   </Fragment>
 );

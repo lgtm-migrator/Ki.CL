@@ -5,11 +5,11 @@ declare module ILogo {
     default: string;
     square: string;
   }
-
+  
   interface Component {
     component?: ElementType;
   }
-
+  
   interface Props extends Component {
     isSquare?: boolean;
   }

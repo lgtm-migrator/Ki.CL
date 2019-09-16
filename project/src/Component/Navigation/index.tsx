@@ -9,29 +9,29 @@ import Style from "./Style";
 const {view} = resources;
 
 const DEFAULT_ITEMS: INavigation.Links = Object.keys(view)
-  .map(viewName => {
-    const {name, path} = view[viewName];
-
-    return {
-      children: name,
-      to: path
-    };
-  })
-  .filter(({to}) => Boolean(to) && to !== view.home.path);
+.map(viewName => {
+  const {name, path} = view[viewName];
+  
+  return {
+    children: name,
+    to: path
+  };
+})
+.filter(({to}) => Boolean(to) && to !== view.home.path);
 
 const Navigation: React.FunctionComponent<INavigation.Props> = ({
-                                                                  className,
-                                                                  inline = false,
-                                                                  items,
-                                                                  onClick,
-                                                                  onMouseOver,
-                                                                }) => (
+  className,
+  inline = false,
+  items,
+  onClick,
+  onMouseOver,
+}) => (
   <nav
     className={classnames(className, {
       "is-inline": inline
     })}
     data-component={Style.default}
-    role="navigation"
+    role='navigation'
   >
     {(items || DEFAULT_ITEMS).map(({children, to}) => (
       <Link

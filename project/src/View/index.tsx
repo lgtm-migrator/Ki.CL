@@ -2,10 +2,15 @@ import {Router} from '@/Component';
 import {TransitionStyleName} from '@/Component/CSSTransition';
 import React from 'react';
 import About from './About';
-import Home from './Home';
+import Home, {awaitFor as homeAwaitFor} from './Home';
 import PageNotFound from './PageNotFound';
+import IView from './spec';
 import Style from './Style';
 import Works from './Works';
+
+const awaitFor: IView.AwaitFor = {
+  home: homeAwaitFor
+};
 
 const View = (
   <Router
@@ -21,4 +26,5 @@ const View = (
   </Router>
 );
 
+export {awaitFor};
 export default View;

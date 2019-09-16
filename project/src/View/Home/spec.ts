@@ -2,13 +2,12 @@ import {RouteComponentProps} from 'react-router';
 
 declare module IHome {
   interface ClassNames extends IClassNames {
-    gutter: string;
-    tweenTime: string;
+    backgroundImage: string;
   }
-
+  
   interface Props extends RouteComponentProps {
   }
-
+  
   interface Component {
   }
 }

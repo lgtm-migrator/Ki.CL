@@ -6,13 +6,13 @@ declare module ITransition {
   interface ClassNames {
     transition: string;
   }
-
+  
   interface Component extends ComponentTransitionGroupProps<ElementType> {
-
+  
   }
-
+  
   interface Props extends Partial<Component>, ICSSTransition.Props {
-
+  
   }
 }
 

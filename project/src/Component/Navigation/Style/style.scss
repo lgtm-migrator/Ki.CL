@@ -1,7 +1,7 @@
 $default: get($component-navigation, 'default');
 $inline: get($component-navigation, 'inline');
 
-$gap: #{get($grid, 'narrow')};
+$gap: get($grid, 'gutter');
 
 [data-component='#{$default}'] {
   display: grid;
