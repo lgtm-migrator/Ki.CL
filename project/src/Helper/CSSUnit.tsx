@@ -8,7 +8,7 @@ const BASE_UNIT = 'px';
 function CSSUnit(values: any): any {
   let {value, unit} = engine.parse(values || '');
   
-  if (value < 0) {
+  if (value < 0 || !value) {
     return values;
   }
   
@@ -20,7 +20,7 @@ function CSSUnit(values: any): any {
     return engine.convert(BASE_UNIT, values, document.querySelector('body'));
   }
   
-  return engine.convert(BASE_UNIT, values);
+  return engine.convert(BASE_UNIT, value.toString(), document.querySelector('body'));
 }
 
 function CSSUnitGroup(style: IHelper.Style) {
