@@ -1,11 +1,11 @@
-$style: get($css-transition-style, "slide-down");
-$appear: get($css-transition, "appear.default");
-$appear-active: get($css-transition, "appear.active");
-$enter: get($css-transition, "enter.default");
-$enter-active: get($css-transition, "enter.active");
-$exit: get($css-transition, "exit.default");
-$exit-active: get($css-transition, "exit.active");
-$exit-done: get($css-transition, "exit.done");
+$style: get($css-transition-style, 'slide-down');
+$appear: get($css-transition, 'appear.default');
+$appear-active: get($css-transition, 'appear.active');
+$enter: get($css-transition, 'enter.default');
+$enter-active: get($css-transition, 'enter.active');
+$exit: get($css-transition, 'exit.default');
+$exit-active: get($css-transition, 'exit.active');
+$exit-done: get($css-transition, 'exit.done');
 
 .#{$style} {
   transition-property: transform;

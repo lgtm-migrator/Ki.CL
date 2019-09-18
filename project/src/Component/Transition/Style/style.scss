@@ -1,7 +1,7 @@
-$enter: get($css-transition, "enter.default");
-$exit: get($css-transition, "exit.default");
+$enter: get($css-transition, 'enter.default');
+$exit: get($css-transition, 'exit.default');
 
-.#{get($transition, "default")} {
+.#{get($transition, 'default')} {
   position: relative;
 
   > .#{$enter},

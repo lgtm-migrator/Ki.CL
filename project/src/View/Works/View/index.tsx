@@ -1,5 +1,5 @@
 import {Router} from '@/Component';
-import {TransitionStyleName} from '@/Component/CSSTransition';
+import {TransitionStyle} from '@/Component/CSSTransition';
 import React from 'react';
 import Work from './Work';
 
@@ -7,7 +7,7 @@ const View = (
   <Router
     classNames='works-view'
     routeIndex={1}
-    transitionStyle={TransitionStyleName.fade}
+    transitionStyle={TransitionStyle.name.fade}
   >
     {Work}
   </Router>

@@ -1,4 +1,4 @@
-import ICSSTransition from "@/Component/CSSTransition/spec";
+import ICSSTransition from '@/Component/CSSTransition/spec';
 
 declare module ISpinner {
   interface ClassNames extends IClassNames {

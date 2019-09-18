@@ -1,15 +1,15 @@
-$default: get($component-logo, "default");
-$square: get($component-logo, "square");
+$default: get($component-logo, 'default');
+$square: get($component-logo, 'square');
 
-$content: get($kicl, "content.default");
-$name: get($kicl, "name");
-$size: get($grid, "gutter");
-$transition-duration: get($duration, "fast");
-$transition-timing-function: get($ease, "default.in");
+$content: get($kicl, 'content.default');
+$name: get($kicl, 'name');
+$size: get($grid, 'gutter');
+$transition-duration: get($duration, 'fast');
+$transition-timing-function: get($ease, 'default.in');
 
 @include set-logo-size($size);
 
-[data-component="#{$default}"] {
+[data-component='#{$default}'] {
   overflow: hidden;
   position: relative;
 

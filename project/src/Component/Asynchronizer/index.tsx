@@ -1,10 +1,10 @@
-import {CSSTransition} from "@/Component";
-import {TransitionStyleName} from "@/Component/CSSTransition";
-import Spinner from "@/Component/Spinner";
-import {CSSUnit, Fetch} from "@/Helper";
-import React, {useEffect, useState} from "react";
-import IAsynchronizer from "./spec";
-import Style from "./Style";
+import {CSSTransition} from '@/Component';
+import {TransitionStyle} from '@/Component/CSSTransition';
+import Spinner from '@/Component/Spinner';
+import {CSSUnit, Fetch} from '@/Helper';
+import React, {useEffect, useState} from 'react';
+import IAsynchronizer from './spec';
+import Style from './Style';
 
 const delay = CSSUnit(Style.delay);
 
@@ -42,7 +42,7 @@ const Asynchronizer: React.FunctionComponent<IAsynchronizer.Props> = ({
       <Spinner transitionIn={Boolean(!data)} />
       <CSSTransition
         transitionIn={Boolean(data)}
-        transitionStyle={TransitionStyleName.fade}
+        transitionStyle={TransitionStyle.name.fade}
       >
         {Boolean(data) ? children(data) : children}
       </CSSTransition>

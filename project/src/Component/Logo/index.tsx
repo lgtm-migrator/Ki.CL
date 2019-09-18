@@ -1,9 +1,9 @@
-import resources from "$/resources";
-import {Link} from "@/Component";
-import classnames from "classnames";
-import React from "react";
-import ILogo from "./spec";
-import Style from "./Style";
+import resources from '$/resources';
+import {Link} from '@/Component';
+import classnames from 'classnames';
+import React from 'react';
+import ILogo from './spec';
+import Style from './Style';
 
 const {
   siteName,

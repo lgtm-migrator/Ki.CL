@@ -25,5 +25,5 @@ const Home: React.FunctionComponent<IHome.Props> = () => (
 
 const Component = withRouter(Home);
 
-export {awaitFor};
+export {awaitFor, path};
 export default <Route path={path} exact={true} component={Component} />;

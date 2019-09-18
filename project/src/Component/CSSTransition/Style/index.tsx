@@ -1,7 +1,9 @@
-import ICSSTransition from "@/Component/CSSTransition/spec";
-import "./style.scss";
-import TransitionStyle, {TransitionStyleName} from "./TransitionStyle";
-import value from "./value.scss";
+import ICSSTransition from '@/Component/CSSTransition/spec';
+import './style.scss';
+import style, {Name as name} from './TransitionStyle';
+import value from './value.scss';
 
-export {TransitionStyle, TransitionStyleName};
+const TransitionStyle = {style, name};
+
+export {TransitionStyle};
 export default value as ICSSTransition.ClassNames;

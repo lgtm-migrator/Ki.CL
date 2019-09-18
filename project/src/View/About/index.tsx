@@ -12,4 +12,5 @@ const Works: React.FunctionComponent<IAbout.Props> = () => (
   </main>
 );
 
+export {path};
 export default <Route path={path} render={Works} />;

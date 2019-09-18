@@ -1,10 +1,10 @@
-import resources from "$/resources";
-import {Link} from "@/Component";
-import INavigation from "@/Component/Navigation/spec";
-import {RandomId} from "@/Helper";
-import classnames from "classnames";
-import React from "react";
-import Style from "./Style";
+import resources from '$/resources';
+import {Link} from '@/Component';
+import INavigation from '@/Component/Navigation/spec';
+import {RandomId} from '@/Helper';
+import classnames from 'classnames';
+import React from 'react';
+import Style from './Style';
 
 const {view} = resources;
 
@@ -28,7 +28,7 @@ const Navigation: React.FunctionComponent<INavigation.Props> = ({
 }) => (
   <nav
     className={classnames(className, {
-      "is-inline": inline
+      'is-inline': inline
     })}
     data-component={Style.default}
     role='navigation'

@@ -1,4 +1,4 @@
-import WindowSizes from "./WindowSizes";
+import WindowSizes from './WindowSizes';
 
 const State = () => {
   return {

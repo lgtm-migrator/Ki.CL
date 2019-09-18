@@ -1,7 +1,9 @@
 import {Router} from '@/Component';
-import {TransitionStyleName} from '@/Component/CSSTransition';
+import {TransitionStyle} from '@/Component/CSSTransition';
+import ITransitionStyle from '@/Component/CSSTransition/Style/TransitionStyle/spec';
+import IRouter from "@/Component/Router/spec";
 import React from 'react';
-import About from './About';
+import About, {path as aboutPath} from './About';
 import Home, {awaitFor as homeAwaitFor} from './Home';
 import PageNotFound from './PageNotFound';
 import IView from './spec';
@@ -12,12 +14,24 @@ const awaitFor: IView.AwaitFor = {
   home: homeAwaitFor
 };
 
+const transitionStyle: IRouter.TransitionStyleFunction = ({ history }) => {
+  let style: ITransitionStyle.Key = 'fade';
+  
+  if (
+    [aboutPath].some(path => path === history.location.pathname)
+  ) {
+    style = 'slideRight';
+  }
+  
+  return TransitionStyle.name[style];
+};
+
 const View = (
   <Router
     appear={true}
     classNames={Style.view}
     routeIndex={0}
-    transitionStyle={TransitionStyleName.fade}
+    transitionStyle={transitionStyle}
   >
     {About}
     {Home}

@@ -1,9 +1,9 @@
 import resources from '$/resources';
-import {CSSTransition, Logo, Navigation} from "@/Component";
-import {TransitionStyleName} from "@/Component/CSSTransition";
-import React from "react";
-import IGlobalHeader from "./spec";
-import Style from "./Style";
+import {CSSTransition, Logo, Navigation} from '@/Component';
+import {TransitionStyle} from '@/Component/CSSTransition';
+import React from 'react';
+import IGlobalHeader from './spec';
+import Style from './Style';
 
 const {
   view: {
@@ -22,7 +22,7 @@ const GlobalHeader: React.FunctionComponent<IGlobalHeader.Props> = ({
 }) => (
   <CSSTransition
     transitionIn={transitionIn}
-    transitionStyle={TransitionStyleName.fade}
+    transitionStyle={TransitionStyle.name.fade}
   >
     <header role='banner' data-component={Style.default}>
       <Logo isSquare={true} />

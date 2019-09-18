@@ -3,7 +3,7 @@ import React from 'react';
 import {CSSTransition as Origin} from 'react-transition-group';
 import {EnterHandler, ExitHandler} from 'react-transition-group/Transition';
 import ICSSTransition from './spec';
-import Style, {TransitionStyle, TransitionStyleName} from './Style';
+import Style, {TransitionStyle} from './Style';
 import {addEndListener, classNameModifier} from './Utility';
 
 const CSSTransition: React.FunctionComponent<ICSSTransition.Props> = (
@@ -25,18 +25,20 @@ const CSSTransition: React.FunctionComponent<ICSSTransition.Props> = (
     unmountOnExit = true
   }
 ) => {
+  const style = transitionStyle instanceof Function ? transitionStyle() : TransitionStyle.style[transitionStyle];
+  
   const onEnterHandler: EnterHandler = (node, isAppearing) => {
-    classNameModifier.addDefault(node, TransitionStyle[transitionStyle]);
+    classNameModifier.addDefault(node, style);
     onEnter && onEnter(node, isAppearing);
   };
   
   const onEnteredHandler: EnterHandler = (node, isAppearing) => {
-    classNameModifier.removeDone(node, TransitionStyle[transitionStyle]);
+    classNameModifier.removeDone(node, style);
     onEntered && onEntered(node, isAppearing);
   };
   
   const onExitHandler: ExitHandler = (node) => {
-    classNameModifier.addDefault(node, TransitionStyle[transitionStyle]);
+    classNameModifier.addDefault(node, style);
     onExit && onExit(node);
   };
   
@@ -62,5 +64,5 @@ const CSSTransition: React.FunctionComponent<ICSSTransition.Props> = (
   );
 };
 
-export {Style, TransitionStyle, TransitionStyleName};
+export {Style, TransitionStyle};
 export default CSSTransition;

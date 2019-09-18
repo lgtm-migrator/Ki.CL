@@ -1,14 +1,14 @@
-import ICSSTransition from '@/Component/CSSTransition/spec';
+import ITransitionStyle from './spec';
 import './style.scss';
 import value from './value.scss';
 
-const TransitionStyleName: Partial<ICSSTransition.TransitionStyle> = {};
+const Name: Partial<ITransitionStyle.Name> = {};
 
-Object.keys(value).forEach(
-  name => {
-    TransitionStyleName[name] = name;
+Object.keys(value as ITransitionStyle.Style).forEach(
+  (name: ITransitionStyle.Key) => {
+    Name[name] = name;
   }
 );
 
-export {TransitionStyleName};
-export default value as ICSSTransition.TransitionStyle;
+export {Name};
+export default value as ITransitionStyle.Style;

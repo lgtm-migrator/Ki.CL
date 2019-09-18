@@ -26,11 +26,13 @@ const Router: React.FunctionComponent<IRouter.Props> = (
 ) => {
   const Component: React.FunctionComponent<IRouter.Component> = (
     {
-      children, history: {location: {pathname}}, location
+      children, ...props
     }
   ) => {
     let enterFrame: number;
     let exitFrame: number;
+    
+    const {history: {location: {pathname}}, location} = props;
     
     const routes = pathname === view.home.path
       ? view.home.name.toLowerCase()
@@ -68,6 +70,8 @@ const Router: React.FunctionComponent<IRouter.Props> = (
       );
     };
     
+    const style = transitionStyle instanceof Function ? transitionStyle(props) : transitionStyle;
+    
     return (
       <Transition
         appear={appear}
@@ -81,7 +85,7 @@ const Router: React.FunctionComponent<IRouter.Props> = (
         onExited={onExited}
         transitionIn={transitionIn}
         transitionKey={location.pathname.split('/')[routeIndex + 1] || '/'}
-        transitionStyle={transitionStyle}
+        transitionStyle={style}
         unmountOnExit={unmountOnExit}
       >
         <Switch location={location}>{children}</Switch>

@@ -1,5 +1,6 @@
 import {CSSTransitionProps} from 'react-transition-group/CSSTransition';
 import {EndHandler, EnterHandler, ExitHandler} from 'react-transition-group/Transition';
+import ITransitionStyle from './Style/TransitionStyle/spec';
 
 declare module ICSSTransition {
   interface ClassNames extends IClassNames {
@@ -20,6 +21,9 @@ declare module ICSSTransition {
   
   type TransitionIn = boolean;
   
+  type TransitionStyleFunction = () => ITransitionStyle.Key;
+  type TransitionStyle = TransitionStyleFunction | ITransitionStyle.Key;
+  
   interface Props extends Partial<CSSTransitionProps> {
     addEndListener?: EndHandler;
     onEnter?: EnterHandler;
@@ -30,18 +34,7 @@ declare module ICSSTransition {
     onExited?: ExitHandler;
     transitionIn?: TransitionIn;
     transitionKey?: string;
-    transitionStyle?: keyof TransitionStyle;
-  }
-  
-  interface TransitionStyle {
-    custom: string;
-    fade: string
-    slideUp: string;
-    slideDown: string;
-    zoomIn: string;
-    zoomOut: string;
-    
-    [key: string]: string;
+    transitionStyle?: TransitionStyle;
   }
 }
 

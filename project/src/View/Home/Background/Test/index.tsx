@@ -1,8 +1,8 @@
-import {Node} from "@/Component/WebGL";
-import autobind from "autobind-decorator";
-import React from "react";
-import Shader from "./Shader";
-import ITest from "./spec";
+import {Node} from '@/Component/WebGL';
+import autobind from 'autobind-decorator';
+import React from 'react';
+import Shader from './Shader';
+import ITest from './spec';
 
 class Index extends React.PureComponent<ITest.Props, ITest.State> {
   public state: ITest.State = {
