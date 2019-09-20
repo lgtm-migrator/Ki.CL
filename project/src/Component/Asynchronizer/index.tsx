@@ -6,7 +6,7 @@ import React, {useEffect, useState} from 'react';
 import IAsynchronizer from './spec';
 import Style from './Style';
 
-const delay = CSSUnit(Style.delay);
+const awaitDelay = CSSUnit(Style.delay);
 
 const Asynchronizer: React.FunctionComponent<IAsynchronizer.Props> = ({
   awaitFor,
@@ -27,7 +27,7 @@ const Asynchronizer: React.FunctionComponent<IAsynchronizer.Props> = ({
       const {cancel, promise} = Fetch(awaitFor);
       
       promise.then(data => {
-        awaitTimer = window.setTimeout(awaitComplete(data), delay);
+        awaitTimer = window.setTimeout(awaitComplete(data), awaitDelay);
       });
       
       return () => {
@@ -35,17 +35,21 @@ const Asynchronizer: React.FunctionComponent<IAsynchronizer.Props> = ({
         cancel();
       };
     }
-  });
+  }, [data]);
   
   return (
     <React.Fragment>
       <Spinner transitionIn={Boolean(!data)} />
-      <CSSTransition
-        transitionIn={Boolean(data)}
-        transitionStyle={TransitionStyle.name.fade}
-      >
-        {Boolean(data) ? children(data) : children}
-      </CSSTransition>
+      {
+        Boolean(data) && (
+          <CSSTransition
+            transitionIn={Boolean(data)}
+            transitionStyle={TransitionStyle.name.fade}
+          >
+            {children(data)}
+          </CSSTransition>
+        )
+      }
     </React.Fragment>
   );
 };

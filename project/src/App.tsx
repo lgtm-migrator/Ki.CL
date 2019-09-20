@@ -6,20 +6,20 @@ const appRoot = document.querySelector('[app-root]');
 const pathname = window.location.hash.substr(2) || 'home';
 const shouldWaitFor = awaitFor[pathname];
 
-const App = () => (
+const App = (
   <Fragment>
-    {
-      shouldWaitFor ? (
-        <Asynchronizer awaitFor={shouldWaitFor}>
-          {() => (
-            <GlobalHeader transitionIn={true} />
-          )}
-        </Asynchronizer>
-      ) : <GlobalHeader transitionIn={true} />
-    }
+    <GlobalHeader transitionIn={true} />
     {View}
   </Fragment>
 );
 
+const Component = () => (
+  shouldWaitFor ? (
+    <Asynchronizer awaitFor={shouldWaitFor}>
+      {() => App}
+    </Asynchronizer>
+  ) : App
+);
+
 export {appRoot};
-export default App;
+export default Component;

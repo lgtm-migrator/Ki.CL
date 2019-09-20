@@ -1,4 +1,4 @@
 $linkSize: #{get($grid, 'wide')};
-$background-image: '../../../../asset/image/big.sur.png';
+$background-image: '../../../..#{get($image, 'assetRoot')}big.sur.png';
 
 @value gutter: #{$linkSize};

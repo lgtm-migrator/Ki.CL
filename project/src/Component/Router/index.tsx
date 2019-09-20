@@ -6,6 +6,8 @@ import IRouter from './spec';
 
 const {view} = resources;
 
+let cache: IRouter.Cache;
+
 const Router: React.FunctionComponent<IRouter.Props> = (
   {
     appear,
@@ -70,7 +72,9 @@ const Router: React.FunctionComponent<IRouter.Props> = (
       );
     };
     
-    const style = transitionStyle instanceof Function ? transitionStyle(props) : transitionStyle;
+    const style = transitionStyle instanceof Function ? transitionStyle(props, cache) : transitionStyle;
+    
+    cache = props;
     
     return (
       <Transition

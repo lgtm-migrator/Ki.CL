@@ -1,8 +1,119 @@
+$cssTransition: get($css-transition, 'default');
+$appear: get($css-transition, 'appear.default');
+$appear-active: get($css-transition, 'appear.active');
 $enter: get($css-transition, 'enter.default');
+$enter-active: get($css-transition, 'enter.active');
 $exit: get($css-transition, 'exit.default');
+$exit-active: get($css-transition, 'exit.active');
+
+$transition-duration: get($duration, 'fast');
+$transition-delay: get($duration, 'fastest');
+$transition-delay-alternative-component: get($duration, 'faster');
+
+$spinner: get($component-spinner, 'default');
+
+$background-color: get($black, 'light');
+$background-opacity: 0.5;
+$color: get($white, 'default');
+$content: get($kicl, 'content.default');
+$underlay-background-color: get($black, 'pure');
 
 [data-routes='about'] {
+  background-color: $background-color;
+  color: $color;
+  position: relative;
+  z-index: 2000;
+
   h1 {
     padding-top: 300px;
+  }
+
+  [data-component=#{$spinner}] {
+    color: $color;
+  }
+
+  &.#{$cssTransition} {
+    &::before {
+      background-color: $underlay-background-color;
+      content: $content;
+      height: 100vh;
+      opacity: $background-opacity;
+      position: absolute;
+      transform: translate3d(-100%, 0, 0);
+      transition-property: opacity;
+      transition-duration: $transition-duration;
+      width: 100vw;
+    }
+  }
+}
+
+[data-entered-routes='about'],
+[data-exited-routes='about'] {
+  main {
+    &.#{$appear-active},
+    &.#{$enter-active},
+    &.#{$exit-active} {
+      transition-duration: $transition-duration;
+      transition-property: opacity, transform;
+      will-change: opacity, transform;
+    }
+  }
+}
+
+[data-entered-routes='about'] {
+  main {
+    &.#{$appear} {
+      &:not(.#{$appear-active}) {
+        opacity: 0;
+      }
+    }
+
+    &.#{$enter} {
+      transition-delay: $transition-delay;
+      z-index: 2000;
+
+      &:not(.#{$enter-active}) {
+        transform: translate3d(100%, 0, 0);
+
+        &::before {
+          opacity: 0;
+        }
+      }
+    }
+
+    &.#{$exit} {
+      z-index: 100;
+
+      &.#{$exit-active} {
+        opacity: 1;
+        transition-delay: $transition-delay-alternative-component;
+        transform: translate3d(-10%, 0, 0);
+      }
+    }
+  }
+}
+
+[data-exited-routes='about'] {
+  main {
+    &.#{$enter} {
+      z-index: 100;
+
+      &:not(.#{$enter-active}) {
+        opacity: 1;
+        transform: translate3d(-10%, 0, 0);
+      }
+    }
+
+    &.#{$exit} {
+      z-index: 2000;
+
+      &.#{$exit-active} {
+        transform: translate3d(100%, 0, 0);
+
+        &::before {
+          opacity: 0;
+        }
+      }
+    }
   }
 }

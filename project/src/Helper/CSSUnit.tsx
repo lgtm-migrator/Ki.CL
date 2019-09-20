@@ -8,7 +8,7 @@ const BASE_UNIT = 'px';
 function CSSUnit(values: any): any {
   let {value, unit} = engine.parse(values || '');
   
-  if (value < 0 || !value) {
+  if (value < 0) {
     return values;
   }
   

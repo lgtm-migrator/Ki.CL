@@ -1,49 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="1" time="3.991">
-  <testsuite name="App" errors="0" failures="1" skipped="0" timestamp="2019-09-18T20:08:40" time="3.177" tests="1">
-    <testcase classname="App should match with snapshot" name="App should match with snapshot" time="0.077">
-      <failure>TypeError: Cannot read property &apos;baseVal&apos; of undefined
-    at hasClass (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-transition-group/node_modules/dom-helpers/cjs/hasClass.js:8:36)
-    at addClass (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-transition-group/node_modules/dom-helpers/cjs/addClass.js:11:91)
-    at /Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-transition-group/cjs/CSSTransition.js:28:35
-    at Array.forEach (&lt;anonymous&gt;)
-    at addClass (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-transition-group/cjs/CSSTransition.js:27:48)
-    at CSSTransition.addClass (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-transition-group/cjs/CSSTransition.js:219:5)
-    at Object.CSSTransition._this.onEnter (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-transition-group/cjs/CSSTransition.js:125:13)
-    at Transition.performEnter (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-transition-group/cjs/Transition.js:282:16)
-    at Transition.updateStatus (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-transition-group/cjs/Transition.js:253:14)
-    at Transition.componentDidMount (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-transition-group/cjs/Transition.js:195:10)
-    at commitLifeCycles (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10930:22)
-    at commitLayoutEffects (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:13583:7)
-    at HTMLUnknownElement.callCallback (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10487:14)
+<testsuites name="jest tests" tests="1" failures="1" time="3.813">
+  <testsuite name="App" errors="0" failures="1" skipped="0" timestamp="2019-09-20T08:17:59" time="2.946" tests="1">
+    <testcase classname="App should match with snapshot" name="App should match with snapshot" time="0.052">
+      <failure>TypeError: The &quot;path&quot; argument must be of type string. Received type objectTypeError [ERR_INVALID_ARG_TYPE]: The &quot;path&quot; argument must be of type string. Received type object
+    at validateString (internal/validators.js:112:11)
+    at Object.extname (path.js:1231:5)
+    at Object.&lt;anonymous&gt;.module.exports (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/is-image/index.js:7:50)
+    at Fetch (/Users/keni.lam/Documents/Work/Ki.CL/project/src/Helper/Fetch.tsx:20:7)
+    at /Users/keni.lam/Documents/Work/Ki.CL/project/src/Component/Asynchronizer/index.tsx:27:33
+    at commitHookEffectList (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-dom/cjs/react-dom.development.js:19986:26)
+    at commitPassiveHookEffects (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-dom/cjs/react-dom.development.js:20016:11)
+    at HTMLUnknownElement.callCallback (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-dom/cjs/react-dom.development.js:347:14)
     at innerInvokeEventListeners (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-environment-jsdom-fourteen/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:315:27)
-    at invokeEventListeners (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-environment-jsdom-fourteen/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:266:3)
-    at HTMLUnknownElementImpl._dispatch (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-environment-jsdom-fourteen/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:212:11)
-    at HTMLUnknownElementImpl.dispatchEvent (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-environment-jsdom-fourteen/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:87:17)
-    at HTMLUnknownElement.dispatchEvent (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-environment-jsdom-fourteen/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:144:23)
-    at Object.invokeGuardedCallbackDev (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10537:16)
-    at invokeGuardedCallback (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10590:31)
-    at commitRootImpl (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:13355:9)
-    at unstable_runWithPriority (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/scheduler/cjs/scheduler.development.js:643:12)
-    at runWithPriority (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:1887:10)
-    at commitRoot (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:13184:3)
-    at runRootCallback (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12420:20)
-    at /Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:1935:24
-    at unstable_runWithPriority (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/scheduler/cjs/scheduler.development.js:643:12)
-    at runWithPriority (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:1887:10)
-    at flushSyncCallbackQueueImpl (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:1931:7)
-    at flushSyncCallbackQueue (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:1920:3)
-    at scheduleUpdateOnFiber (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12297:9)
-    at scheduleRootUpdate (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15087:3)
-    at updateContainerAtExpirationTime (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15115:10)
-    at updateContainer (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15134:10)
-    at Object.create (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15824:5)
-    at Object.create (/Users/keni.lam/Documents/Work/Ki.CL/project/src/App.test.tsx:12:26)
-    at Object.asyncJestLifecycle (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:53:37)
-    at /Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-jasmine2/build/queueRunner.js:43:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-jasmine2/build/queueRunner.js:26:19)
-    at /Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-jasmine2/build/queueRunner.js:73:41</failure>
+    at invokeEventListeners (/Users/keni.lam/Documents/Work/Ki.CL/node_modules/jest-environment-jsdom-fourteen/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:266:3)</failure>
     </testcase>
   </testsuite>
 </testsuites>

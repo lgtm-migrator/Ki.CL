@@ -1,5 +1,4 @@
 import resources from '$/resources';
-import {Asynchronizer} from '@/Component';
 import {Route, withRouter} from '@/Component/Router';
 import IHome from '@/View/Home/spec';
 import React from 'react';
@@ -16,11 +15,7 @@ const {
 } = resources;
 
 const Home: React.FunctionComponent<IHome.Props> = () => (
-  <Asynchronizer awaitFor={awaitFor}>
-    {() => (
-      <main data-routes='home' />
-    )}
-  </Asynchronizer>
+  <main data-routes='home'/>
 );
 
 const Component = withRouter(Home);
