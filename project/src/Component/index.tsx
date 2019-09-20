@@ -2,7 +2,6 @@ import Asynchronizer from './Asynchronizer';
 import AudioPlayer from './AudioPlayer';
 import CSSTransition from './CSSTransition';
 import './Font';
-import GlobalHeader from './GlobalHeader';
 import Link from './Link';
 import Logo from './Logo';
 import Navigation from './Navigation';
@@ -14,7 +13,6 @@ export {
   Asynchronizer,
   AudioPlayer,
   CSSTransition,
-  GlobalHeader,
   Link,
   Logo,
   Navigation,

@@ -1,4 +1,4 @@
-import IGlobalHeader from '@/Component/GlobalHeader/spec';
+import IGlobalHeader from '@/GlobalHeader/spec';
 import './style.scss';
 import value from './value.scss';
 

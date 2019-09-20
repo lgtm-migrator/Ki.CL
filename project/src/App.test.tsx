@@ -1,8 +1,6 @@
 import * as React from 'react';
+import renderer, {ReactTestRenderer, ReactTestRendererJSON} from 'react-test-renderer';
 import Component from './App';
-import renderer, {
-  ReactTestRenderer, ReactTestRendererJSON
-} from 'react-test-renderer';
 
 let component: ReactTestRenderer;
 let instance: ReactTestRendererJSON;
@@ -10,7 +8,7 @@ let instance: ReactTestRendererJSON;
 describe('App', () => {
   beforeEach(() => {
     component = renderer.create(
-      <Component/>
+      <Component />
     );
     
     instance = component.toJSON();

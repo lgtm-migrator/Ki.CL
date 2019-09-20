@@ -19,7 +19,9 @@ declare module ICSSTransition {
   type OnEnter = EnterHandler;
   type OnExit = ExitHandler;
   
-  type TransitionIn = boolean;
+  type TransitionInFunction = () => boolean;
+  type TransitionInValue = boolean;
+  type TransitionIn = TransitionInFunction | TransitionInValue;
   
   type TransitionStyleFunction = () => ITransitionStyle.Key;
   type TransitionStyle = TransitionStyleFunction | ITransitionStyle.Key;

@@ -15,7 +15,7 @@ const {
 } = resources;
 
 const Home: React.FunctionComponent<IHome.Props> = () => (
-  <main data-routes='home'/>
+  <main data-routes='home' />
 );
 
 const Component = withRouter(Home);

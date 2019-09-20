@@ -1,5 +1,6 @@
 import resources from '$/resources';
 import {Transition} from '@/Component';
+import * as History from 'history';
 import React from 'react';
 import {HashRouter as Provider, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import IRouter from './spec';
@@ -106,6 +107,6 @@ const Router: React.FunctionComponent<IRouter.Props> = (
   );
 };
 
-export {Redirect, Route, Switch, Provider, withRouter};
+export {History, Redirect, Route, Switch, Provider, withRouter};
 
 export default Router;

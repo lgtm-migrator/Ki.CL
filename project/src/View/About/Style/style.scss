@@ -40,8 +40,8 @@ $underlay-background-color: get($black, 'pure');
       opacity: $background-opacity;
       position: absolute;
       transform: translate3d(-100%, 0, 0);
-      transition-property: opacity;
       transition-duration: $transition-duration;
+      transition-property: opacity;
       width: 100vw;
     }
   }
@@ -86,8 +86,8 @@ $underlay-background-color: get($black, 'pure');
 
       &.#{$exit-active} {
         opacity: 1;
-        transition-delay: $transition-delay-alternative-component;
         transform: translate3d(-10%, 0, 0);
+        transition-delay: $transition-delay-alternative-component;
       }
     }
   }

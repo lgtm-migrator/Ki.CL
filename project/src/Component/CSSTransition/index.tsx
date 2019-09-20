@@ -25,6 +25,7 @@ const CSSTransition: React.FunctionComponent<ICSSTransition.Props> = (
     unmountOnExit = true
   }
 ) => {
+  const inValue = transitionIn instanceof Function ? transitionIn() : transitionIn;
   const style = transitionStyle instanceof Function ? transitionStyle() : TransitionStyle.style[transitionStyle];
   
   const onEnterHandler: EnterHandler = (node, isAppearing) => {
@@ -47,7 +48,7 @@ const CSSTransition: React.FunctionComponent<ICSSTransition.Props> = (
       addEndListener={!timeout && addEndListener}
       appear={appear}
       classNames={classnames(classNames, Style.cssTransition)}
-      in={transitionIn}
+      in={inValue}
       key={transitionKey}
       mountOnEnter={mountOnEnter}
       onEnter={onEnterHandler}

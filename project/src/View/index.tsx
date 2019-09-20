@@ -1,9 +1,9 @@
 import {Router} from '@/Component';
 import {TransitionStyle} from '@/Component/CSSTransition';
-import IRouter from "@/Component/Router/spec";
+import IRouter from '@/Component/Router/spec';
 import React from 'react';
 import About, {path as abortPath} from './About';
-import Home, {awaitFor as homeAwaitFor} from './Home';
+import Home, {awaitFor as homeAwaitFor, path as homePath} from './Home';
 import PageNotFound from './PageNotFound';
 import IView from './spec';
 import Style from './Style';
@@ -13,11 +13,15 @@ const awaitFor: IView.AwaitFor = {
   home: homeAwaitFor
 };
 
+const paths: IView.Paths = {
+  home: homePath
+};
+
 const transitionStyle: IRouter.TransitionStyleFunction = (
   props
 ) => TransitionStyle.name[
   [abortPath].some(path => path === props.location.pathname) ? 'custom' : 'fade'
-];
+  ];
 
 const View = (
   <Router
@@ -33,5 +37,5 @@ const View = (
   </Router>
 );
 
-export {awaitFor};
+export {awaitFor, paths};
 export default View;

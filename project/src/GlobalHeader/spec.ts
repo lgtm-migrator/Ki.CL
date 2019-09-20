@@ -4,7 +4,6 @@ declare module IGlobalHeader {
   }
   
   interface Props {
-    transitionIn: boolean;
   }
 }
 export default IGlobalHeader;

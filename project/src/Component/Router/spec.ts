@@ -20,7 +20,7 @@ declare module IRouter {
   interface Props extends ITransition.Props {
     routeIndex: number;
     timeout?: number;
-    transitionStyle: TransitionStyleFunction | ICSSTransition.TransitionStyle;
+    transitionStyle?: TransitionStyleFunction | ICSSTransition.TransitionStyle;
   }
 }
 

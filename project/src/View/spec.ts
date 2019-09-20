@@ -3,8 +3,14 @@ declare module IView {
     view: string;
   }
   
-  interface AwaitFor {
-    [name: string]: string;
+  type View = 'about' | 'works' | 'home';
+  
+  type AwaitFor = {
+    [name in View]?: string;
+  }
+  
+  type Paths = {
+    [name in View]?: string;
   }
   
   interface Props {

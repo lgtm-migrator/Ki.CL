@@ -1,5 +1,5 @@
 import resources from '$/resources';
-import {Asynchronizer} from "@/Component";
+import {Asynchronizer} from '@/Component';
 import {Route} from '@/Component/Router';
 import React from 'react';
 import IAbout from './spec';
