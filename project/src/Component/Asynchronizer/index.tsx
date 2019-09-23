@@ -10,7 +10,8 @@ const awaitDelay = CSSUnit(Style.delay);
 
 const Asynchronizer: React.FunctionComponent<IAsynchronizer.Props> = ({
   awaitFor,
-  children
+  children,
+  transitionStyle = TransitionStyle.name.fade
 }) => {
   let awaitTimer: number;
   
@@ -44,7 +45,7 @@ const Asynchronizer: React.FunctionComponent<IAsynchronizer.Props> = ({
         Boolean(data) && (
           <CSSTransition
             transitionIn={Boolean(data)}
-            transitionStyle={TransitionStyle.name.fade}
+            transitionStyle={transitionStyle}
           >
             {children(data)}
           </CSSTransition>

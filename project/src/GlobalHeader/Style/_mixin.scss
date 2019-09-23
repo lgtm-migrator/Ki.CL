@@ -1,0 +1,14 @@
+$default: get($component-global-header, 'default');
+$navigation: get($component-navigation, 'default');
+
+@mixin set-global-header-color($color: get($black, 'default')) {
+  [data-component='#{$default}'] {
+    color: $color;
+
+    > [data-component=#{$navigation}] {
+      a {
+        color: $color;
+      }
+    }
+  }
+}

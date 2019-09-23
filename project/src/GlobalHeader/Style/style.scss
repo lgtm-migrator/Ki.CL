@@ -11,6 +11,8 @@ $exit: get($css-transition, 'exit.default');
 $exit-active: get($css-transition, 'exit.active');
 $exit-done: get($css-transition, 'exit.done');
 
+$transition-duration: get($duration, 'faster');
+
 $logo: get($component-logo, 'default');
 $navigation: get($component-navigation, 'default');
 
@@ -18,6 +20,8 @@ $bleed: get($grid, 'default');
 $color: get($black, 'default');
 $gap: get($grid, 'gutter');
 $space: get($grid, 'narrow');
+
+@include set-global-header-color();
 
 [data-component='#{$default}'] {
   display: grid;
@@ -27,7 +31,7 @@ $space: get($grid, 'narrow');
   grid-template-rows: $bleed max-content auto;
   position: fixed;
   width: 100vw;
-  z-index: 1000;
+  z-index: 1500;
 
   > * {
     align-self: center;
@@ -41,22 +45,26 @@ $space: get($grid, 'narrow');
     grid-template-rows: auto;
     text-transform: uppercase;
     transition-property: font-weight;
-
-    a {
-      color: $color;
-    }
   }
 
   @include tablet() {
     grid-gap: $space;
     grid-template-areas: '. . . . . .' '. logo h2 . navigation .' '. . . . . .';
-    grid-template-columns: $space max-content max-content auto max-content $space;
+    grid-template-columns: $gap max-content max-content auto max-content $gap;
     grid-template-rows: $gap max-content auto;
 
     > [data-component=#{$navigation}] {
       grid-gap: $space;
       grid-template-columns: auto;
       grid-template-rows: auto;
+    }
+
+    h2 {
+      color: transparent;
+      height: 0;
+      overflow: hidden;
+      position: absolute;
+      width: 0;
     }
   }
 
@@ -71,26 +79,26 @@ $space: get($grid, 'narrow');
 
   &.#{$cssTransition} {
     > * {
-      transition-duration: get($duration, 'normal');
+      transition-duration: $transition-duration;
       transition-property: opacity, transform;
     }
 
     &:not(.#{$exit}) {
       > * {
-        transition-delay: get($duration, 'fast');
+        transition-delay: $transition-duration;
       }
 
       h2 {
-        transition-delay: get($duration, 'fast') * 1.4;
+        transition-delay: $transition-duration * 1.4;
       }
 
       > [data-component=#{$navigation}] {
-        transition-delay: get($duration, 'fast') * 1.8;
+        transition-delay: $transition-duration * 1.8;
       }
     }
 
     &.#{$exit} {
-      transition-delay: get($duration, 'normal');
+      transition-delay: $transition-duration;
     }
 
     &.#{$appear}:not(.#{$appear-active}),

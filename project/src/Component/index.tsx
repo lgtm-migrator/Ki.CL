@@ -1,5 +1,6 @@
 import Asynchronizer from './Asynchronizer';
 import AudioPlayer from './AudioPlayer';
+import CloseButton from './CloseButton';
 import CSSTransition from './CSSTransition';
 import './Font';
 import Link from './Link';
@@ -12,6 +13,7 @@ import WebGL from './WebGL';
 export {
   Asynchronizer,
   AudioPlayer,
+  CloseButton,
   CSSTransition,
   Link,
   Logo,

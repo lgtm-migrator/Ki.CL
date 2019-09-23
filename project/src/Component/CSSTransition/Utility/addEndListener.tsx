@@ -5,11 +5,17 @@ import {EndHandler} from 'react-transition-group/Transition';
 
 const {setTimeout} = window;
 
-const getAnimationDuration = (node: HTMLElement) => (
-  CSSUnit(window.getComputedStyle(node).animationDuration) || 0
-) + (
-  CSSUnit(window.getComputedStyle(node).animationDelay) || 0
-);
+const getAnimationDuration = (node: HTMLElement) => {
+  if (window.getComputedStyle(node).animationName === 'none') {
+    return 0;
+  }
+  
+  return (
+    CSSUnit(window.getComputedStyle(node).animationDuration) || 0
+  ) + (
+    CSSUnit(window.getComputedStyle(node).animationDelay) || 0
+  );
+};
 
 const duration = (node: HTMLElement) => (
   node && node.parentNode ? (
@@ -22,7 +28,7 @@ const duration = (node: HTMLElement) => (
           node.querySelectorAll(`.${Style.cssTransition}`)
         ),
         Array.from(
-          node.childNodes
+          node.children
         )
       ).map(
         (elm: HTMLElement) => Math.max(

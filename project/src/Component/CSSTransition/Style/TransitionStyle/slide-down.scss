@@ -1,3 +1,4 @@
+$cssTransition: get($css-transition, 'default');
 $style: get($css-transition-style, 'slide-down');
 $appear: get($css-transition, 'appear.default');
 $appear-active: get($css-transition, 'appear.active');
@@ -7,14 +8,15 @@ $exit: get($css-transition, 'exit.default');
 $exit-active: get($css-transition, 'exit.active');
 $exit-done: get($css-transition, 'exit.done');
 
-.#{$style} {
-  transition-property: transform;
-  will-change: transform;
+.#{$cssTransition}.#{$style} {
+  transition-property: opacity, transform;
+  will-change: opacity, transform;
 
   &.#{$appear}:not(.#{$appear-active}),
   &.#{$enter}:not(.#{$enter-active}),
   &.#{$exit}.#{$exit-active},
-  &.#{$exit}.#{$exit-done} {
+  &.#{$exit-done} {
+    opacity: 0;
     transform: translate3d(0, -100%, 0);
   }
 }

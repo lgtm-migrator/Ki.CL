@@ -10,6 +10,14 @@ html {
   line-height: get($font, 'line-height.default');
 }
 
+a,
+button,
+[href] {
+  color: $green;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 h1,
 h2,
 h3,
@@ -21,18 +29,6 @@ h5 {
   line-height: get($font, 'line-height.wide');
 }
 
-h1 {
-  font-size: get($font, 'font-size.medium');
-}
-
-a,
-button,
-[href] {
-  color: $green;
-  cursor: pointer;
-  text-decoration: none;
-}
-
 [app-root] {
   min-height: 100vh;
   min-width: 100vw;
@@ -41,6 +37,26 @@ button,
 
 [aria-hidden='true'] {
   visibility: hidden;
+}
+
+* {
+  transition-timing-function: get($ease, 'quad.in');
+}
+
+body {
+  transition-duration: get($duration, 'slow');
+  transition-property: background-color;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: get($font, 'font-size.medium');
 }
 
 header[rule='banner'] {

@@ -29,18 +29,18 @@ const CSSTransition: React.FunctionComponent<ICSSTransition.Props> = (
   const style = transitionStyle instanceof Function ? transitionStyle() : TransitionStyle.style[transitionStyle];
   
   const onEnterHandler: EnterHandler = (node, isAppearing) => {
-    classNameModifier.addDefault(node, style);
     onEnter && onEnter(node, isAppearing);
+    classNameModifier.addDefault(node, style);
   };
   
   const onEnteredHandler: EnterHandler = (node, isAppearing) => {
-    classNameModifier.removeDone(node, style);
     onEntered && onEntered(node, isAppearing);
+    classNameModifier.removeDone(node, style);
   };
   
   const onExitHandler: ExitHandler = (node) => {
-    classNameModifier.addDefault(node, style);
     onExit && onExit(node);
+    classNameModifier.addDefault(node, style);
   };
   
   return (

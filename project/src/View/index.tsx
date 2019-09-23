@@ -7,25 +7,25 @@ import Home, {awaitFor as homeAwaitFor, path as homePath} from './Home';
 import PageNotFound from './PageNotFound';
 import IView from './spec';
 import Style from './Style';
-import Works from './Works';
+import Works, {path as worksPath} from './Works';
 
 const awaitFor: IView.AwaitFor = {
   home: homeAwaitFor
 };
 
 const paths: IView.Paths = {
-  home: homePath
+  home: homePath,
+  works: worksPath
 };
 
 const transitionStyle: IRouter.TransitionStyleFunction = (
-  props
+  {location}
 ) => TransitionStyle.name[
-  [abortPath].some(path => path === props.location.pathname) ? 'custom' : 'fade'
-  ];
+  [abortPath, worksPath].some(path => path === location.pathname) ? 'custom' : 'fade'
+];
 
 const View = (
   <Router
-    appear={true}
     classNames={Style.view}
     routeIndex={0}
     transitionStyle={transitionStyle}

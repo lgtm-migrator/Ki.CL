@@ -1,3 +1,4 @@
+$cssTransition: get($css-transition, 'default');
 $style: get($css-transition-style, 'zoom-in');
 $appear: get($css-transition, 'appear.default');
 $appear-active: get($css-transition, 'appear.active');
@@ -14,7 +15,7 @@ $exit-done: get($css-transition, 'exit.done');
   &.#{$appear}:not(.#{$appear-active}),
   &.#{$enter}:not(.#{$enter-active}),
   &.#{$exit}.#{$exit-active},
-  &.#{$exit}.#{$exit-done} {
+  &.#{$exit-done} {
     opacity: 0;
     transform: scale(0.7);
   }

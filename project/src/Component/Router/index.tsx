@@ -1,13 +1,11 @@
 import resources from '$/resources';
 import {Transition} from '@/Component';
 import * as History from 'history';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {HashRouter as Provider, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import IRouter from './spec';
 
 const {view} = resources;
-
-let cache: IRouter.Cache;
 
 const Router: React.FunctionComponent<IRouter.Props> = (
   {
@@ -73,37 +71,41 @@ const Router: React.FunctionComponent<IRouter.Props> = (
       );
     };
     
-    const style = transitionStyle instanceof Function ? transitionStyle(props, cache) : transitionStyle;
-    
-    cache = props;
-    
-    return (
-      <Transition
-        appear={appear}
-        classNames={classNames}
-        component={component}
-        onEnter={onEnterHandler}
-        onEntered={onEntered}
-        onEntering={onEntering}
-        onExit={onExitHandler}
-        onExiting={onExiting}
-        onExited={onExited}
-        transitionIn={transitionIn}
-        transitionKey={location.pathname.split('/')[routeIndex + 1] || '/'}
-        transitionStyle={style}
-        unmountOnExit={unmountOnExit}
-      >
-        <Switch location={location}>{children}</Switch>
-      </Transition>
+    const style = transitionStyle instanceof Function ? transitionStyle(props) : transitionStyle;
+  
+    return useMemo(
+      () => (
+        <Transition
+          appear={appear}
+          classNames={classNames}
+          component={component}
+          onEnter={onEnterHandler}
+          onEntered={onEntered}
+          onEntering={onEntering}
+          onExit={onExitHandler}
+          onExiting={onExiting}
+          onExited={onExited}
+          transitionIn={transitionIn}
+          transitionKey={location.pathname.split('/')[routeIndex + 1] || '/'}
+          transitionStyle={style}
+          unmountOnExit={unmountOnExit}
+        >
+          <Switch location={location}>{children}</Switch>
+        </Transition>
+      ), [routes]
     );
   };
   
-  const Instance = withRouter(Component);
+  const Instance = useMemo(
+    () => (
+      withRouter(Component)
+    ), []
+  );
   
-  return (
-    <Provider>
+  return useMemo(
+    () => (
       <Instance>{children}</Instance>
-    </Provider>
+    ), []
   );
 };
 

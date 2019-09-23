@@ -1,3 +1,5 @@
+import ICSSTransition from "@/Component/CSSTransition/spec";
+
 declare module IAsynchronizer {
   interface ClassNames extends IClassNames {
     delay: string;
@@ -11,7 +13,8 @@ declare module IAsynchronizer {
   
   interface Props {
     awaitFor: awaitFor,
-    children: (data: Data) => React.ReactNode
+    children: (data: Data) => React.ReactNode,
+    transitionStyle?: ICSSTransition.TransitionStyle
   }
 }
 

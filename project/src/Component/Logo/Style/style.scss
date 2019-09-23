@@ -5,7 +5,6 @@ $content: get($kicl, 'content.default');
 $name: get($kicl, 'name');
 $size: get($grid, 'gutter');
 $transition-duration: get($duration, 'fast');
-$transition-timing-function: get($ease, 'default.in');
 
 @include set-logo-size($size);
 
@@ -28,7 +27,6 @@ $transition-timing-function: get($ease, 'default.in');
     top: 0;
     transition-duration: $transition-duration;
     transition-property: color;
-    transition-timing-function: $transition-timing-function;
     will-change: color;
     z-index: 1;
   }

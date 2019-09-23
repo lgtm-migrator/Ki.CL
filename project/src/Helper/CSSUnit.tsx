@@ -20,7 +20,7 @@ function CSSUnit(values: any): any {
     return engine.convert(BASE_UNIT, values, document.querySelector('body'));
   }
   
-  return engine.convert(BASE_UNIT, value.toString(), document.querySelector('body'));
+  return engine.convert(BASE_UNIT, value, document.querySelector('body'));
 }
 
 function CSSUnitGroup(style: IHelper.Style) {

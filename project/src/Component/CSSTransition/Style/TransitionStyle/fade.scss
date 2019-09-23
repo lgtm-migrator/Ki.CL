@@ -1,3 +1,4 @@
+$cssTransition: get($css-transition, 'default');
 $style: get($css-transition-style, 'fade');
 $appear: get($css-transition, 'appear.default');
 $appear-active: get($css-transition, 'appear.active');
@@ -7,14 +8,14 @@ $exit: get($css-transition, 'exit.default');
 $exit-active: get($css-transition, 'exit.active');
 $exit-done: get($css-transition, 'exit.done');
 
-.#{$style} {
+.#{$cssTransition}.#{$style} {
   transition-property: opacity;
   will-change: opacity;
 
   &.#{$appear}:not(.#{$appear-active}),
   &.#{$enter}:not(.#{$enter-active}),
   &.#{$exit}.#{$exit-active},
-  &.#{$exit}.#{$exit-done} {
+  &.#{$exit-done} {
     opacity: 0;
   }
 }

@@ -10,11 +10,8 @@ declare module IRouter {
   type OnEnter = ICSSTransition.OnEnter;
   type OnExit = ICSSTransition.OnExit;
   
-  type Cache = RouteComponentProps;
-  
   type TransitionStyleFunction = (
-    props?: Cache,
-    prevProps?: Cache
+    props?: RouteComponentProps
   ) => ITransitionStyle.Key;
   
   interface Props extends ITransition.Props {

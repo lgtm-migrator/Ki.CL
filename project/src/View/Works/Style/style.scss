@@ -1,2 +1,5 @@
-$enter: get($css-transition, 'enter.default');
-$exit: get($css-transition, 'exit.default');
+$background-color: get($black, 'default');
+
+[data-routes^='works'] {
+  background-color: $background-color;
+}

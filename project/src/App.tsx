@@ -1,6 +1,7 @@
 import {Asynchronizer} from '@/Component';
+import {Provider} from '@/Component/Router';
 import IView from '@/View/spec';
-import React, {Fragment} from 'react';
+import React from 'react';
 import GlobalHeader from './GlobalHeader';
 import View, {awaitFor} from './View';
 
@@ -9,10 +10,10 @@ const pathname = window.location.hash.substr(2) || 'home';
 const shouldWaitFor = awaitFor[pathname as IView.View];
 
 const App = (
-  <Fragment>
+  <Provider>
     <GlobalHeader />
     {View}
-  </Fragment>
+  </Provider>
 );
 
 const Component = () => (

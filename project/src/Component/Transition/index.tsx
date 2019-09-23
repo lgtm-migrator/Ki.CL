@@ -27,33 +27,23 @@ const Transition: React.FunctionComponent<ITransition.Props> = (
   const className = classnames(classNames, Style.transition);
   
   const onEnterHandler: EnterHandler = (node, isAppearing) => {
-    onEnter && onEnter(node, isAppearing);
-    
-    if (!node || !node.parentElement) {
-      return;
+    if (node && node.parentElement) {
+      node.parentElement.classList.add(...className.split(' '));
     }
-    
-    node.parentElement.classList.add(...className.split(' '));
+  
+    onEnter && onEnter(node, isAppearing);
   };
   
   const onEnteredHandler: EnterHandler = (node, isAppearing) => {
     onEntered && onEntered(node, isAppearing);
     
-    if (!node || !node.parentElement) {
-      return;
+    if (node && node.parentElement) {
+      node.parentElement.classList.remove(...className.split(' '));
     }
-    
-    node.parentElement.classList.remove(...className.split(' '));
   };
   
   const onExitHandler: ExitHandler = (node) => {
     onExit && onExit(node);
-    
-    if (!node || !node.parentElement) {
-      return;
-    }
-    
-    node.parentElement.classList.add(...className.split(' '));
   };
   
   return (
