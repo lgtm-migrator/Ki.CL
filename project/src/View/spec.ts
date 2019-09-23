@@ -3,7 +3,7 @@ declare module IView {
     view: string;
   }
   
-  type View = 'about' | 'works' | 'home';
+  type View = 'about' | 'works' | '';
   
   type AwaitFor = {
     [name in View]?: string;
@@ -13,7 +13,12 @@ declare module IView {
     [name in View]?: string;
   }
   
+  interface Routes {
+    view: View
+  }
+  
   interface Props {
+    routes: Routes
   }
 }
 

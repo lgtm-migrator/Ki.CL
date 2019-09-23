@@ -41,6 +41,7 @@ const optimization = {
 const contentBase = [assetPath, contentPath].map(path => `${path}/`)
 
 const devServer = {
+  historyApiFallback: true,
   https: true,
   hot: true,
   inline: true,

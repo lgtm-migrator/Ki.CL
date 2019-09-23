@@ -1,28 +1,28 @@
-import {Asynchronizer} from '@/Component';
-import {Provider} from '@/Component/Router';
-import IView from '@/View/spec';
-import React from 'react';
-import GlobalHeader from './GlobalHeader';
-import View, {awaitFor} from './View';
+import React, {Fragment} from 'react';
+import View from './View';
+import {navigate} from 'hookrouter';
 
 const appRoot = document.querySelector('[app-root]');
-const pathname = window.location.hash.substr(2) || 'home';
-const shouldWaitFor = awaitFor[pathname as IView.View];
 
-const App = (
-  <Provider>
-    <GlobalHeader />
-    {View}
-  </Provider>
-);
+const onClick: React.MouseEventHandler<React.MouseEvent> = event => {
+  event.preventDefault();
+  navigate(event.currentTarget.pathname);
+};
 
-const Component = () => (
-  shouldWaitFor ? (
-    <Asynchronizer awaitFor={shouldWaitFor}>
-      {() => App}
-    </Asynchronizer>
-  ) : App
+const App = () => (
+  <Fragment>
+    <a onClick={onClick} href={'/'}>
+      Home
+    </a>
+    <a onClick={onClick} href={'/about'}>
+      About
+    </a>
+    <a onClick={onClick} href={'/works'}>
+      Works
+    </a>
+    <View/>
+  </Fragment>
 );
 
 export {appRoot};
-export default Component;
+export default App;

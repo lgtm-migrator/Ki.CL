@@ -1,41 +1,55 @@
-import {Router} from '@/Component';
-import {TransitionStyle} from '@/Component/CSSTransition';
-import IRouter from '@/Component/Router/spec';
-import React from 'react';
-import About, {path as abortPath} from './About';
-import Home, {awaitFor as homeAwaitFor, path as homePath} from './Home';
-import PageNotFound from './PageNotFound';
-import IView from './spec';
-import Style from './Style';
-import Works, {path as worksPath} from './Works';
+import {RouterHook} from '@/Component';
+import IRouterHook from "@/Component/RouterHook/spec";
+import IView from "@/View/spec";
+import React, {Fragment} from "react";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
-const awaitFor: IView.AwaitFor = {
-  home: homeAwaitFor
-};
-
-const paths: IView.Paths = {
-  home: homePath,
-  works: worksPath
-};
-
-const transitionStyle: IRouter.TransitionStyleFunction = (
-  {location}
-) => TransitionStyle.name[
-  [abortPath, worksPath].some(path => path === location.pathname) ? 'custom' : 'fade'
-];
-
-const View = (
-  <Router
-    classNames={Style.view}
-    routeIndex={0}
-    transitionStyle={transitionStyle}
-  >
-    {About}
-    {Home}
-    {Works}
-    {PageNotFound}
-  </Router>
+const About: React.FunctionComponent = () => (
+  <main>ABOUT</main>
 );
 
-export {awaitFor, paths};
-export default View;
+const Home: React.FunctionComponent = () => (
+  <main>HOME</main>
+);
+
+const Works: React.FunctionComponent = () => (
+  <main>WORKS</main>
+);
+
+const View = ({routes}: IView.Props) => {
+  return (
+    <TransitionGroup component={Fragment}>
+      {
+        [
+          {view: 'about', Component: About as React.FunctionComponent<{routes: IRouterHook.Routes}>},
+          {view: 'home', Component: Home as React.FunctionComponent<{routes: IRouterHook.Routes}>},
+          {view: 'works', Component: Works as React.FunctionComponent<{routes: IRouterHook.Routes}>}
+        ]
+        .sort(
+          ({view}: {view: string}) => view !== routes.view ? 1 : 0
+        )
+        .filter(
+          ({view}: {view: string}) => view === routes.view
+        )
+        .map(
+          ({view, Component}: {view: string, Component: React.FunctionComponent<{routes: IRouterHook.Routes}>}) => (
+            <CSSTransition timeout={1000} key={view} appear={true}>
+              <Component routes={routes}/>
+            </CSSTransition>
+          )
+        )
+      }
+    </TransitionGroup>
+  );
+};
+
+const Component = () => (
+  <RouterHook
+    index={View}
+    routes={
+      { '/:view': View }
+    }
+  />
+);
+
+export default Component;

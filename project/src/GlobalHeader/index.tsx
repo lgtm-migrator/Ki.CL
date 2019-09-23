@@ -1,7 +1,6 @@
 import resources from '$/resources';
 import {CSSTransition, Logo, Navigation} from '@/Component';
 import {withRouter} from '@/Component/Router';
-import {paths} from '@/View';
 import React from 'react';
 import IGlobalHeader from './spec';
 import Style from './Style';
@@ -10,6 +9,8 @@ const {
   view: {
     about,
     contact,
+    home,
+    works
   },
   component: {
     globalHeader: {
@@ -18,7 +19,7 @@ const {
   }
 } = resources;
 
-const transitionInPaths = [paths.home, paths.works];
+const transitionInPaths = [home.path, works.path];
 
 const GlobalHeader: React.FunctionComponent<IGlobalHeader.Props> = ({
   location
