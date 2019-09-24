@@ -1,8 +1,5 @@
 import {RouterHook} from '@/Component';
-import IRouterHook from "@/Component/RouterHook/spec";
-import IView from "@/View/spec";
-import React, {Fragment} from "react";
-import {CSSTransition, TransitionGroup} from "react-transition-group";
+import React from 'react';
 
 const About: React.FunctionComponent = () => (
   <main>ABOUT</main>
@@ -16,40 +13,14 @@ const Works: React.FunctionComponent = () => (
   <main>WORKS</main>
 );
 
-const View = ({routes}: IView.Props) => {
-  return (
-    <TransitionGroup component={Fragment}>
-      {
-        [
-          {view: 'about', Component: About as React.FunctionComponent<{routes: IRouterHook.Routes}>},
-          {view: 'home', Component: Home as React.FunctionComponent<{routes: IRouterHook.Routes}>},
-          {view: 'works', Component: Works as React.FunctionComponent<{routes: IRouterHook.Routes}>}
-        ]
-        .sort(
-          ({view}: {view: string}) => view !== routes.view ? 1 : 0
-        )
-        .filter(
-          ({view}: {view: string}) => view === routes.view
-        )
-        .map(
-          ({view, Component}: {view: string, Component: React.FunctionComponent<{routes: IRouterHook.Routes}>}) => (
-            <CSSTransition timeout={1000} key={view} appear={true}>
-              <Component routes={routes}/>
-            </CSSTransition>
-          )
-        )
-      }
-    </TransitionGroup>
-  );
+const routes = {
+  '/': Home,
+  '/about': About,
+  '/works': Works
 };
 
 const Component = () => (
-  <RouterHook
-    index={View}
-    routes={
-      { '/:view': View }
-    }
-  />
+  <RouterHook routes={routes} />
 );
 
 export default Component;

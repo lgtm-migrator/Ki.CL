@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {MouseEvent} from 'react';
 
 declare module IRouterHook {
-  type Component = React.FunctionComponent<{routes: Routes}>;
+  type Component = React.FunctionComponent<{ routes: Routes }>;
   
   type Routes = {
     [path: string]: Component
   };
   
+  type Event = MouseEvent<HTMLAnchorElement>;
+  
+  interface Link extends React.AnchorHTMLAttributes<{}> {
+    pathname: string;
+  }
+  
   interface Props {
-    index?: Component;
     routes: Routes;
   }
 }

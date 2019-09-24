@@ -1,15 +1,15 @@
 import resources from '$/resources';
 import {Asynchronizer, CloseButton, Logo, Navigation} from '@/Component';
-import {TransitionStyle} from "@/Component/CSSTransition";
+import {TransitionStyle} from '@/Component/CSSTransition';
 import {Route} from '@/Component/Router';
-import IHome from "@/View/Home/spec";
+import IHome from '@/View/Home/spec';
 import React from 'react';
 import IAbout from './spec';
 import './Style';
 
 const {
   view: {
-    about: {path, content: { action, heading }}
+    about: {path, content: {action, heading}}
   }
 } = resources;
 
@@ -23,10 +23,10 @@ const Abort: React.FunctionComponent<IHome.Props> = ({
       {
         (data: IAbout.Data) => (
           <article>
-            <Logo/>
+            <Logo />
             <h2>{heading}</h2>
             <p>{data.sections.About}</p>
-            <CloseButton onExit={history.goBack}/>
+            <CloseButton onExit={history.goBack} />
             <Navigation
               inline={true}
               items={[

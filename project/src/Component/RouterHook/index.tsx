@@ -1,25 +1,54 @@
-import IRouterHook from "@/Component/RouterHook/spec";
-import React from 'react';
-import {HookRouter, useRoutes} from 'hookrouter';
+import IRouterHook from '@/Component/RouterHook/spec';
+import {HookRouter, navigate, useRoutes} from 'hookrouter';
+import React, {Fragment, ReactElement} from 'react';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
-const RouterHook: React.FunctionComponent<IRouterHook.Props> = ({ index: IndexComponent, routes }) => {
+const Link: React.FunctionComponent<IRouterHook.Link> = ({children, onClick, pathname}) => {
+  const clickHandler: React.MouseEventHandler = async (event: IRouterHook.Event) => {
+    event.preventDefault();
+    onClick && onClick(event);
+    navigate(event.currentTarget.pathname);
+  };
+  
+  return (
+    <a onClick={clickHandler} href={pathname} aria-disabled={window.location.pathname === pathname}>
+      {children}
+    </a>
+  );
+};
+
+const RouterHook: React.FunctionComponent<IRouterHook.Props> = ({routes}) => {
   const routeObject: HookRouter.RouteObject = {};
   
   Object.keys(routes).forEach(
     path => {
-      const Component: React.FunctionComponent<{routes: IRouterHook.Routes}> = routes[path];
-  
-      routeObject[path] = params => <Component routes={params}/>
+      routeObject[path] = (params) => (
+        <TransitionGroup component={Fragment}>
+          {
+            Object
+            .keys(routes)
+            .filter(pathname => window.location.pathname === pathname)
+            .map(
+              pathname => {
+                const Instance = routes[pathname];
+                
+                return (
+                  <CSSTransition timeout={1000} key={pathname}>
+                    <Instance routes={params} />
+                  </CSSTransition>
+                );
+              }
+            ) as ReactElement[]
+          }
+        </TransitionGroup>
+      );
     }
   );
-  
-  if (!routeObject['/'] && IndexComponent) {
-    routeObject['/'] = () => <IndexComponent routes={{ view: 'home' }}/>;
-  }
   
   const result = useRoutes(routeObject);
   
   return result || 'empty';
 };
 
+export {Link};
 export default RouterHook;

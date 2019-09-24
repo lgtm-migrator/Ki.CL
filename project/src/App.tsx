@@ -1,26 +1,21 @@
+import {Link} from '@/Component/RouterHook';
 import React, {Fragment} from 'react';
 import View from './View';
-import {navigate} from 'hookrouter';
 
 const appRoot = document.querySelector('[app-root]');
 
-const onClick: React.MouseEventHandler<React.MouseEvent> = event => {
-  event.preventDefault();
-  navigate(event.currentTarget.pathname);
-};
-
 const App = () => (
   <Fragment>
-    <a onClick={onClick} href={'/'}>
+    <Link pathname={'/'}>
       Home
-    </a>
-    <a onClick={onClick} href={'/about'}>
+    </Link>
+    <Link pathname={'/about'}>
       About
-    </a>
-    <a onClick={onClick} href={'/works'}>
+    </Link>
+    <Link pathname={'/works'}>
       Works
-    </a>
-    <View/>
+    </Link>
+    <View />
   </Fragment>
 );
 

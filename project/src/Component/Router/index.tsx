@@ -72,7 +72,7 @@ const Router: React.FunctionComponent<IRouter.Props> = (
     };
     
     const style = transitionStyle instanceof Function ? transitionStyle(props) : transitionStyle;
-  
+    
     return useMemo(
       () => (
         <Transition

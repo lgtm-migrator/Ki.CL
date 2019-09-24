@@ -3,11 +3,11 @@ import AudioPlayer from './AudioPlayer';
 import CloseButton from './CloseButton';
 import CSSTransition from './CSSTransition';
 import './Font';
-import RouterHook from './RouterHook';
 import Link from './Link';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import Router from './Router';
+import RouterHook from './RouterHook';
 import Transition from './Transition';
 import WebGL from './WebGL';
 
