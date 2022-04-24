@@ -71,7 +71,7 @@
     "@jedmao/location": "3.0.0",
     "@types/classnames": "2.2.11",
     "@types/color": "3.0.1",
-    "@types/enzyme": "3.10.8",
+    "@types/enzyme": "3.10.12",
     "@types/enzyme-adapter-react-16": "1.0.6",
     "@types/jest": "26.0.20",
     "@types/node": "14.14.20",
