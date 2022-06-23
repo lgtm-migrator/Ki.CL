@@ -146,7 +146,7 @@
     "helmet": "4.2.0",
     "hpp": "0.2.3",
     "html-webpack-plugin": "4.5.1",
-    "http-server": "0.12.3",
+    "http-server": "14.1.1",
     "husky": "4.3.7",
     "identity-obj-proxy": "3.0.0",
     "image-webpack-loader": "7.0.1",
