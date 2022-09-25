@@ -87,7 +87,7 @@
     "@ungap/url-search-params": "0.2.2",
     "abortcontroller-polyfill": "1.5.0",
     "app-root-dir": "1.0.2",
-    "app-root-path": "3.0.0",
+    "app-root-path": "3.1.0",
     "autobind-decorator": "2.4.0",
     "autoprefixer": "10.2.0",
     "babel-eslint": "10.1.0",
